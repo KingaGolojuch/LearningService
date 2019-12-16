@@ -11,14 +11,10 @@ using LearningService.WebApplication.Models;
 namespace LearningService.WebApplication.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public ManageController()
-        {
-        }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
