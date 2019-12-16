@@ -70,7 +70,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\TestEntity.cs" />
+    <Compile Include="Helpers\IUnitOfWork.cs" />
+    <Compile Include="Helpers\UnitOfWork.cs" />
+    <Compile Include="Mappings\TestMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Abstract\ITestRepository.cs" />
+    <Compile Include="Repositories\Concrete\TestRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

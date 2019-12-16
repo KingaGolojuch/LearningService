@@ -3,6 +3,7 @@
 
 namespace LearningService.WebApplication.App_Start
 {
+    using LearningService.DAO.Helpers;
     using Microsoft.Owin.Security;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
@@ -10,6 +11,8 @@ namespace LearningService.WebApplication.App_Start
     using Ninject.Web.Common.WebHost;
     using System;
     using System.Web;
+    using Ninject.Extensions.Conventions;
+    using NHibernate;
 
     public static class NinjectWebCommon 
     {
@@ -48,6 +51,7 @@ namespace LearningService.WebApplication.App_Start
                 kernel.Bind<ApplicationUserManager>().ToSelf();
                 kernel.Bind<ApplicationSignInManager>().ToSelf();
                 kernel.Bind<IAuthenticationManager>().ToMethod(x => HttpContext.Current.GetOwinContext().Authentication);
+                kernel.Bind<ISession>().ToMethod(x => x.Kernel.Get<IUnitOfWork>().Session);
 
                 RegisterServices(kernel);
                 return kernel;
@@ -65,6 +69,9 @@ namespace LearningService.WebApplication.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
+
+            kernel.Bind(x => x.FromAssembliesMatching("*").SelectAllClasses().Excluding<UnitOfWork>().BindDefaultInterface());
         }        
     }
 }
