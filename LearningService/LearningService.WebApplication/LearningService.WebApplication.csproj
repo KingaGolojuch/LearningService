@@ -235,6 +235,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AspRoles.cs" />
     <Compile Include="Helpers\MapperProfiles\AutoMapperProfile.cs" />
     <Compile Include="Helpers\MapperProfiles\UserProfile.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
