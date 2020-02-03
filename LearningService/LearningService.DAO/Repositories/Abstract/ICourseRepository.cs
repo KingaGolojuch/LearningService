@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace LearningService.DAO.Repositories.Abstract
 {
-    public interface ITestRepository
+    public interface ICourseRepository
     {
-        IEnumerable<TestEntity> Get();
-        TestEntity GetById(int id);
+        IEnumerable<Course> Get();
+        Course GetById(int id);
+        void Add(Course entity);
     }
 }

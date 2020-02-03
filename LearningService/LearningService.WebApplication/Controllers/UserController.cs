@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-
 namespace LearningService.WebApplication.Controllers
 {
     [Authorize(Roles = AspRoles.Admin)]

@@ -5,7 +5,7 @@ namespace LearningService.Domain.Services.Abstract
 {
     public interface IUserService
     {
-        IEnumerable<TestDTO> Get();
-        TestDTO Get(int id);
+        IEnumerable<CourseDTO> Get();
+        CourseDTO Get(int id);
     }
 }

@@ -8,27 +8,26 @@ namespace LearningService.Domain.Services.Concrete
 {
     public class UserService : IUserService
     {
-        private readonly ITestRepository _testRepository;
+        private readonly ICourseRepository _testRepository;
 
-        public UserService(ITestRepository testRepository)
+        public UserService(ICourseRepository testRepository)
         {
             this._testRepository = testRepository;
         }
 
-        public IEnumerable<TestDTO> Get()
+        public IEnumerable<CourseDTO> Get()
         {
             var entities = _testRepository.Get();
-            return Mapper.Map<IEnumerable<TestDTO>>(entities);
+            return Mapper.Map<IEnumerable<CourseDTO>>(entities);
         }
 
-        public TestDTO Get(int id)
+        public CourseDTO Get(int id)
         {
             var entity = _testRepository.GetById(id);
-            return new TestDTO
+            return new CourseDTO
             {
                 Id = entity.Id,
-                Name = entity.Name,
-                Accepted = entity.Accepted
+                Name = entity.Name
             };
         }
     }

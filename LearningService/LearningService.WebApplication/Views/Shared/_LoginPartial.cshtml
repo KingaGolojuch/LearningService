@@ -9,7 +9,11 @@
         <ul class="nav navbar-nav navbar-right">
             @if (User.IsInRole(AspRoles.Admin))
             {
-                <li>@Html.ActionLink("Użytkownicy", "Index", "User", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Użytkownicy", "Index", "User", routeValues: null, htmlAttributes: new { id = "" })</li>
+            }
+            @if (User.IsInRole(AspRoles.User))
+            {
+                <li>@Html.ActionLink("Kursy", "Index", "Course", routeValues: null, htmlAttributes: new { id = "" })</li>
             }
             <li>
                 @Html.ActionLink("Ustawienia", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

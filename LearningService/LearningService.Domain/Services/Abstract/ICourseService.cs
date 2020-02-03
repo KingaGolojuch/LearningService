@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace LearningService.Domain.Services.Abstract
 {
-    public interface ITestService
+    public interface ICourseService
     {
-        IEnumerable<TestDTO> Get();
-        TestDTO Get(int id);
+        IEnumerable<CourseDTO> Get();
+        CourseDTO Get(int id);
+        void Add(CourseDTO course);
     }
 }

@@ -70,14 +70,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\TestEntity.cs" />
+    <Compile Include="Entities\Course.cs" />
     <Compile Include="Helpers\IUnitOfWork.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
-    <Compile Include="Mappings\TestMap.cs" />
+    <Compile Include="Mappings\CourseMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Abstract\ITestRepository.cs" />
+    <Compile Include="Repositories\Abstract\ICourseRepository.cs" />
     <Compile Include="Repositories\Abstract\IUserRepository.cs" />
-    <Compile Include="Repositories\Concrete\TestRepository.cs" />
+    <Compile Include="Repositories\Concrete\CourseRepository.cs" />
     <Compile Include="Repositories\Concrete\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

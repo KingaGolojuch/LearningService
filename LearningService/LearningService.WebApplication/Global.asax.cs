@@ -1,4 +1,5 @@
-﻿using LearningService.WebApplication.Helpers.MapperProfiles;
+﻿using LearningService.Domain;
+using LearningService.WebApplication.Helpers.MapperProfiles;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -16,6 +17,8 @@ namespace LearningService.WebApplication
             AutoMapper.Mapper.Initialize(cfg => {
                 cfg.AddProfile<UserProfile>();
                 cfg.AddProfile<AutoMapperProfile>();
+                cfg.AddProfile<CourseProfile>();
+                cfg.AddProfile<DomainProfile>();
             });
         }
     }
