@@ -16,6 +16,11 @@ namespace LearningService.DAO.Mappings
 
             Id(x => x.Id).GeneratedBy.Assigned();
             Map(x => x.Name, "Name");
+
+            HasMany(x => x.Lessons)
+                  .KeyColumn("LessonTypeId")
+                  .Inverse()
+                  .Cascade.AllDeleteOrphan();
         }
     }
 }
