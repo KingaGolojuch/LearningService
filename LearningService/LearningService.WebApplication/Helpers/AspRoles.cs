@@ -7,7 +7,7 @@ namespace LearningService.WebApplication.Helpers
 {
     public static class AspRoles
     {
-        public static string User { get { return "User"; } }
-        public static string Admin { get { return "Admin"; } }
+        public const string User  ="User";
+        public const string Admin = "Admin";
     }
 }

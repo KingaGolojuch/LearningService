@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LearningService.Domain.Services.Abstract;
+using LearningService.WebApplication.Helpers;
 using LearningService.WebApplication.Models.User;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace LearningService.WebApplication.Controllers
 {
+    [Authorize(Roles = AspRoles.Admin)]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
