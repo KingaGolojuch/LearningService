@@ -71,9 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Course.cs" />
+    <Compile Include="Entities\LessonType.cs" />
     <Compile Include="Helpers\IUnitOfWork.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
     <Compile Include="Mappings\CourseMap.cs" />
+    <Compile Include="Mappings\LessonTypeMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Abstract\ICourseRepository.cs" />
     <Compile Include="Repositories\Abstract\IUserRepository.cs" />
