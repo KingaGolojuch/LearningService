@@ -22,6 +22,10 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
                 .ForMember(
                     dest => dest.Surname,
                     opt => opt.MapFrom(src => src.Surname)
+                )
+                .ForMember(
+                    dest => dest.Active,
+                    opt => opt.MapFrom(src => src.Active)
                 );
         }
     }

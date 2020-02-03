@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LearningService.WebApplication.Models.User.UserViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Użytkownicy</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Surname)</th>
+            <th>@Html.DisplayNameFor(model => model.Active)</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.OrderBy(x => x.GetActiveAsString))
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Surname) </td>
+                <td>@Html.DisplayFor(modelItem => item.GetActiveAsString) </td>
+                <td>@Html.ActionLink("Edytuj", "Edit", new { userId = item.Id })</td>
+                <td>
+                    @if (item.Active)
+                    {
+                        @Html.ActionLink("Zablokuj", "Disable", new { userId = item.Id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Odblokuj", "Enable", new { userId = item.Id })
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
