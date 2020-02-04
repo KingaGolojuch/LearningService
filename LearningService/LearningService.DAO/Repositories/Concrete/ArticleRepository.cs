@@ -6,31 +6,31 @@ using System.Collections.Generic;
 
 namespace LearningService.DAO.Repositories.Concrete
 {
-    public class CourseRepository : ICourseRepository
+    public class ArticleRepository : IArticleRepository
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CourseRepository(IUnitOfWork unitOfWork)
+        public ArticleRepository(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
-
-        public IEnumerable<Course> Get(string userId)
+        
+        public IEnumerable<Article> Get(string userId)
         {
             return _unitOfWork
                 .Session
-                .QueryOver<Course>()
+                .QueryOver<Article>()
                 .JoinQueryOver<ApplicationUser>(x => x.User)
                 .Where(x => x.Id == userId)
-                .List<Course>();
+                .List<Article>();
         }
 
-        public Course GetById(int id)
+        public Article GetById(int id)
         {
-            return _unitOfWork.Session.Get<Course>(id);
+            return _unitOfWork.Session.Get<Article>(id);
         }
 
-        public void Add(Course entity)
+        public void Add(Article entity)
         {
             using (var transaction = _unitOfWork.Session.BeginTransaction())
             {

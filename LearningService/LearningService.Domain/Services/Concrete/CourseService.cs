@@ -15,15 +15,10 @@ namespace LearningService.Domain.Services.Concrete
         {
             this._courseRepository = courseRepository;
         }
-        public IEnumerable<CourseDTO> Get()
-        {
-            var entities = _courseRepository.Get();
-            return Mapper.Map<IEnumerable<CourseDTO>>(entities);
-        }
 
         public IEnumerable<CourseDTO> Get(string userId)
         {
-            var entities = _courseRepository.Get();
+            var entities = _courseRepository.Get(userId);
             return Mapper.Map<IEnumerable<CourseDTO>>(entities);
         }
 

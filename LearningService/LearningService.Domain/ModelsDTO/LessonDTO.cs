@@ -8,5 +8,6 @@ namespace LearningService.Domain.ModelsDTO
 {
     public class LessonDTO
     {
+        
     }
 }

@@ -13,6 +13,7 @@
             }
             @if (User.IsInRole(AspRoles.User))
             {
+                <li>@Html.ActionLink("Artykuły", "Index", "Article", routeValues: null, htmlAttributes: new { id = "" })</li>
                 <li>@Html.ActionLink("Kursy", "Index", "Course", routeValues: null, htmlAttributes: new { id = "" })</li>
             }
             <li>
