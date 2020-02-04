@@ -13,5 +13,16 @@ namespace LearningService.DAO.Repositories.Concrete
         {
             this._unitOfWork = unitOfWork;
         }
+
+        public IEnumerable<Lesson> GetLessons(int courseId)
+        {
+            var course = _unitOfWork
+                .Session
+                .QueryOver<Course>()
+                .Where(x => x.Id == courseId)
+                .SingleOrDefault();
+            
+            return course?.Lessons;
+        }
     }
 }

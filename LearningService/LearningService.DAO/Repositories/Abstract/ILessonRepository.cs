@@ -5,5 +5,6 @@ namespace LearningService.DAO.Repositories.Abstract
 {
     public interface ILessonRepository
     {
+        IEnumerable<Lesson> GetLessons(int courseId);
     }
 }
