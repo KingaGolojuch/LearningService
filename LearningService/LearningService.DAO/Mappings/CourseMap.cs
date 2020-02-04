@@ -12,7 +12,7 @@ namespace LearningService.DAO.Mappings
             Id(x => x.Id);
             Map(x => x.Name, "Name").Not.Nullable();
             
-            References(x => x.User, "ApplicationUserId").ReadOnly().Cascade.None();
+            References(x => x.User, "UserId").Cascade.None();
             HasMany(x => x.Lessons)
                   .KeyColumn("CourseId")
                   .Inverse()

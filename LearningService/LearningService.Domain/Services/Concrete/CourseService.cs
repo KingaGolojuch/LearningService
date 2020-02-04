@@ -21,6 +21,12 @@ namespace LearningService.Domain.Services.Concrete
             return Mapper.Map<IEnumerable<CourseDTO>>(entities);
         }
 
+        public IEnumerable<CourseDTO> Get(string userId)
+        {
+            var entities = _courseRepository.Get();
+            return Mapper.Map<IEnumerable<CourseDTO>>(entities);
+        }
+
         public CourseDTO Get(int id)
         {
             var entity = _courseRepository.GetById(id);

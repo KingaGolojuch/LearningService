@@ -2,13 +2,14 @@
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
 using LearningService.WebApplication.Models.Course;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace LearningService.WebApplication.Controllers
 {
     [Authorize]
-    public class CourseController : Controller
+    public class CourseController : BaseController
     {
         private readonly ICourseService _courseService;
 
@@ -19,7 +20,7 @@ namespace LearningService.WebApplication.Controllers
         // GET: Test
         public ActionResult Index()
         {
-            var courses = _courseService.Get();
+            var courses = _courseService.Get(GetUserId);
             var model = Mapper.Map<IEnumerable<CourseViewModel>>(courses);
             return View(model);
         }
@@ -35,7 +36,9 @@ namespace LearningService.WebApplication.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            _courseService.Add(Mapper.Map<CourseDTO>(model));
+            var courseDTO = Mapper.Map<CourseDTO>(model);
+            courseDTO.UserId = GetUserId;
+            _courseService.Add(courseDTO);
             return RedirectToAction("Index");
         }
     }

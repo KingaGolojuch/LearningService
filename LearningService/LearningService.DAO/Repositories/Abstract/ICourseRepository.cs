@@ -6,6 +6,7 @@ namespace LearningService.DAO.Repositories.Abstract
     public interface ICourseRepository
     {
         IEnumerable<Course> Get();
+        IEnumerable<Course> Get(string userId);
         Course GetById(int id);
         void Add(Course entity);
     }

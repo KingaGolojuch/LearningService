@@ -42,6 +42,7 @@
     <Reference Include="NHibernate, Version=5.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.5.0.0\lib\net461\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate.AspNet.Identity, Version=5.0.2.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
@@ -80,6 +81,10 @@
     <ProjectReference Include="..\LearningService.DAO\LearningService.DAO.csproj">
       <Project>{f3b6c206-192e-4643-8cb5-b4ca44168477}</Project>
       <Name>LearningService.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LearningService.Helpers\LearningService.Helpers.csproj">
+      <Project>{472A953B-2463-4C4A-952E-EFCFD58B45E9}</Project>
+      <Name>LearningService.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

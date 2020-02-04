@@ -1,6 +1,7 @@
 ﻿using LearningService.DAO.Entities;
 using LearningService.DAO.Helpers;
 using LearningService.DAO.Repositories.Abstract;
+using LearningService.Helpers;
 using System.Collections.Generic;
 
 namespace LearningService.DAO.Repositories.Concrete
@@ -16,6 +17,16 @@ namespace LearningService.DAO.Repositories.Concrete
         public IEnumerable<Course> Get()
         {
             return _unitOfWork.Session.QueryOver<Course>().List();
+        }
+
+        public IEnumerable<Course> Get(string userId)
+        {
+            return _unitOfWork
+                .Session
+                .QueryOver<Course>()
+                .JoinQueryOver<ApplicationUser>(x => x.User)
+                .Where(x => x.Id == userId)
+                .List<Course>();
         }
 
         public Course GetById(int id)

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LearningService.DAO.Entities;
 using LearningService.Domain.ModelsDTO;
+using LearningService.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace LearningService.Domain
                 ).ForMember(
                    dest => dest.Name,
                    opt => opt.MapFrom(src => src.Name)
+                ).ForMember(
+                   dest => dest.UserId,
+                   opt => opt.MapFrom(src => src.User.Id)
                 )
                 .ReverseMap()
                 .ForMember(
@@ -28,6 +32,9 @@ namespace LearningService.Domain
                 ).ForMember(
                    dest => dest.Name,
                    opt => opt.MapFrom(src => src.Name)
+                ).ForMember(
+                   dest => dest.User,
+                   opt => opt.MapFrom(src => new ApplicationUser(src.UserId))
                 );
         }
     }
