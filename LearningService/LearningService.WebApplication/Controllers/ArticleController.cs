@@ -43,5 +43,26 @@ namespace LearningService.WebApplication.Controllers
             _articleService.Add(articleDTO);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Edit(int articleId)
+        {
+            var articleDTO = _articleService.Get(articleId);
+            if (articleDTO == null)
+                return RedirectToAction("Index");
+
+            var model = Mapper.Map<ArticleBaseViewModel>(articleDTO);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ArticleBaseViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var articleDTO = Mapper.Map<ArticleDTO>(model);
+            _articleService.Update(articleDTO);
+            return RedirectToAction("Index");
+        }
     }
 }

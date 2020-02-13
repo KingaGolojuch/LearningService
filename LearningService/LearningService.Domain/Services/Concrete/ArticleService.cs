@@ -23,6 +23,17 @@ namespace LearningService.Domain.Services.Concrete
             _articleRepository.Add(entity);
         }
 
+        public void Update(ArticleDTO articleDTO)
+        {
+            var article = _articleRepository.GetById(articleDTO.Id);
+            article.SetHeadline(articleDTO.Headline);
+            article.SetContent(articleDTO.ContentArticle);
+            if (!article.DataChanged)
+                return;
+
+            _articleRepository.Update(article);
+        }
+
         public IEnumerable<ArticleDTO> Get(string userId)
         {
             var entities = _articleRepository.Get(userId);

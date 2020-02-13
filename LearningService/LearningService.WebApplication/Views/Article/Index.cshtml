@@ -12,12 +12,9 @@
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Headline)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContentArticle)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.Headline)</th>
+        <th>@Html.DisplayNameFor(model => model.ContentArticle)</th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -25,8 +22,8 @@
     <tr>
         <td>@Html.DisplayFor(modelItem => item.Headline)</td>
         <td>@Html.Raw(item.ContentArticle)</td>
-        <td>@Html.ActionLink("Edit", "Edit", new { id=item.Id })</td>
-        <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</td>
+        <td>@Html.ActionLink("Edycja", "Edit", new { articleId = item.Id })</td>
+        <td>@Html.ActionLink("Usuń", "Delete", new { id = item.Id })</td>
     </tr>
 }
 

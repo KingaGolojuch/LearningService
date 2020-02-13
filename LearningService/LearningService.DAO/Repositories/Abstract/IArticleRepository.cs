@@ -8,5 +8,6 @@ namespace LearningService.DAO.Repositories.Abstract
         IEnumerable<Article> Get(string userId);
         Article GetById(int id);
         void Add(Article entity);
+        void Update(Article entity);
     }
 }

@@ -7,6 +7,7 @@ namespace LearningService.Domain.Services.Abstract
     {
         IEnumerable<ArticleDTO> Get(string userId);
         ArticleDTO Get(int id);
-        void Add(ArticleDTO course);
+        void Add(ArticleDTO article);
+        void Update(ArticleDTO article);
     }
 }
