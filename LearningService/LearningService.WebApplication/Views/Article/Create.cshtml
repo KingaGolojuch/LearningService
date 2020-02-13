@@ -52,7 +52,21 @@
                         height: 150,
                         codemirror: {
                             theme: 'united'
-                        }
+                        },
+                        toolbar: [
+                            ['style', ['bold', 'italic', 'underline', 'clear']],
+                            ['font', ['superscript', 'subscript']],
+                            ['color', ['color']],
+                            ['style', ['style']],
+                            ['table', ['table']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['insert', ['link']]
+                        ],
+                        styleTags: [
+                            'p',
+                            { title: 'Blockquote', tag: 'blockquote', className: 'blockquote', value: 'blockquote' },
+                            'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+                        ]
                     });
                 }
 
