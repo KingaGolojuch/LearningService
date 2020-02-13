@@ -238,6 +238,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AspRoles.cs" />
+    <Compile Include="Helpers\Extensions\DateTimeExtensions.cs" />
     <Compile Include="Helpers\MapperProfiles\ArticleProfile.cs" />
     <Compile Include="Helpers\MapperProfiles\AutoMapperProfile.cs" />
     <Compile Include="Helpers\MapperProfiles\CourseProfile.cs" />

@@ -14,5 +14,11 @@ namespace LearningService.WebApplication.Models.Article
         [Required]
         [System.Web.Mvc.AllowHtml]
         public string ContentArticle { get; set; }
+
+        [Display(Name = "Data utworzenia")]
+        public string CreateTime { get; set; }
+
+        [Display(Name = "Data edycji")]
+        public string UpdateTime { get; set; }
     }
 }

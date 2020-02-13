@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using LearningService.Domain.ModelsDTO;
+using LearningService.WebApplication.Helpers.Extensions;
 using LearningService.WebApplication.Models.Article;
-using LearningService.WebApplication.Models.Course;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace LearningService.WebApplication.Helpers.MapperProfiles
 {
@@ -15,25 +11,20 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
         {
             CreateMap<ArticleDTO, ArticleBaseViewModel>()
                 .ForMember(
-                   dest => dest.Id,
-                   opt => opt.MapFrom(src => src.Id)
+                    dest => dest.CreateTime,
+                    opt => opt.MapFrom(src => src.CreateTime.ToFullDateWithoutSeconds())
                 ).ForMember(
-                   dest => dest.Headline,
-                   opt => opt.MapFrom(src => src.Headline)
-                ).ForMember(
-                   dest => dest.ContentArticle,
-                   opt => opt.MapFrom(src => src.ContentArticle)
-                )
-                .ReverseMap()
+                    dest => dest.UpdateTime,
+                    opt => opt.MapFrom(src => src.UpdateTime.ToFullDateWithoutSeconds())
+                );
+
+            CreateMap<ArticleBaseViewModel, ArticleDTO>()
                 .ForMember(
-                   dest => dest.Id,
-                   opt => opt.MapFrom(src => src.Id)
+                    dest => dest.CreateTime,
+                    opt => opt.Ignore()
                 ).ForMember(
-                   dest => dest.Headline,
-                   opt => opt.MapFrom(src => src.Headline)
-                ).ForMember(
-                   dest => dest.ContentArticle,
-                   opt => opt.MapFrom(src => src.ContentArticle)
+                    dest => dest.UpdateTime,
+                    opt => opt.Ignore()
                 );
         }
     }

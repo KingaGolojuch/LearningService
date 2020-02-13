@@ -10,6 +10,8 @@
     <tr>
         <th>@Html.DisplayNameFor(model => model.Headline)</th>
         <th>@Html.DisplayNameFor(model => model.ContentArticle)</th>
+        <th>@Html.DisplayNameFor(model => model.CreateTime)</th>
+        <th>@Html.DisplayNameFor(model => model.UpdateTime)</th>
     </tr>
 
     @foreach (var item in Model)
@@ -17,6 +19,8 @@
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Headline)</td>
             <td>@Html.Raw(item.ContentArticle)</td>
+            <td>@Html.DisplayFor(modelItem => item.CreateTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.UpdateTime)</td>
         </tr>
     }
 

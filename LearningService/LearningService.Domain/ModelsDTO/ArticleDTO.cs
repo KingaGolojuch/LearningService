@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LearningService.Domain.ModelsDTO
 {
@@ -12,6 +8,8 @@ namespace LearningService.Domain.ModelsDTO
         public string Headline { get; set; }
         public string ContentArticle { get; set; }
         public bool Active { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
 
         public string UserId { get; set; }
     }
