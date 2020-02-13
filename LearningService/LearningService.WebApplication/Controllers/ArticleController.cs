@@ -22,7 +22,7 @@ namespace LearningService.WebApplication.Controllers
         // GET: Article
         public ActionResult Index()
         {
-            var articles = _articleService.Get(GetUserId);
+            var articles = _articleService.GetActive(GetUserId);
             var model = Mapper.Map<IEnumerable<ArticleBaseViewModel>>(articles);
             return View(model);
         }
@@ -62,6 +62,13 @@ namespace LearningService.WebApplication.Controllers
 
             var articleDTO = Mapper.Map<ArticleDTO>(model);
             _articleService.Update(articleDTO);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int articleId)
+        {
+            _articleService.Delete(articleId);
             return RedirectToAction("Index");
         }
     }

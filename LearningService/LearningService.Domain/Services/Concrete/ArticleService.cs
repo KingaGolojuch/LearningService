@@ -4,6 +4,7 @@ using LearningService.DAO.Repositories.Abstract;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LearningService.Domain.Services.Concrete
 {
@@ -19,7 +20,7 @@ namespace LearningService.Domain.Services.Concrete
         public void Add(ArticleDTO article)
         {
             var entity = Mapper.Map<Article>(article);
-            entity.Active = true;
+            entity.SetActive(true);
             _articleRepository.Add(entity);
         }
 
@@ -40,10 +41,26 @@ namespace LearningService.Domain.Services.Concrete
             return Mapper.Map<IEnumerable<ArticleDTO>>(entities);
         }
 
+        public IEnumerable<ArticleDTO> GetActive(string userId)
+        {
+            var entities = _articleRepository.Get(userId);
+            return Mapper.Map<IEnumerable<ArticleDTO>>(entities.Where(x => x.Active == true));
+        }
+
         public ArticleDTO Get(int id)
         {
             var entity = _articleRepository.GetById(id);
             return Mapper.Map<ArticleDTO>(entity);
+        }
+
+        public void Delete(int articleId)
+        {
+            var article = _articleRepository.GetById(articleId);
+            article.SetActive(false);
+            if (!article.DataChanged)
+                return;
+
+            _articleRepository.Update(article);
         }
     }
 }

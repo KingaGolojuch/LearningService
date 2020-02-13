@@ -14,7 +14,7 @@ namespace LearningService.DAO.Entities
         public virtual int Id { get; set; }
         public virtual string Headline { get; protected set; }
         public virtual string ContentArticle { get; protected set; }
-        public virtual bool Active { get; set; }
+        public virtual bool Active { get; protected set; }
 
         public virtual ApplicationUser User { get; set; }
 
@@ -33,6 +33,15 @@ namespace LearningService.DAO.Entities
                 return;
 
             ContentArticle = name;
+            DataChanged = true;
+        }
+
+        public virtual void SetActive(bool status)
+        {
+            if (Active == status)
+                return;
+
+            Active = status;
             DataChanged = true;
         }
     }

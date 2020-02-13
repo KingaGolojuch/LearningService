@@ -23,7 +23,12 @@
         <td>@Html.DisplayFor(modelItem => item.Headline)</td>
         <td>@Html.Raw(item.ContentArticle)</td>
         <td>@Html.ActionLink("Edycja", "Edit", new { articleId = item.Id })</td>
-        <td>@Html.ActionLink("Usuń", "Delete", new { id = item.Id })</td>
+        <td>
+            @using (Html.BeginForm("Delete", "Article", new { articleId = item.Id }, FormMethod.Post, null))
+            {
+                <input type="submit" value="Usuń" />
+            }
+        </td>
     </tr>
 }
 
