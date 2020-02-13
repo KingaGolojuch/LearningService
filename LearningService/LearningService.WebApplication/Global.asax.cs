@@ -1,8 +1,8 @@
-﻿using LearningService.Domain;
-using LearningService.WebApplication.Helpers.MapperProfiles;
+﻿using LearningService.WebApplication.Helpers.MapperProfiles;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DomainAutomappers = LearningService.Domain.Mappers;
 
 namespace LearningService.WebApplication
 {
@@ -18,9 +18,10 @@ namespace LearningService.WebApplication
                 cfg.AddProfile<UserProfile>();
                 cfg.AddProfile<AutoMapperProfile>();
                 cfg.AddProfile<CourseProfile>();
-                cfg.AddProfile<DomainProfile>();
                 cfg.AddProfile<LessonProfile>();
                 cfg.AddProfile<ArticleProfile>();
+                cfg.AddProfile<DomainAutomappers.ArticleDomainProfile>();
+                cfg.AddProfile<DomainAutomappers.CourseDomainProfile>();
             });
         }
     }

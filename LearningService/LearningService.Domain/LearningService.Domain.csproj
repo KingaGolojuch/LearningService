@@ -65,7 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainProfile.cs" />
+    <Compile Include="Mappers\ArticleDomainProfile.cs" />
+    <Compile Include="Mappers\CourseDomainProfile.cs" />
     <Compile Include="ModelsDTO\ArticleDTO.cs" />
     <Compile Include="ModelsDTO\CourseDTO.cs" />
     <Compile Include="ModelsDTO\LessonDTO.cs" />
@@ -93,5 +94,6 @@
       <Name>LearningService.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
