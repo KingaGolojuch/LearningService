@@ -17,11 +17,13 @@ namespace LearningService.Domain.Services.Concrete
             _articleRepository = articleRepository;
         }
 
-        public void Add(ArticleDTO article)
+        public void Add(ArticleDTO articleDTO)
         {
-            var entity = Mapper.Map<Article>(article);
-            entity.SetActive(true);
-            _articleRepository.Add(entity);
+            var article = Mapper.Map<Article>(articleDTO);
+            article.SetActive(true);
+            article.SetCreateTime();
+            article.SetUpdateTime();
+            _articleRepository.Add(article);
         }
 
         public void Update(ArticleDTO articleDTO)
@@ -32,6 +34,7 @@ namespace LearningService.Domain.Services.Concrete
             if (!article.DataChanged)
                 return;
 
+            article.SetUpdateTime();
             _articleRepository.Update(article);
         }
 
@@ -44,7 +47,11 @@ namespace LearningService.Domain.Services.Concrete
         public IEnumerable<ArticleDTO> GetFromOtherUsers(string userId)
         {
             var entities = _articleRepository.Get();
-            return Mapper.Map<IEnumerable<ArticleDTO>>(entities.Where(x => x.User.Id != userId && x.Active == true));
+            return Mapper.Map<IEnumerable<ArticleDTO>>(
+                entities
+                .Where(x => x.User.Id != userId && x.Active == true)
+                .OrderByDescending(x => x.CreateTime)
+            );
         }
 
         public IEnumerable<ArticleDTO> GetActive(string userId)
@@ -66,6 +73,7 @@ namespace LearningService.Domain.Services.Concrete
             if (!article.DataChanged)
                 return;
 
+            article.SetUpdateTime();
             _articleRepository.Update(article);
         }
     }

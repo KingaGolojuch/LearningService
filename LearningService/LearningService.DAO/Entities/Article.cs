@@ -1,9 +1,5 @@
 ﻿using LearningService.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LearningService.DAO.Entities
 {
@@ -15,6 +11,8 @@ namespace LearningService.DAO.Entities
         public virtual string Headline { get; protected set; }
         public virtual string ContentArticle { get; protected set; }
         public virtual bool Active { get; protected set; }
+        public virtual DateTime CreateTime { get; protected set; }
+        public virtual DateTime UpdateTime { get; protected set; }
 
         public virtual ApplicationUser User { get; set; }
 
@@ -42,6 +40,18 @@ namespace LearningService.DAO.Entities
                 return;
 
             Active = status;
+            DataChanged = true;
+        }
+
+        public virtual void SetCreateTime()
+        {
+            CreateTime = DateTime.Now;
+            DataChanged = true;
+        }
+
+        public virtual void SetUpdateTime()
+        {
+            UpdateTime = DateTime.Now;
             DataChanged = true;
         }
     }
