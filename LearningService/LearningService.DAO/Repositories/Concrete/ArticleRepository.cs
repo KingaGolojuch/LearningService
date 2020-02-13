@@ -14,7 +14,15 @@ namespace LearningService.DAO.Repositories.Concrete
         {
             this._unitOfWork = unitOfWork;
         }
-        
+
+        public IEnumerable<Article> Get()
+        {
+            return _unitOfWork
+                .Session
+                .QueryOver<Article>()
+                .List<Article>();
+        }
+
         public IEnumerable<Article> Get(string userId)
         {
             return _unitOfWork

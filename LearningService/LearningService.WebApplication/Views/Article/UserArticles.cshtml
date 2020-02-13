@@ -1,0 +1,23 @@
+﻿@model IEnumerable<LearningService.WebApplication.Models.Article.ArticleBaseViewModel>
+
+@{
+    ViewBag.Title = "Artykuły innych";
+}
+
+<h2>Artykuły innych</h2>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Headline)</th>
+        <th>@Html.DisplayNameFor(model => model.ContentArticle)</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Headline)</td>
+            <td>@Html.Raw(item.ContentArticle)</td>
+        </tr>
+    }
+
+</table>

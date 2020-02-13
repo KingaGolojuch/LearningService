@@ -71,5 +71,12 @@ namespace LearningService.WebApplication.Controllers
             _articleService.Delete(articleId);
             return RedirectToAction("Index");
         }
+
+        public ActionResult UserArticles()
+        {
+            var articles = _articleService.GetFromOtherUsers(GetUserId);
+            var model = Mapper.Map<IEnumerable<ArticleBaseViewModel>>(articles);
+            return View(model);
+        }
     }
 }

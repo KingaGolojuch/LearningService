@@ -5,6 +5,7 @@ namespace LearningService.Domain.Services.Abstract
 {
     public interface IArticleService
     {
+        IEnumerable<ArticleDTO> GetFromOtherUsers(string userId);
         IEnumerable<ArticleDTO> Get(string userId);
         IEnumerable<ArticleDTO> GetActive(string userId);
         ArticleDTO Get(int id);

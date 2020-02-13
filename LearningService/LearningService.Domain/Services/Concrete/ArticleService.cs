@@ -41,6 +41,12 @@ namespace LearningService.Domain.Services.Concrete
             return Mapper.Map<IEnumerable<ArticleDTO>>(entities);
         }
 
+        public IEnumerable<ArticleDTO> GetFromOtherUsers(string userId)
+        {
+            var entities = _articleRepository.Get();
+            return Mapper.Map<IEnumerable<ArticleDTO>>(entities.Where(x => x.User.Id != userId && x.Active == true));
+        }
+
         public IEnumerable<ArticleDTO> GetActive(string userId)
         {
             var entities = _articleRepository.Get(userId);
