@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LearningService.WebApplication.Models.Article
 {
@@ -16,6 +12,7 @@ namespace LearningService.WebApplication.Models.Article
 
         [Display(Name = "Zawartość")]
         [Required]
+        [System.Web.Mvc.AllowHtml]
         public string ContentArticle { get; set; }
     }
 }

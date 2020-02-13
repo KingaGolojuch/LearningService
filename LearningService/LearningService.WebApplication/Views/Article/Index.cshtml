@@ -24,7 +24,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>@Html.DisplayFor(modelItem => item.Headline)</td>
-        <td>@Html.DisplayFor(modelItem => item.ContentArticle)</td>
+        <td>@Html.Raw(item.ContentArticle)</td>
         <td>@Html.ActionLink("Edit", "Edit", new { id=item.Id })</td>
         <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</td>
     </tr>

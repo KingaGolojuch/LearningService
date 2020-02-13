@@ -1,38 +1,35 @@
 ﻿@model LearningService.WebApplication.Models.Article.ArticleBaseViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Tworzenie artykułu";
 }
 
 <h2>Tworzenie artykułu</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Article", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Headline, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                @Html.TextBoxFor(model => model.Headline, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.ContentArticle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ContentArticle, new { @class = "form-control" })
+            @Html.LabelFor(model => model.ContentArticle, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-9">
+                @Html.TextAreaFor(model => model.ContentArticle, new { @id = "newArticleArea", @class = "form-control", @row = 5 })
                 @Html.ValidationMessageFor(model => model.ContentArticle, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-default" />
+            <div class="col-lg-push-2 col-lg-9">
+                <input type="submit" class="btn btn-success" value="Zapisz" />
             </div>
         </div>
     </div>
@@ -42,6 +39,31 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        (function ($) {
+            function HomeIndex() {
+                var $this = this;
+
+                function initialize() {
+                    $('#newArticleArea').summernote({
+                        focus: true,
+                        height: 150,
+                        codemirror: {
+                            theme: 'united'
+                        }
+                    });
+                }
+
+                $this.init = function () {
+                    initialize();
+                }
+            }
+            $(function () {
+                var self = new HomeIndex();
+                self.init();
+            })
+        })(jQuery);
+    </script>
 }
