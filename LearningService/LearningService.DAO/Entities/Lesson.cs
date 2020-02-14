@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LearningService.DAO.Entities
 {
@@ -11,9 +12,12 @@ namespace LearningService.DAO.Entities
         public virtual int OrderLesson { get; set; }
         public virtual string Headline { get; set; }
         public virtual string LessonContent { get; set; }
+        public virtual string ValidAnswer { get; set; }
+        
 
         public virtual Course Course { get; set; }
         public virtual LessonType LessonType { get; set; }
+        public virtual IEnumerable<LessonComponent> LessonComponents { get; set; }
 
         public virtual void SetHeadline(string name)
         {

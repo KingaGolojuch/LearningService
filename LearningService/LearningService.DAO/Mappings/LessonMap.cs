@@ -13,9 +13,14 @@ namespace LearningService.DAO.Mappings
             Map(x => x.OrderLesson, "OrderLesson");
             Map(x => x.Headline, "Headline");
             Map(x => x.LessonContent, "LessonContent");
+            Map(x => x.ValidAnswer, "ValidAnswer").Nullable();
 
             References(x => x.Course, "CourseId").Cascade.None();
             References(x => x.LessonType, "LessonTypeId").Cascade.None();
+            HasMany(x => x.LessonComponents)
+                  .KeyColumn("LessonId")
+                  .Inverse()
+                  .Cascade.AllDeleteOrphan();
         }
     }
 }

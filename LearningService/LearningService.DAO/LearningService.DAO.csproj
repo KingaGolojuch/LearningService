@@ -73,11 +73,13 @@
     <Compile Include="Entities\Article.cs" />
     <Compile Include="Entities\Course.cs" />
     <Compile Include="Entities\Lesson.cs" />
+    <Compile Include="Entities\LessonComponent.cs" />
     <Compile Include="Entities\LessonType.cs" />
     <Compile Include="Helpers\IUnitOfWork.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
     <Compile Include="Mappings\ArticleMap.cs" />
     <Compile Include="Mappings\CourseMap.cs" />
+    <Compile Include="Mappings\LessonComponentMap.cs" />
     <Compile Include="Mappings\LessonMap.cs" />
     <Compile Include="Mappings\LessonTypeMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
