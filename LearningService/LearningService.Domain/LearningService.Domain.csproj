@@ -65,8 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\LessonTypeCustom.cs" />
     <Compile Include="Mappers\ArticleDomainProfile.cs" />
     <Compile Include="Mappers\CourseDomainProfile.cs" />
+    <Compile Include="Mappers\LessonDomainProfile.cs" />
     <Compile Include="ModelsDTO\ArticleDTO.cs" />
     <Compile Include="ModelsDTO\CourseDTO.cs" />
     <Compile Include="ModelsDTO\LessonDTO.cs" />

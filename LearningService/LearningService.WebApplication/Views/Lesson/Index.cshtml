@@ -1,31 +1,32 @@
-﻿@model IEnumerable<LearningService.WebApplication.Models.Lesson.LessonBaseViewModel>
+﻿@model LearningService.WebApplication.Models.Lesson.LessonCourseContainerViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lekcje";
 }
 
-<h2>Lekcje kursu</h2>
+<h2>Lekcje z kursu @Model.Course.Name</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj teorie", "CreateTheory", new { @courseId = Model.Course.Id })
+</p>
+<p>
+    @Html.ActionLink("Dodaj podsumowanie - checkboxy", "CreateTheory", new { @courseId = Model.Course.Id })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().Headline)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Lessons) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Headline)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edycja", "EditTheory", new { lessonId = item.Id })
         </td>
     </tr>
 }

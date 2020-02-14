@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LearningService.WebApplication.Models.Lesson
 {
-    public class LessonBaseViewModel
+    public class LessonTheoryViewModel : LessonBaseViewModel
     {
-        public int Id { get; set; }
-        public int CourseId { get; set; }
-
-        [Display(Name = "Nagłówek")]
+        [Display(Name = "Treść")]
         [Required]
-        public string Headline { get; set; }
+        [AllowHtml]
+        public string LessonContent { get; set; }
     }
 }

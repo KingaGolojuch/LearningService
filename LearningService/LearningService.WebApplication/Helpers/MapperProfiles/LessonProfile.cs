@@ -15,6 +15,9 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
         public LessonProfile()
         {
             CreateMap<LessonDTO, LessonBaseViewModel>();
+
+            CreateMap<LessonDTO, LessonTheoryViewModel>();
+            CreateMap<LessonTheoryViewModel, LessonDTO>();
         }
     }
 }

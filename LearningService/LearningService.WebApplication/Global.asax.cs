@@ -22,6 +22,7 @@ namespace LearningService.WebApplication
                 cfg.AddProfile<ArticleProfile>();
                 cfg.AddProfile<DomainAutomappers.ArticleDomainProfile>();
                 cfg.AddProfile<DomainAutomappers.CourseDomainProfile>();
+                cfg.AddProfile<DomainAutomappers.LessonDomainProfile>();
             });
         }
     }

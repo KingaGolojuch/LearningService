@@ -57,7 +57,16 @@
                         height: 150,
                         codemirror: {
                             theme: 'united'
-                        }
+                        },
+                        toolbar: [
+                            ['style', ['bold', 'italic', 'underline', 'clear']],
+                            ['font', ['superscript', 'subscript']],
+                            ['color', ['color']],
+                            ['style', ['style']],
+                            ['table', ['table']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['insert', ['link']]
+                        ]
                     });
                 }
 
