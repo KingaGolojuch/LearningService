@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LearningService.Domain.Enums;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
 using LearningService.WebApplication.Models.Course;
@@ -33,6 +34,21 @@ namespace LearningService.WebApplication.Controllers
                 Lessons = Mapper.Map<IEnumerable<LessonBaseViewModel>>(allLessons)
             };
             return View(model);
+        }
+
+        public RedirectToRouteResult Edit(int lessonId)
+        {
+            var lessonDTO = _lessonService.GetLesson(lessonId);
+            if (lessonDTO == null)
+                return RedirectToAction("Index", "Course");
+
+            if (lessonDTO.LessonType == LessonTypeCustom.Theory)
+                return RedirectToAction("EditTheory", new { lessonId = lessonId });
+
+            if (lessonDTO.LessonType == LessonTypeCustom.TheoryExam)
+                return RedirectToAction("EditTheoryExam", new { lessonId = lessonId });
+
+            return RedirectToAction("Index", "Course");
         }
 
         public ActionResult CreateTheory(int courseId)
