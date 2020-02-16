@@ -5,6 +5,7 @@ using LearningService.WebApplication.Models.Course;
 using LearningService.WebApplication.Models.Lesson;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace LearningService.WebApplication.Controllers
@@ -71,6 +72,46 @@ namespace LearningService.WebApplication.Controllers
 
             var lessonDTO = Mapper.Map<LessonDTO>(model);
             _lessonService.EditLessonTheory(lessonDTO);
+            return RedirectToAction("Index", new { courseId = model.CourseId });
+        }
+        
+        public ActionResult CreateTheoryExam(int courseId)
+        {
+            var model = new LessonTheoryExamViewModel
+            {
+                CourseId = courseId,
+                Options = new List<LessonTheoryOptionViewModel>()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CreateTheoryExam(LessonTheoryExamViewModel model)
+        {
+            if (model.Options == null || !model.Options.Any())
+            {
+                ModelState.AddModelError(string.Empty, "Brak opcji. Dodaj aby zapisać");
+                model.Options = new List<LessonTheoryOptionViewModel>();
+                return View(model);
+            }
+
+            if (model.Options.Count() == 1)
+            {
+                ModelState.AddModelError(string.Empty, "Musi być więcej jak jedna opcja. Tylko jedna odpowiedź może być prawidłowa");
+                return View(model);
+            }
+
+            if (model.Options.Where(x => x.Selected == true).Count() != 1)
+            {
+                ModelState.AddModelError(string.Empty, "Tylko jedna odpowiedź może być prawidłowa");
+                return View(model);
+            }
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var lessonDTO = Mapper.Map<LessonDTO>(model);
+            _lessonService.AddLessonTheory(lessonDTO);
             return RedirectToAction("Index", new { courseId = model.CourseId });
         }
     }

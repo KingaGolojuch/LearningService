@@ -1,10 +1,10 @@
-﻿@model LearningService.WebApplication.Models.Lesson.LessonTheoryViewModel
-
+﻿@model LearningService.WebApplication.Models.Lesson.LessonTheoryExamViewModel
+@using LearningService.WebApplication.Models.Lesson;
 @{
-    ViewBag.Title = "Edycja lekcji teorii";
+    ViewBag.Title = "Tworzenie egzaminu teoretycznego";
 }
 
-<h2>Edycja lekcji teorii</h2>
+<h2>Tworzenie egzaminu teoretycznego</h2>
 
 @using (Html.BeginForm())
 {
@@ -13,8 +13,6 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.CourseId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -31,21 +29,38 @@
                 @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="btnAddNewOptionThoery" type="button" value="Add new row" class="btn btn-default" />
+            </div>
+        </div>
+        <div id="formCreateTheoryExam">
+            @for (int i = 0; i < Model.Options.Count; i++)
+            {
+                <div class="form-group">
+                    @Html.CheckBoxFor(x => x.Options[i].Selected)
+                    @Html.TextBoxFor(x => x.Options[i].Name)
+                </div>
+            }
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
+<template id="theory-exam-row">
+    @Html.Partial("_TheoryExamItem", Model)
+</template>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        (function ($)
-        {
+<script>
+        var countedOptions = @Model.CountOfOptions;
+        (function ($) {
             $('#lessonTheoryContent').summernote({
                 focus: true,
                 height: 150,
@@ -62,6 +77,17 @@
                     ['insert', ['link']]
                 ]
             });
+
+            $('#btnAddNewOptionThoery').click(function () {
+                var rowToAdd = document.getElementById("theory-exam-row");
+                rowToAdd.content.querySelector('.optionCheckBox').setAttribute("name", 'Options[' + countedOptions + '].Selected');
+                rowToAdd.content.querySelector('.optionName').setAttribute("name", 'Options[' + countedOptions + '].Name');
+                var theoryExamOptionsParent = document.getElementById("formCreateTheoryExam");
+                var clon = rowToAdd.content.cloneNode(true);
+                $(clon).appendTo(theoryExamOptionsParent);
+                countedOptions = countedOptions + 1;
+            });
+
         })(jQuery);
-    </script>
+</script>
 }

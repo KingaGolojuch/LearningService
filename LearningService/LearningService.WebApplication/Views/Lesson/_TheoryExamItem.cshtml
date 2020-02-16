@@ -1,0 +1,6 @@
+﻿@model LearningService.WebApplication.Models.Lesson.LessonTheoryExamViewModel
+
+<div class="form-group">
+    @Html.CheckBoxFor(x => x.Options.LastOrDefault().Selected, new { @class = "optionCheckBox" })
+    @Html.TextBoxFor(x => x.Options.LastOrDefault().Name, new { @class = "optionName" })
+</div>
