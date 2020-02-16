@@ -1,13 +1,14 @@
 ﻿@model LearningService.WebApplication.Models.Lesson.LessonTheoryExamViewModel
 @{
-    ViewBag.Title = "Tworzenie egzaminu teoretycznego";
+    ViewBag.Title = "Edycja egzaminu teoretycznego";
 }
 
-<h2>Tworzenie egzaminu teoretycznego</h2>
+<h2>Edycja egzaminu teoretycznego</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.CourseId)
 
     <div class="form-horizontal">
@@ -29,7 +30,7 @@
                 @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="btnAddNewOptionThoery" type="button" value="Add new row" class="btn btn-default" />
@@ -39,6 +40,7 @@
             @for (int i = 0; i < Model.Options.Count; i++)
             {
                 <div class="form-group">
+                    @Html.HiddenFor(x => x.Options[i].Id)
                     @Html.CheckBoxFor(x => x.Options[i].Selected)
                     @Html.TextBoxFor(x => x.Options[i].Name)
                 </div>
@@ -58,7 +60,7 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
+    <script>
         var countedOptions = @Model.CountOfOptions;
         (function ($) {
             $('#lessonTheoryContent').summernote({
@@ -80,6 +82,7 @@
 
             $('#btnAddNewOptionThoery').click(function () {
                 var rowToAdd = document.getElementById("theory-exam-row");
+                rowToAdd.content.querySelector('.optionId').setAttribute("name", 'Options[' + countedOptions + '].Id');
                 rowToAdd.content.querySelector('.optionCheckBox').setAttribute("name", 'Options[' + countedOptions + '].Selected');
                 rowToAdd.content.querySelector('.optionName').setAttribute("name", 'Options[' + countedOptions + '].Name');
                 var theoryExamOptionsParent = document.getElementById("formCreateTheoryExam");
@@ -89,5 +92,5 @@
             });
 
         })(jQuery);
-</script>
+    </script>
 }

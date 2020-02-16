@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LearningService.DAO.Entities
 {
@@ -17,7 +18,7 @@ namespace LearningService.DAO.Entities
 
         public virtual Course Course { get; set; }
         public virtual LessonType LessonType { get; set; }
-        public virtual IEnumerable<LessonComponent> LessonComponents { get; set; }
+        public virtual IList<LessonComponent> LessonComponents { get; set; }
 
         public virtual void SetHeadline(string name)
         {
@@ -40,6 +41,32 @@ namespace LearningService.DAO.Entities
                 return;
 
             LessonContent = content;
+            DataChanged = true;
+        }
+
+        public virtual void SetComponents(IEnumerable<LessonComponent> lessonComponents, string validAnswer)
+        {
+            foreach (var lessonComponent in LessonComponents.ToList())
+            {
+                var lessonComponentInNewList = lessonComponents.SingleOrDefault(x => x.Id == lessonComponent.Id);
+                if (lessonComponentInNewList == null)
+                {
+                    LessonComponents.Remove(lessonComponent);
+                    continue;
+                }
+                if (lessonComponent.Name == lessonComponentInNewList.Name)
+                    continue;
+
+                lessonComponent.Name = lessonComponentInNewList.Name;
+                
+            }
+
+            foreach (var lessonComponent in lessonComponents.Where(x => x.Id == 0))
+            {
+                LessonComponents.Add(lessonComponent);
+            }
+
+            ValidAnswer = validAnswer;
             DataChanged = true;
         }
     }

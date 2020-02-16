@@ -16,6 +16,8 @@ namespace LearningService.Domain.Mappers
                     destination => destination.LessonType,
                     opt => opt.MapFrom(source => Enum.GetName(typeof(LessonTypeCustom), source.LessonType.Id))
                 );
+
+            CreateMap<LessonComponent, LessonComponentDTO>();
         }
     }
 }

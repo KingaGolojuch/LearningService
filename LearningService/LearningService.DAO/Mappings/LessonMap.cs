@@ -19,6 +19,7 @@ namespace LearningService.DAO.Mappings
             References(x => x.LessonType, "LessonTypeId").Cascade.None();
             HasMany(x => x.LessonComponents)
                   .KeyColumn("LessonId")
+                  .Inverse()
                   .Cascade.AllDeleteOrphan();
         }
     }

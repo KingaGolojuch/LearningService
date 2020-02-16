@@ -131,5 +131,49 @@ namespace LearningService.WebApplication.Controllers
             _lessonService.AddTheoryTest(lessonDTO, answers);
             return RedirectToAction("Index", new { courseId = model.CourseId });
         }
+
+
+        public ActionResult EditTheoryExam(int lessonId)
+        {
+            var lessonDTO = _lessonService.GetLesson(lessonId);
+            if (lessonDTO == null)
+                return RedirectToAction("Index", "Course");
+
+            var lessonOptions = _lessonService.GetLessonOptions(lessonId);
+            var model = Mapper.Map<LessonTheoryExamViewModel>(lessonDTO);
+            model.Options = Mapper.Map<List<LessonTheoryOptionViewModel>>(lessonOptions);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditTheoryExam(LessonTheoryExamViewModel model)
+        {
+            if (model.Options == null || !model.Options.Any())
+            {
+                ModelState.AddModelError(string.Empty, "Brak opcji. Dodaj aby zapisać");
+                model.Options = new List<LessonTheoryOptionViewModel>();
+                return View(model);
+            }
+
+            if (model.Options.Count() == 1)
+            {
+                ModelState.AddModelError(string.Empty, "Musi być więcej jak jedna opcja. Tylko jedna odpowiedź może być prawidłowa");
+                return View(model);
+            }
+
+            if (model.Options.Where(x => x.Selected == true).Count() != 1)
+            {
+                ModelState.AddModelError(string.Empty, "Tylko jedna odpowiedź może być prawidłowa");
+                return View(model);
+            }
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var lessonDTO = Mapper.Map<LessonDTO>(model);
+            var answers = Mapper.Map<IEnumerable<LessonComponentDTO>>(model.Options);
+            _lessonService.EditTheoryTest(lessonDTO, answers);
+            return RedirectToAction("Index", new { courseId = model.CourseId });
+        }
     }
 }

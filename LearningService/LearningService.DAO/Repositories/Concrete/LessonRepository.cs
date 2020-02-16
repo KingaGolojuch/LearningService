@@ -23,6 +23,24 @@ namespace LearningService.DAO.Repositories.Concrete
             }
         }
 
+        public void AddOrUpdate(Lesson entity)
+        {
+            using (var transaction = _unitOfWork.Session.BeginTransaction())
+            {
+                _unitOfWork.Session.SaveOrUpdate(entity);
+                transaction.Commit();
+            }
+        }
+
+        public void Merge(Lesson entity)
+        {
+            using (var transaction = _unitOfWork.Session.BeginTransaction())
+            {
+                _unitOfWork.Session.Merge(entity);
+                transaction.Commit();
+            }
+        }
+
         public void Update(Lesson entity)
         {
             using (var transaction = _unitOfWork.Session.BeginTransaction())

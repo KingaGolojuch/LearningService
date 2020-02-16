@@ -55,9 +55,27 @@ namespace LearningService.Domain.Services.Concrete
             {
                 Name = x.Name,
                 Lesson = newLesson
-            });
+            }).ToList();
             newLesson.LessonComponents = lessonComponents;
             _lessonRepository.Add(newLesson);
+        }
+
+        public void EditTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components)
+        {
+            var lesson = _lessonRepository.GetById(lessonDTO.Id);
+
+            lesson.SetHeadline(lessonDTO.Headline);
+            lesson.SetContent(lessonDTO.LessonContent);
+            var lessonComponents = components.Select(x => new LessonComponent
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Lesson = lesson
+            }).ToList();
+            var validAnswer = components.Single(x => x.Selected).Name;
+            lesson.SetComponents(lessonComponents, validAnswer);
+
+            _lessonRepository.Update(lesson);
         }
 
         public void EditLessonTheory(LessonDTO lessonDTO)
@@ -76,6 +94,14 @@ namespace LearningService.Domain.Services.Concrete
         {
             var lesson = _lessonRepository.GetById(lessonId);
             return Mapper.Map<LessonDTO>(lesson);
+        }
+
+        public IEnumerable<LessonComponentDTO> GetLessonOptions(int lessonId)
+        {
+            var lesson = _lessonRepository.GetById(lessonId);
+            var lessonComponents = Mapper.Map<IEnumerable<LessonComponentDTO>>(lesson.LessonComponents);
+            lessonComponents.Single(x => x.Name == lesson.ValidAnswer).Selected = true;
+            return lessonComponents;
         }
 
         public IEnumerable<LessonDTO> GetLessons(int courseId)

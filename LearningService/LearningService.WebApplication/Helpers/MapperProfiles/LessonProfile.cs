@@ -15,8 +15,10 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
             CreateMap<LessonTheoryViewModel, LessonDTO>();
 
             CreateMap<LessonTheoryExamViewModel, LessonDTO>();
+            CreateMap<LessonDTO, LessonTheoryExamViewModel>();
 
             CreateMap<LessonTheoryOptionViewModel, LessonComponentDTO>();
+            CreateMap<LessonComponentDTO, LessonTheoryOptionViewModel>();
         }
     }
 }

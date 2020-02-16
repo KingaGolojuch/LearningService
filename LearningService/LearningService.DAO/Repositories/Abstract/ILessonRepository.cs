@@ -8,6 +8,8 @@ namespace LearningService.DAO.Repositories.Abstract
         Lesson GetById(int lessonId);
         IEnumerable<Lesson> GetLessons(int courseId);
         void Add(Lesson entity);
+        void AddOrUpdate(Lesson entity);
+        void Merge(Lesson entity);
         void Update(Lesson entity);
     }
 }
