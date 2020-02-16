@@ -111,7 +111,8 @@ namespace LearningService.WebApplication.Controllers
                 return View(model);
 
             var lessonDTO = Mapper.Map<LessonDTO>(model);
-            _lessonService.AddLessonTheory(lessonDTO);
+            var answers = Mapper.Map<IEnumerable<LessonComponentDTO>>(model.Options);
+            _lessonService.AddTheoryTest(lessonDTO, answers);
             return RedirectToAction("Index", new { courseId = model.CourseId });
         }
     }

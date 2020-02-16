@@ -5,6 +5,7 @@ using LearningService.Domain.Enums;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LearningService.Domain.Services.Concrete
 {
@@ -33,6 +34,29 @@ namespace LearningService.Domain.Services.Concrete
                 Headline = lessonDTO.Headline,
                 LessonContent = lessonDTO.LessonContent
             };
+            _lessonRepository.Add(newLesson);
+        }
+
+        public void AddTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components)
+        {
+            var course = _courseRepository.GetById(lessonDTO.CourseId);
+            var validAnswer = components.Single(x => x.Selected).Name;
+           
+            var newLesson = new Lesson
+            {
+                Course = new Course { Id = lessonDTO.CourseId },
+                LessonType = new LessonType { Id = (int)LessonTypeCustom.TheoryExam },
+                OrderLesson = course.GetNextOrderLesson(),
+                Headline = lessonDTO.Headline,
+                LessonContent = lessonDTO.LessonContent,
+                ValidAnswer = validAnswer
+            };
+            var lessonComponents = components.Select(x => new LessonComponent
+            {
+                Name = x.Name,
+                Lesson = newLesson
+            });
+            newLesson.LessonComponents = lessonComponents;
             _lessonRepository.Add(newLesson);
         }
 

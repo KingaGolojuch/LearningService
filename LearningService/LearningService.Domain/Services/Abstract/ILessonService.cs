@@ -9,5 +9,6 @@ namespace LearningService.Domain.Services.Abstract
         IEnumerable<LessonDTO> GetLessons(int courseId);
         void AddLessonTheory(LessonDTO lessonDTO);
         void EditLessonTheory(LessonDTO lessonDTO);
+        void AddTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components);
     }
 }
