@@ -233,6 +233,7 @@
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\SharpCodeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,6 +254,7 @@
     <Compile Include="Models\Lesson\LessonTheoryOptionViewModel.cs" />
     <Compile Include="Models\Lesson\LessonTheoryViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TestSharpCodeViewModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -438,6 +440,8 @@
     <Content Include="Views\Lesson\CreateTheoryExam.cshtml" />
     <Content Include="Views\Lesson\_TheoryExamItem.cshtml" />
     <Content Include="Views\Lesson\EditTheoryExam.cshtml" />
+    <Content Include="Views\SharpCode\Create.cshtml" />
+    <Content Include="Views\SharpCode\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
