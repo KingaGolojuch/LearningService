@@ -1,12 +1,11 @@
-﻿using LearningService.Helpers;
-using FluentNHibernate.Cfg;
+﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.AspNet.Identity.Helpers;
 using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Reflection;
-
+using LearningService.DAO.Entities;
 
 namespace LearningService.DAO.Helpers
 {

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using LearningService.DAO.Entities;
 using LearningService.Domain.ModelsDTO;
-using LearningService.Helpers;
 using LearningService.WebApplication.Models.User;
 
 namespace LearningService.WebApplication.Helpers.MapperProfiles

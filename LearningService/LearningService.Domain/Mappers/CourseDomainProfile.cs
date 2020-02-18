@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using LearningService.DAO.Entities;
 using LearningService.Domain.ModelsDTO;
-using LearningService.Helpers;
 
 namespace LearningService.Domain.Mappers
 {

@@ -2,7 +2,6 @@
 using LearningService.DAO.Entities;
 using LearningService.Domain.Enums;
 using LearningService.Domain.ModelsDTO;
-using LearningService.Helpers;
 using System;
 
 namespace LearningService.Domain.Mappers

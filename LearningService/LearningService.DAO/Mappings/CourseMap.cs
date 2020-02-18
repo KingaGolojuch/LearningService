@@ -9,7 +9,7 @@ namespace LearningService.DAO.Mappings
         {
             Table("Course");
 
-            Id(x => x.Id);
+            Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.Name, "Name").Not.Nullable();
             Map(x => x.Description, "Description").Not.Nullable();
 
@@ -18,6 +18,17 @@ namespace LearningService.DAO.Mappings
                   .KeyColumn("CourseId")
                   .Inverse()
                   .Cascade.AllDeleteOrphan();
+
+            HasMany(x => x.UserCourseSubscription)
+                .Cascade.AllDeleteOrphan()
+                .Inverse()
+                .KeyColumn("CourseId");
+
+            //HasManyToMany(x => x.Users)
+            //   .Table("UserCourseSubscription")
+            //   .ParentKeyColumns.Add("CourseId")
+            //   .ChildKeyColumns.Add("UserId")
+            //   .Cascade.All();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using LearningService.Helpers;
 using LearningService.WebApplication.Models.User;
 using System;
 using System.Collections.Generic;

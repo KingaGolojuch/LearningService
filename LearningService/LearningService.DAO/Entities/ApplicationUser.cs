@@ -3,7 +3,7 @@ using NHibernate.AspNet.Identity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace LearningService.Helpers
+namespace LearningService.DAO.Entities
 {
     public class ApplicationUser : IdentityUser
     {
@@ -18,11 +18,10 @@ namespace LearningService.Helpers
         public virtual string Name { get; set; }
         public virtual string Surname { get; set; }
         public virtual bool Active { get; set; }
-
         
         public ApplicationUser()
         {
-
+            
         }
 
         public ApplicationUser(string userId)

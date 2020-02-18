@@ -9,8 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LearningService.WebApplication.Models;
-using LearningService.Helpers;
 using LearningService.WebApplication.Helpers;
+using LearningService.DAO.Entities;
 
 namespace LearningService.WebApplication.Controllers
 {
@@ -383,7 +383,10 @@ namespace LearningService.WebApplication.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

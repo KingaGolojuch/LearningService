@@ -1,4 +1,4 @@
-﻿using LearningService.Helpers;
+﻿using LearningService.DAO.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

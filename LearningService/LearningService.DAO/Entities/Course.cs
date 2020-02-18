@@ -1,5 +1,4 @@
-﻿using LearningService.Helpers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace LearningService.DAO.Entities
@@ -10,8 +9,11 @@ namespace LearningService.DAO.Entities
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
 
+        //User that create course
         public virtual ApplicationUser User { get; set; }
         public virtual IEnumerable<Lesson> Lessons { get; set; }
+        //users thats subscribe course
+        public virtual IList<UserCourseSubscription> UserCourseSubscription { get; set; }
 
         public virtual int GetNextOrderLesson()
         {

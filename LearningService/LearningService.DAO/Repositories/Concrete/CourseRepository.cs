@@ -1,7 +1,6 @@
 ﻿using LearningService.DAO.Entities;
 using LearningService.DAO.Helpers;
 using LearningService.DAO.Repositories.Abstract;
-using LearningService.Helpers;
 using System.Collections.Generic;
 
 namespace LearningService.DAO.Repositories.Concrete
