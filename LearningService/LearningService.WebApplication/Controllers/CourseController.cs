@@ -41,5 +41,13 @@ namespace LearningService.WebApplication.Controllers
             _courseService.Add(courseDTO);
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult UserCourses()
+        {
+            var courses = _courseService.GetFromOtherUsers(GetUserId);
+            var model = Mapper.Map<IEnumerable<CourseViewModel>>(courses);
+            return View(model);
+        }
     }
 }

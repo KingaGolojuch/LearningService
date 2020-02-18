@@ -8,5 +8,6 @@ namespace LearningService.Domain.Services.Abstract
         IEnumerable<CourseDTO> Get(string userId);
         CourseDTO Get(int id);
         void Add(CourseDTO course);
+        IEnumerable<CourseDTO> GetFromOtherUsers(string userId);
     }
 }

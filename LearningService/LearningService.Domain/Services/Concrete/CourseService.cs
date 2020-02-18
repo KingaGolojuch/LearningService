@@ -4,6 +4,7 @@ using LearningService.DAO.Repositories.Abstract;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LearningService.Domain.Services.Concrete
 {
@@ -32,6 +33,15 @@ namespace LearningService.Domain.Services.Concrete
         {
             var entity = Mapper.Map<Course>(course);
             _courseRepository.Add(entity);
+        }
+
+        public IEnumerable<CourseDTO> GetFromOtherUsers(string userId)
+        {
+            var entities = _courseRepository.Get();
+            return Mapper.Map<IEnumerable<CourseDTO>>(
+                entities
+                .Where(x => x.User.Id != userId)
+            );
         }
     }
 }

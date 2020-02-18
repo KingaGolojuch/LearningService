@@ -15,7 +15,8 @@
             {
                 <li>@Html.ActionLink("Artykuły innych", "UserArticles", "Article", routeValues: null, htmlAttributes: new { id = "" })</li>
                 <li>@Html.ActionLink("Artykuły twoje", "Index", "Article", routeValues: null, htmlAttributes: new { id = "" })</li>
-                <li>@Html.ActionLink("Kursy", "Index", "Course", routeValues: null, htmlAttributes: new { id = "" })</li>
+                <li>@Html.ActionLink("Kursy innych", "UserCourses", "Course", routeValues: null, htmlAttributes: new { id = "" })</li>
+                <li>@Html.ActionLink("Kursy twoje", "Index", "Course", routeValues: null, htmlAttributes: new { id = "" })</li>
             }
             <li>
                 @Html.ActionLink("Ustawienia", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

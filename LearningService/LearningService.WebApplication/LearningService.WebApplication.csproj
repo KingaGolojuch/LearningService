@@ -442,6 +442,7 @@
     <Content Include="Views\Lesson\EditTheoryExam.cshtml" />
     <Content Include="Views\SharpCode\Create.cshtml" />
     <Content Include="Views\SharpCode\Index.cshtml" />
+    <Content Include="Views\Course\UserCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
