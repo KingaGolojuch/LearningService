@@ -16,7 +16,7 @@
         <td>@Html.DisplayFor(modelItem => item.Name)</td>
         <td>@Html.DisplayFor(modelItem => item.Description)</td>
         <td>
-            @Html.ActionLink("Szczegóły", "Edit", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Szczegóły", "CourseOverwiew", new { courseId =item.Id })
         </td>
     </tr>
 }

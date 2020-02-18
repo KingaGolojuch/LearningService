@@ -247,6 +247,7 @@
     <Compile Include="Helpers\MapperProfiles\UserProfile.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article\ArticleBaseViewModel.cs" />
+    <Compile Include="Models\Course\CourseOverwiewViewModel.cs" />
     <Compile Include="Models\Course\CourseViewModel.cs" />
     <Compile Include="Models\Lesson\LessonBaseViewModel.cs" />
     <Compile Include="Models\Lesson\LessonCourseContainerViewModel.cs" />
@@ -443,6 +444,7 @@
     <Content Include="Views\SharpCode\Create.cshtml" />
     <Content Include="Views\SharpCode\Index.cshtml" />
     <Content Include="Views\Course\UserCourses.cshtml" />
+    <Content Include="Views\Course\CourseOverwiew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
