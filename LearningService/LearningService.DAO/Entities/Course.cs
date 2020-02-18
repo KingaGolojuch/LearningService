@@ -8,6 +8,7 @@ namespace LearningService.DAO.Entities
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
+        public virtual string Description { get; set; }
 
         public virtual ApplicationUser User { get; set; }
         public virtual IEnumerable<Lesson> Lessons { get; set; }

@@ -10,7 +10,12 @@ namespace LearningService.WebApplication.Models.Course
     {
         public int Id { get; set; }
 
+        [Required]
         [Display(Name = "Nazwa")]
         public string Name{ get; set; }
+
+        [Required]
+        [Display(Name = "Opis")]
+        public string Description{ get; set; }
     }
 }
