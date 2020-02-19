@@ -28,6 +28,25 @@ namespace LearningService.Domain.Services.Concrete
             };
             user.AddCourse(newCourse);
 
+            if (!user.DataChanged)
+                return;
+
+            _userRepository.Update(user);
+        }
+        
+        public void SetLessonAsCompleted(string userId, int lessonId)
+        {
+            var user = _userRepository.GetById(userId);
+            var passedLesson = new UserLesson
+            {
+                User = user,
+                Lesson = new Lesson { Id = lessonId }
+            };
+            user.AddLesson(passedLesson);
+
+            if (!user.DataChanged)
+                return;
+
             _userRepository.Update(user);
         }
     }

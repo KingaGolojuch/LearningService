@@ -13,13 +13,16 @@ namespace LearningService.Domain.Services.Concrete
     {
         private readonly ICourseRepository _courseRepository;
         private readonly ILessonRepository _lessonRepository;
+        private readonly IUserRepository _userRepository;
 
         public LessonService(
             ICourseRepository courseRepository,
-            ILessonRepository lessonRepository)
+            ILessonRepository lessonRepository,
+            IUserRepository userRepository)
         {
             _courseRepository = courseRepository;
             _lessonRepository = lessonRepository;
+            _userRepository = userRepository;
         }
 
         public void AddLessonTheory(LessonDTO lessonDTO)

@@ -1,0 +1,12 @@
+﻿@model LearningService.WebApplication.Models.Lesson.LessonTheoryViewModel
+
+@{
+    ViewBag.Title = "Nauka lekcji";
+}
+
+<h2>Nauka lekcji</h2>
+
+<div class="form-horizontal">
+    <p>nagłówek: @Model.Headline</p>
+    <p>zawartość: @Html.Raw(Model.LessonContent)</p>
+</div>

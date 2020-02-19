@@ -15,13 +15,16 @@ namespace LearningService.WebApplication.Controllers
     {
         private readonly ICourseService _courseService;
         private readonly ILessonService _lessonService;
+        private readonly IUserService _userService;
 
         public LessonController(
             ICourseService courseService,
-            ILessonService lessonService)
+            ILessonService lessonService,
+            IUserService userService)
         {
             _courseService = courseService;
             _lessonService = lessonService;
+            _userService = userService;
         }
         // GET: Lesson
         public ActionResult Index(int courseId)
@@ -174,6 +177,32 @@ namespace LearningService.WebApplication.Controllers
             var answers = Mapper.Map<IEnumerable<LessonComponentDTO>>(model.Options);
             _lessonService.EditTheoryTest(lessonDTO, answers);
             return RedirectToAction("Index", new { courseId = model.CourseId });
+        }
+
+        public ActionResult StartLesson(int lessonId)
+        {
+            var lessonDTO = _lessonService.GetLesson(lessonId);
+            if (lessonDTO == null)
+                return RedirectToAction("Index", "Home");
+
+            if (lessonDTO.LessonType == LessonTypeCustom.Theory)
+                return RedirectToAction("LearningTheory", new { lessonId = lessonId });
+
+            if (lessonDTO.LessonType == LessonTypeCustom.TheoryExam)
+                return RedirectToAction("EditTheoryExam", new { lessonId = lessonId });
+
+            return RedirectToAction("Index", "Course");
+        }
+
+        public ActionResult LearningTheory(int lessonId)
+        {
+            var lessonDTO = _lessonService.GetLesson(lessonId);
+            if (lessonDTO == null)
+                return RedirectToAction("Index", "Course");
+
+            _userService.SetLessonAsCompleted(GetUserId, lessonId);
+            var model = Mapper.Map<LessonTheoryViewModel>(lessonDTO);
+            return View(model);
         }
     }
 }
