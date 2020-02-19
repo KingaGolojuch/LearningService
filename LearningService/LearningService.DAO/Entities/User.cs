@@ -35,5 +35,19 @@ namespace LearningService.DAO.Entities
             UserLessons.Add(userLesson);
             DataChanged = true;
         }
+
+        public virtual void AddLesson(int lessonId)
+        {
+            if (UserLessons.Select(x => x.Lesson.Id).Contains(lessonId))
+                return;
+
+            var userLesson = new UserLesson
+            {
+                User = this,
+                Lesson = new Lesson { Id = lessonId }
+            };
+            UserLessons.Add(userLesson);
+            DataChanged = true;
+        }
     }
 }

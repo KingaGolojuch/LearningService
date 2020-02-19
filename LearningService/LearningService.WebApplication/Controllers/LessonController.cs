@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LearningService.Domain.Enums;
+using LearningService.Domain.Exceptions;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
 using LearningService.WebApplication.Models.Course;
@@ -189,7 +190,7 @@ namespace LearningService.WebApplication.Controllers
                 return RedirectToAction("LearningTheory", new { lessonId = lessonId });
 
             if (lessonDTO.LessonType == LessonTypeCustom.TheoryExam)
-                return RedirectToAction("EditTheoryExam", new { lessonId = lessonId });
+                return RedirectToAction("PassingTheoryExam", new { lessonId = lessonId });
 
             return RedirectToAction("Index", "Course");
         }
@@ -198,11 +199,45 @@ namespace LearningService.WebApplication.Controllers
         {
             var lessonDTO = _lessonService.GetLesson(lessonId);
             if (lessonDTO == null)
-                return RedirectToAction("Index", "Course");
-
-            _userService.SetLessonAsCompleted(GetUserId, lessonId);
+                return RedirectToAction("Index", "Home");
+            
             var model = Mapper.Map<LessonTheoryViewModel>(lessonDTO);
             return View(model);
+        }
+
+        public ActionResult PassingTheoryExam(int lessonId)
+        {
+            var lessonDTO = _lessonService.GetLesson(lessonId);
+            if (lessonDTO == null)
+                return RedirectToAction("Index", "Home");
+
+            var model = Mapper.Map<LessonTheoryExamLearningViewModel>(lessonDTO);
+            var lessonOptions = _lessonService.GetLessonOptions(lessonId);
+            model.Options = Mapper.Map<List<SelectListItem>>(lessonOptions);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult PassingTheoryExam(LessonTheoryExamLearningViewModel model)
+        {
+            var lesson = _lessonService.GetLesson(model.Id);
+            model.Headline = lesson.Headline;
+            model.LessonContent = lesson.LessonContent;
+            var lessonOptions = _lessonService.GetLessonOptions(model.Id);
+            model.Options = Mapper.Map<List<SelectListItem>>(lessonOptions);
+            if (!ModelState.IsValid)
+                return View(model);
+
+            try
+            {
+                _lessonService.AttemptPassTheoryTest(model.Id, model.SelectedOption.Value, GetUserId);
+                return RedirectToAction("CourseOverwiew", "Course", new { courseId = lesson.CourseId });
+            }
+            catch (LessonException)
+            {
+                ModelState.AddModelError(string.Empty, "Niepoprawna odpowiedź");
+                return View(model);
+            }
         }
     }
 }

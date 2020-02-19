@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\LessonTypeCustom.cs" />
+    <Compile Include="Exceptions\LessonException.cs" />
     <Compile Include="Mappers\ArticleDomainProfile.cs" />
     <Compile Include="Mappers\CourseDomainProfile.cs" />
     <Compile Include="Mappers\LessonDomainProfile.cs" />

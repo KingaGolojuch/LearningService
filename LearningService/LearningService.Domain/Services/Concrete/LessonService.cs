@@ -2,6 +2,7 @@
 using LearningService.DAO.Entities;
 using LearningService.DAO.Repositories.Abstract;
 using LearningService.Domain.Enums;
+using LearningService.Domain.Exceptions;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
 using System.Collections.Generic;
@@ -111,6 +112,21 @@ namespace LearningService.Domain.Services.Concrete
         {
             var lessons = _lessonRepository.GetLessons(courseId);
             return Mapper.Map<IEnumerable<LessonDTO>>(lessons);
+        }
+
+        public void AttemptPassTheoryTest(int lessonId, int answerId, string userId)
+        {
+            var lesson = _lessonRepository.GetById(lessonId);
+            bool answeredCorrect = lesson.IsAnswerTheoryTestCorrect(answerId);
+            if (!answeredCorrect)
+                throw new LessonException();
+
+            var user = _userRepository.GetById(userId);
+            user.AddLesson(lessonId);
+            if (!user.DataChanged)
+                return;
+
+            _userRepository.Update(user);
         }
     }
 }

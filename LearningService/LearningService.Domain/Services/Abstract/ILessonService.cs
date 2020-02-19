@@ -12,5 +12,6 @@ namespace LearningService.Domain.Services.Abstract
         void AddTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components);
         void EditTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components);
         IEnumerable<LessonComponentDTO> GetLessonOptions(int lessonId);
+        void AttemptPassTheoryTest(int lessonId, int answerId, string userId);
     }
 }

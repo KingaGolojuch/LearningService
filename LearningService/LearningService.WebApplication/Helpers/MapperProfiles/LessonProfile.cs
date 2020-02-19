@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using LearningService.Domain.ModelsDTO;
 using LearningService.WebApplication.Models.Lesson;
-
+using System.Web.Mvc;
 
 namespace LearningService.WebApplication.Helpers.MapperProfiles
 {
@@ -19,6 +19,17 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
 
             CreateMap<LessonTheoryOptionViewModel, LessonComponentDTO>();
             CreateMap<LessonComponentDTO, LessonTheoryOptionViewModel>();
+
+            CreateMap<LessonDTO, LessonTheoryExamLearningViewModel>();
+
+            CreateMap<LessonComponentDTO, SelectListItem>()
+                .ForMember(
+                    dest => dest.Value,
+                    opt => opt.MapFrom(src => src.Id.ToString())
+                ).ForMember(
+                    dest => dest.Text,
+                    opt => opt.MapFrom(src => src.Name)
+                );
         }
     }
 }

@@ -70,5 +70,14 @@ namespace LearningService.DAO.Entities
             ValidAnswer = validAnswer;
             DataChanged = true;
         }
+
+        public virtual bool IsAnswerTheoryTestCorrect(int answerId)
+        {
+            var validAnswerComponent = LessonComponents.Single(x => x.Name == ValidAnswer);
+            if (validAnswerComponent.Id == answerId)
+                return true;
+
+            return false;
+        }
     }
 }

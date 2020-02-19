@@ -251,6 +251,7 @@
     <Compile Include="Models\Course\CourseViewModel.cs" />
     <Compile Include="Models\Lesson\LessonBaseViewModel.cs" />
     <Compile Include="Models\Lesson\LessonCourseContainerViewModel.cs" />
+    <Compile Include="Models\Lesson\LessonTheoryExamLearningViewModel.cs" />
     <Compile Include="Models\Lesson\LessonTheoryExamViewModel.cs" />
     <Compile Include="Models\Lesson\LessonTheoryOptionViewModel.cs" />
     <Compile Include="Models\Lesson\LessonTheoryViewModel.cs" />
@@ -446,6 +447,7 @@
     <Content Include="Views\Course\UserCourses.cshtml" />
     <Content Include="Views\Course\CourseOverwiew.cshtml" />
     <Content Include="Views\Lesson\LearningTheory.cshtml" />
+    <Content Include="Views\Lesson\PassingTheoryExam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
