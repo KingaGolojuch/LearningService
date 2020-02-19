@@ -448,6 +448,7 @@
     <Content Include="Views\Course\CourseOverwiew.cshtml" />
     <Content Include="Views\Lesson\LearningTheory.cshtml" />
     <Content Include="Views\Lesson\PassingTheoryExam.cshtml" />
+    <Content Include="Views\Lesson\PassingTheoryExamCompleted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

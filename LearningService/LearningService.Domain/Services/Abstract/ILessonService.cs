@@ -6,7 +6,9 @@ namespace LearningService.Domain.Services.Abstract
     public interface ILessonService
     {
         LessonDTO GetLesson(int lessonId);
+        LessonDTO GetLesson(int lessonId, string userId);
         IEnumerable<LessonDTO> GetLessons(int courseId);
+        IEnumerable<LessonDTO> GetLessons(int courseId, string userId);
         void AddLessonTheory(LessonDTO lessonDTO);
         void EditLessonTheory(LessonDTO lessonDTO);
         void AddTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components);

@@ -27,8 +27,11 @@
     @for (int i = 0; i < Model.Lessons.Count(); i++)
     {
         <p>
-            @(i+1). @Model.Lessons[i].Headline
-            @Html.ActionLink("Przejdź do lekcji", "StartLesson", "Lesson", new { @lessonId = Model.Lessons[i].Id }, null)
+            @(i+1). @Model.Lessons[i].Headline @(Model.Lessons[i].AlreadyPassed ? "Zdana" : "")
+            @if ((Model.Course.IsSubscribed) && (i == 0 || Model.Lessons[i].AlreadyPassed || Model.Lessons[i-1].AlreadyPassed))
+            {
+                @Html.ActionLink("Przejdź do lekcji", "StartLesson", "Lesson", new { @lessonId = Model.Lessons[i].Id }, null)
+            }
         </p>
     }
 </div>

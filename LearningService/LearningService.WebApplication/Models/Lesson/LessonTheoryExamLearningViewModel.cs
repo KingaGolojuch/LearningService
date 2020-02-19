@@ -23,5 +23,7 @@ namespace LearningService.WebApplication.Models.Lesson
         public int? SelectedOption { get; set; }
 
         public List<SelectListItem> Options { get; set; }
+
+        public string Answer { get; set; }
     }
 }

@@ -59,8 +59,9 @@ namespace LearningService.WebApplication.Controllers
 
         public ActionResult CourseOverwiew(int courseId)
         {
-            var course = _courseService.Get(courseId, GetUserId);
-            var lessonsCourse = _lessonService.GetLessons(courseId);
+            string userId = GetUserId;
+            var course = _courseService.Get(courseId, userId);
+            var lessonsCourse = _lessonService.GetLessons(courseId, userId);
             var model = new CourseOverwiewViewModel
             {
                 Course = Mapper.Map<CourseViewModel>(course),

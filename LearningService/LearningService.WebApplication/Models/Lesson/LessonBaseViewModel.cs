@@ -14,5 +14,7 @@ namespace LearningService.WebApplication.Models.Lesson
         [Display(Name = "Nagłówek")]
         [Required]
         public string Headline { get; set; }
+
+        public bool AlreadyPassed { get; set; }
     }
 }

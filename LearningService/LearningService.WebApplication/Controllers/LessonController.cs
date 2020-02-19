@@ -207,11 +207,16 @@ namespace LearningService.WebApplication.Controllers
 
         public ActionResult PassingTheoryExam(int lessonId)
         {
-            var lessonDTO = _lessonService.GetLesson(lessonId);
+            var lessonDTO = _lessonService.GetLesson(lessonId, GetUserId);
             if (lessonDTO == null)
                 return RedirectToAction("Index", "Home");
 
             var model = Mapper.Map<LessonTheoryExamLearningViewModel>(lessonDTO);
+            if (lessonDTO.AlreadyPassed)
+            {
+                model.Answer = lessonDTO.ValidAnswer;
+                return View("PassingTheoryExamCompleted", model);
+            }
             var lessonOptions = _lessonService.GetLessonOptions(lessonId);
             model.Options = Mapper.Map<List<SelectListItem>>(lessonOptions);
             return View(model);

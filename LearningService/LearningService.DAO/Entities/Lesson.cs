@@ -79,5 +79,12 @@ namespace LearningService.DAO.Entities
 
             return false;
         }
+        public virtual bool IsUserPassedLesson(string userId)
+        {
+            if (UserLessons.Any(x => x.User.Id == userId))
+                return true;
+
+            return false;
+        }
     }
 }

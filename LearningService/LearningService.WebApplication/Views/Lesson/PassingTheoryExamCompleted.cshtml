@@ -1,0 +1,20 @@
+﻿@model LearningService.WebApplication.Models.Lesson.LessonTheoryExamLearningViewModel
+@{
+    ViewBag.Title = "Zdany egzamin teoretyczny";
+}
+
+<h2>Zdany egzamin teoretyczny</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="form-horizontal">
+        <hr />
+        
+        <p>@Model.Headline</p>
+        <p>@Html.Raw(Model.LessonContent)</p>
+        <p>Odpowiedź: @Model.Answer</p>
+    </div>
+}

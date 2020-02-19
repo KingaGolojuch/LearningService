@@ -100,6 +100,14 @@ namespace LearningService.Domain.Services.Concrete
             return Mapper.Map<LessonDTO>(lesson);
         }
 
+        public LessonDTO GetLesson(int lessonId, string userId)
+        {
+            var lesson = _lessonRepository.GetById(lessonId);
+            var lessonDTO = Mapper.Map<LessonDTO>(lesson);
+            lessonDTO.AlreadyPassed = lesson.IsUserPassedLesson(userId);
+            return lessonDTO;
+        }
+
         public IEnumerable<LessonComponentDTO> GetLessonOptions(int lessonId)
         {
             var lesson = _lessonRepository.GetById(lessonId);
@@ -112,6 +120,19 @@ namespace LearningService.Domain.Services.Concrete
         {
             var lessons = _lessonRepository.GetLessons(courseId);
             return Mapper.Map<IEnumerable<LessonDTO>>(lessons);
+        }
+
+        public IEnumerable<LessonDTO> GetLessons(int courseId, string userId)
+        {
+            var lessons = _lessonRepository.GetLessons(courseId);
+            var lessonsDTO = Mapper.Map<IEnumerable<LessonDTO>>(lessons);
+            foreach (var lesson in lessonsDTO)
+            {
+                if (lessons.Single(x => x.Id == lesson.Id).UserLessons.Any(x => x.User.Id == userId))
+                    lesson.AlreadyPassed = true;
+            }
+
+            return lessonsDTO;
         }
 
         public void AttemptPassTheoryTest(int lessonId, int answerId, string userId)
