@@ -8,6 +8,7 @@
     <tr>
         <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th>@Html.DisplayNameFor(model => model.Description)</th>
+        <th>@Html.DisplayNameFor(model => model.IsSubscribed)</th>
         <th></th>
     </tr>
 
@@ -15,8 +16,9 @@
     <tr>
         <td>@Html.DisplayFor(modelItem => item.Name)</td>
         <td>@Html.DisplayFor(modelItem => item.Description)</td>
+        <td>@Html.DisplayFor(modelItem => item.IsSubscribed)</td>
         <td>
-            @Html.ActionLink("Szczegóły", "CourseOverwiew", new { courseId =item.Id })
+            @Html.ActionLink("Szczegóły", "CourseOverwiew", new { courseId = item.Id })
         </td>
     </tr>
 }

@@ -1,4 +1,5 @@
-﻿using LearningService.WebApplication.Models;
+﻿using LearningService.Domain.Services.Abstract;
+using LearningService.WebApplication.Models;
 using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
 using System;
 using System.CodeDom.Compiler;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace LearningService.WebApplication.Controllers
 {
-    public class SharpCodeController : Controller
+    public class SharpCodeController : BaseController
     {
         // GET: SharpCode
         public ActionResult Index()

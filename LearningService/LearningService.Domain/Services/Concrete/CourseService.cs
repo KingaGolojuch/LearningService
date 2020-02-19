@@ -29,6 +29,16 @@ namespace LearningService.Domain.Services.Concrete
             return Mapper.Map<CourseDTO>(entity);
         }
 
+        public CourseDTO Get(int id, string userId)
+        {
+            var entity = _courseRepository.GetById(id);
+            var courseDTO = Mapper.Map<CourseDTO>(entity);
+            if (courseDTO.UsersSubscribers.Any(x => x == userId))
+                courseDTO.IsSubscribed = true;
+
+            return courseDTO;
+        }   
+
         public void Add(CourseDTO course)
         {
             var entity = Mapper.Map<Course>(course);
@@ -38,10 +48,17 @@ namespace LearningService.Domain.Services.Concrete
         public IEnumerable<CourseDTO> GetFromOtherUsers(string userId)
         {
             var entities = _courseRepository.Get();
-            return Mapper.Map<IEnumerable<CourseDTO>>(
+            var coursesDTO = Mapper.Map<IEnumerable<CourseDTO>>(
                 entities
-                .Where(x => x.User.Id != userId)
-            );
+                .Where(x => x.User.Id != userId));
+            
+            foreach (var course in coursesDTO)
+            {
+                if (course.UsersSubscribers.Any(x => x == userId))
+                    course.IsSubscribed = true;
+            }
+
+            return coursesDTO;
         }
     }
 }

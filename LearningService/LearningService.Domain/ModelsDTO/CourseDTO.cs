@@ -1,4 +1,6 @@
-﻿namespace LearningService.Domain.ModelsDTO
+﻿using System.Collections.Generic;
+
+namespace LearningService.Domain.ModelsDTO
 {
     public class CourseDTO
     {
@@ -7,5 +9,8 @@
         public string Description { get; set; }
 
         public string UserId { get; set; }
+        public bool IsSubscribed { get; set; }
+
+        public IEnumerable<string> UsersSubscribers { get; set; }
     }
 }

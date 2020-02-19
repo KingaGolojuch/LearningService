@@ -7,6 +7,7 @@ namespace LearningService.Domain.Services.Abstract
     {
         IEnumerable<CourseDTO> Get(string userId);
         CourseDTO Get(int id);
+        CourseDTO Get(int id, string userId);
         void Add(CourseDTO course);
         IEnumerable<CourseDTO> GetFromOtherUsers(string userId);
     }

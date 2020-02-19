@@ -8,6 +8,19 @@
 
 <p>Opis: @Model.Course.Description</p>
 
+<p>Subskrypcja: 
+    @if (Model.Course.IsSubscribed)
+    {
+        <span>Aktualnie subskrybujesz</span>
+    }
+    else
+    {
+        using(Html.BeginForm("AddSubscribe", "Course", new { courseId = Model.Course.Id }, FormMethod.Post, null))
+        {
+            <input type="submit" value="subskrybuj" />
+        }
+    }
+</p>
 
 <div>
     <p><strong>Lekcje</strong></p>

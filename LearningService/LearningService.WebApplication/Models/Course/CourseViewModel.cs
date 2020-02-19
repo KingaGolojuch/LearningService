@@ -17,5 +17,8 @@ namespace LearningService.WebApplication.Models.Course
         [Required]
         [Display(Name = "Opis")]
         public string Description{ get; set; }
+        
+        [Display(Name = "Subskrypcja")]
+        public bool IsSubscribed { get; set; }
     }
 }

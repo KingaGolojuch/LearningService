@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LearningService.DAO.Entities;
 using LearningService.Domain.ModelsDTO;
+using System.Linq;
 
 namespace LearningService.Domain.Mappers
 {
@@ -18,6 +19,9 @@ namespace LearningService.Domain.Mappers
                 ).ForMember(
                     dest => dest.UserId,
                     opt => opt.MapFrom(src => src.User.Id)
+                ).ForMember(
+                    dest => dest.UsersSubscribers,
+                    opt => opt.MapFrom(src => src.UserCourseSubscription.Select(x => x.User.Id).ToList())
                 );
 
             CreateMap<CourseDTO, Course>()
