@@ -19,6 +19,7 @@ namespace LearningService.DAO.Entities
         public virtual Course Course { get; set; }
         public virtual LessonType LessonType { get; set; }
         public virtual IList<LessonComponent> LessonComponents { get; set; }
+        public virtual IList<UserLesson> UserLessons { get; set; }
 
         public virtual void SetHeadline(string name)
         {

@@ -78,8 +78,10 @@
     <Compile Include="Entities\LessonType.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserCourseSubscription.cs" />
+    <Compile Include="Entities\UserLesson.cs" />
     <Compile Include="Helpers\IUnitOfWork.cs" />
     <Compile Include="Helpers\UnitOfWork.cs" />
+    <Compile Include="Mappings\UserLessonMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\ArticleMap.cs" />
     <Compile Include="Mappings\CourseMap.cs" />

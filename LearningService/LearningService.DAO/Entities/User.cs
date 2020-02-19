@@ -14,6 +14,7 @@ namespace LearningService.DAO.Entities
         public virtual bool Active { get; set; }
 
         public virtual IList<UserCourseSubscription> UserCourseSubscription { get; set; }
+        public virtual IList<UserLesson> UserLessons { get; set; }
 
         public virtual void AddCourse(UserCourseSubscription course)
         {
