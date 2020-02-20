@@ -5,6 +5,7 @@ using LearningService.WebApplication.Models.Course;
 using LearningService.WebApplication.Models.Lesson;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace LearningService.WebApplication.Controllers
@@ -65,7 +66,7 @@ namespace LearningService.WebApplication.Controllers
             var model = new CourseOverwiewViewModel
             {
                 Course = Mapper.Map<CourseViewModel>(course),
-                Lessons = Mapper.Map<List<LessonBaseViewModel>>(lessonsCourse)
+                Lessons = Mapper.Map<List<LessonBaseViewModel>>(lessonsCourse.OrderBy(x => x.OrderLesson))
             };
             return View(model);
         }
