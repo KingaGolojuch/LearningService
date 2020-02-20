@@ -2,37 +2,74 @@
 @{
     ViewBag.Title = "Tworzenie egzaminu praktycznego";
 }
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app">
 
-<h2>Tworzenie egzaminu praktycznego</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.CourseId)
+    <h2>Tworzenie egzaminu praktycznego</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CourseId)
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LessonContent, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SelectedOption, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SelectedOption, Model.ReturnTypeOptions, new Dictionary<string,object>() {{ "class", "form-control" }, { @"v-on:change", @"CheckAnswerVisible" }, { @"v-model", "SelectedOptionVue" } })
+                    @Html.ValidationMessageFor(model => model.SelectedOption, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div v-if="IsAnswerVisible" class="form-group">
+                @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Answer, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LessonContent, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+</div>
+@section Scripts {
+    <script>
+        let data = @Html.Raw(Json.Encode(Model));
+        var app = new Vue({
+            el: '#app',
+            data: {
+                SelectedOptionVue: data.SelectedOption,
+                IsAnswerVisible: (data.SelectedOption !== 'null' && data.SelectedOption !== 'void')
+            },
+            methods: {
+                CheckAnswerVisible: function (e) {
+                    this.IsAnswerVisible = (this.SelectedOptionVue !== 'null' && this.SelectedOptionVue !== 'void');
+                }
+            }
+        })
+    </script>    
 }
