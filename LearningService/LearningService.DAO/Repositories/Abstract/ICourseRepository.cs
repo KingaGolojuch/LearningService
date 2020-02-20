@@ -9,5 +9,6 @@ namespace LearningService.DAO.Repositories.Abstract
         IEnumerable<Course> Get(string userId);
         Course GetById(int id);
         void Add(Course entity);
+        void Update(Course entity);
     }
 }

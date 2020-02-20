@@ -1,4 +1,5 @@
-﻿using LearningService.Domain.ModelsDTO;
+﻿using LearningService.Domain.Enums;
+using LearningService.Domain.ModelsDTO;
 using System.Collections.Generic;
 
 namespace LearningService.Domain.Services.Abstract
@@ -15,5 +16,6 @@ namespace LearningService.Domain.Services.Abstract
         void EditTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components);
         IEnumerable<LessonComponentDTO> GetLessonOptions(int lessonId);
         void AttemptPassTheoryTest(int lessonId, int answerId, string userId);
+        void ChangeOrderLesson(int lessonId, LessonOrderChangeDirection orderDirection);
     }
 }

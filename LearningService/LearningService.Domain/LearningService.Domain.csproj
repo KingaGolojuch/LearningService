@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\LessonOrderChangeDirection.cs" />
     <Compile Include="Enums\LessonTypeCustom.cs" />
     <Compile Include="Exceptions\LessonException.cs" />
     <Compile Include="Mappers\ArticleDomainProfile.cs" />

@@ -45,5 +45,14 @@ namespace LearningService.DAO.Repositories.Concrete
                 transaction.Commit();
             }
         }
+
+        public void Update(Course entity)
+        {
+            using (var transaction = _unitOfWork.Session.BeginTransaction())
+            {
+                _unitOfWork.Session.Update(entity);
+                transaction.Commit();
+            }
+        }
     }
 }

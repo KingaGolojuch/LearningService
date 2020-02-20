@@ -149,5 +149,27 @@ namespace LearningService.Domain.Services.Concrete
 
             _userRepository.Update(user);
         }
+
+        public void ChangeOrderLesson(int lessonId, LessonOrderChangeDirection orderDirection)
+        {
+            var lesson = _lessonRepository.GetById(lessonId);
+            var course = lesson.Course;
+            switch (orderDirection)
+            {
+                case LessonOrderChangeDirection.Down:
+                    course.ChangeOrderLessonDown(lesson);
+                    break;
+                case LessonOrderChangeDirection.Up:
+                    course.ChangeOrderLessonUp(lesson);
+                    break;
+                default:
+                    return;
+            }
+            
+            if (!course.DataChanged)
+                return;
+
+            _courseRepository.Update(course);
+        }
     }
 }

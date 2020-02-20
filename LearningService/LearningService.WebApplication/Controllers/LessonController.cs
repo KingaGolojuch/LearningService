@@ -35,7 +35,7 @@ namespace LearningService.WebApplication.Controllers
             var model = new LessonCourseContainerViewModel
             {
                 Course = Mapper.Map<CourseViewModel>(course),
-                Lessons = Mapper.Map<IEnumerable<LessonBaseViewModel>>(allLessons)
+                Lessons = Mapper.Map<IEnumerable<LessonBaseViewModel>>(allLessons.OrderBy(x => x.OrderLesson))
             };
             return View(model);
         }
@@ -53,6 +53,14 @@ namespace LearningService.WebApplication.Controllers
                 return RedirectToAction("EditTheoryExam", new { lessonId = lessonId });
 
             return RedirectToAction("Index", "Course");
+        }
+
+        public ActionResult ChangeOrder(int lessonId, bool orderDown)
+        {
+            var orderDirection = orderDown ? LessonOrderChangeDirection.Down : LessonOrderChangeDirection.Up;
+            _lessonService.ChangeOrderLesson(lessonId, orderDirection);
+            var lesson = _lessonService.GetLesson(lessonId);
+            return RedirectToAction("Index", new { courseId = lesson.CourseId });
         }
 
         public ActionResult CreateTheory(int courseId)

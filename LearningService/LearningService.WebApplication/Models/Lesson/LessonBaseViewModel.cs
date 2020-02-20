@@ -16,5 +16,8 @@ namespace LearningService.WebApplication.Models.Lesson
         public string Headline { get; set; }
 
         public bool AlreadyPassed { get; set; }
+
+        [Display(Name = "Kolejność")]
+        public int OrderLesson { get; set; }
     }
 }
