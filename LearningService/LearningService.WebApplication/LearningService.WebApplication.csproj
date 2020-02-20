@@ -245,6 +245,7 @@
     <Compile Include="Helpers\MapperProfiles\CourseProfile.cs" />
     <Compile Include="Helpers\MapperProfiles\LessonProfile.cs" />
     <Compile Include="Helpers\MapperProfiles\UserProfile.cs" />
+    <Compile Include="Helpers\PracticalTestReturnTypeOptions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article\ArticleBaseViewModel.cs" />
     <Compile Include="Models\Course\CourseOverwiewViewModel.cs" />

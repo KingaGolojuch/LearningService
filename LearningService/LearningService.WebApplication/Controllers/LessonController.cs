@@ -3,6 +3,7 @@ using LearningService.Domain.Enums;
 using LearningService.Domain.Exceptions;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
+using LearningService.WebApplication.Helpers;
 using LearningService.WebApplication.Models.Course;
 using LearningService.WebApplication.Models.Lesson;
 using Microsoft.AspNet.Identity;
@@ -192,7 +193,8 @@ namespace LearningService.WebApplication.Controllers
         {
             var model = new LessonPracticalExamViewModel
             {
-                CourseId = courseId
+                CourseId = courseId,
+                ReturnTypeOptions = PracticalTestReturnTypeOptions.Get()
             };
             return View(model);
         }
@@ -200,6 +202,7 @@ namespace LearningService.WebApplication.Controllers
         [HttpPost]
         public ActionResult CreatePracticalExam(LessonPracticalExamViewModel model)
         {
+            model.ReturnTypeOptions = PracticalTestReturnTypeOptions.Get();
             if (!ModelState.IsValid)
                 return View(model);
 
