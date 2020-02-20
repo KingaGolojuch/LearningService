@@ -188,6 +188,24 @@ namespace LearningService.WebApplication.Controllers
             return RedirectToAction("Index", new { courseId = model.CourseId });
         }
 
+        public ActionResult CreatePracticalExam(int courseId)
+        {
+            var model = new LessonPracticalExamViewModel
+            {
+                CourseId = courseId
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CreatePracticalExam(LessonPracticalExamViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            return View(model);
+        }
+
         public ActionResult StartLesson(int lessonId)
         {
             var lessonDTO = _lessonService.GetLesson(lessonId);

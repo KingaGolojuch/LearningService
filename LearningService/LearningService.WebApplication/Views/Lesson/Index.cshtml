@@ -6,12 +6,10 @@
 
 <h2>Lekcje z kursu @Model.Course.Name</h2>
 
-<p>
-    @Html.ActionLink("Dodaj teorie", "CreateTheory", new { @courseId = Model.Course.Id })
-</p>
-<p>
-    @Html.ActionLink("Dodaj test teoretyczny", "CreateTheoryExam", new { @courseId = Model.Course.Id })
-</p>
+<p>@Html.ActionLink("Dodaj teorie", "CreateTheory", new { @courseId = Model.Course.Id })</p>
+<p>@Html.ActionLink("Dodaj test teoretyczny", "CreateTheoryExam", new { @courseId = Model.Course.Id })</p>
+<p>@Html.ActionLink("Dodaj test praktyczny", "CreatePracticalExam", new { @courseId = Model.Course.Id })</p>
+
 <table class="table">
     <tr>
         <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().Headline)</th>
