@@ -5,6 +5,7 @@ using LearningService.WebApplication.Models.Article;
 using LearningService.WebApplication.Models.Course;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 
@@ -13,6 +14,8 @@ namespace LearningService.WebApplication.Controllers
     [Authorize]
     public class ArticleController : BaseController
     {
+        public const int RecordsPerPage = 10;
+
         private readonly IArticleService _articleService;
         public ArticleController(IArticleService articleService)
         {
@@ -22,9 +25,41 @@ namespace LearningService.WebApplication.Controllers
         // GET: Article
         public ActionResult Index()
         {
-            var articles = _articleService.GetActive(GetUserId);
-            var model = Mapper.Map<IEnumerable<ArticleBaseViewModel>>(articles);
-            return View(model);
+            return RedirectToAction("GetProjects");
+            //var articles = _articleService.GetActive(GetUserId);
+            //var model = Mapper.Map<IEnumerable<ArticleBaseViewModel>>(articles);
+            //return View(model);
+        }
+
+        public ActionResult GetProjects(int? pageNum)
+        {
+            pageNum = pageNum ?? 0;
+            ViewBag.IsEndOfRecords = false;
+            if (Request.IsAjaxRequest())
+            {
+                var projects = GetRecordsForPage(pageNum.Value);
+                ViewBag.IsEndOfRecords = (projects.Any());
+                return PartialView("_ArticleData", projects);
+            }
+            else
+            {
+                var ProjectData = GetRecordsForPage(pageNum.Value);
+
+                ViewBag.TotalNumberProjects = ProjectData.Count();
+
+                return View("Index", Mapper.Map<IEnumerable<ArticleBaseViewModel>>(ProjectData));
+            }
+        }
+
+        public List<ArticleBaseViewModel> GetRecordsForPage(int pageNum)
+        {
+            IEnumerable<ArticleBaseViewModel> data = Mapper.Map<IEnumerable<ArticleBaseViewModel>>(_articleService.GetActive(GetUserId));
+            int from = (pageNum * RecordsPerPage);
+
+            var tempList = (from rec in data
+                            select rec).Skip(from).Take(10).ToList<ArticleBaseViewModel>();
+
+            return tempList;
         }
 
         public ActionResult Create()

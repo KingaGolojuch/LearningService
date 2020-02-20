@@ -3,33 +3,64 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="jumbotron">
+    <h1>LazyLoading Demo</h1>
+    <p class="lead">
+        This page is demo how to load records on demand.
+        Instead of loading all <span class="text-primary">@ViewBag.TotalNumberProjects</span> records,
+        let's load based on user requirement.
 
+        Scroll down the page then you will see that records are added to page.
+        It loads @ViewBag.RecordsPerPage records at a time and total no of records is <span class="text-primary">@ViewBag.TotalNumberProjects</span>.
+    </p>
+</div>
 <h2>Artykuły</h2>
 
 <p>
     @Html.ActionLink("Utwórz nowy", "Create")
 </p>
-
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Headline)</th>
-        <th>@Html.DisplayNameFor(model => model.ContentArticle)</th>
-        <th></th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.Headline)</td>
-        <td>@Html.Raw(item.ContentArticle)</td>
-        <td>@Html.ActionLink("Edycja", "Edit", new { articleId = item.Id })</td>
-        <td>
-            @using (Html.BeginForm("Delete", "Article", new { articleId = item.Id }, FormMethod.Post, null))
+<div id="loading">
+    @*<img src='~/Content/spin.gif' />*@
+    <p style="color: red;"><b>Loading Next...</b></p>
+</div>
+<table class="table table-striped table-bordered table-condensed infinite-scroll">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Headline)</th>
+            <th>@Html.DisplayNameFor(model => model.ContentArticle)</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.Partial("_ArticleData", Model)
+        @*@foreach (var item in Model)
             {
-                <input type="submit" value="Usuń" />
-            }
-        </td>
-    </tr>
-}
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Headline)</td>
+                    <td>@Html.Raw(item.ContentArticle)</td>
+                    <td>@Html.ActionLink("Edycja", "Edit", new { articleId = item.Id })</td>
+                    <td>
+                        @using (Html.BeginForm("Delete", "Article", new { articleId = item.Id }, FormMethod.Post, null))
+                        {
+                            <input type="submit" value="Usuń" />
+                        }
+                    </td>
+                </tr>
+            }*@
+    </tbody>
 
 </table>
+
+@section scripts{
+    <script src="~/Scripts/lazyLoading.js"></script>
+    <script type="text/javascript">
+
+            $(function () {
+                $("div#loading").hide();
+            });
+
+            var url = '@Url.Action("GetProjects", "Article")';
+            $(window).scroll(scrollHandler);
+    </script>
+} 

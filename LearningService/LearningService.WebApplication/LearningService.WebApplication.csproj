@@ -308,6 +308,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lazyLoading.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -445,6 +446,7 @@
     <Content Include="Views\Lesson\LearningTheory.cshtml" />
     <Content Include="Views\Lesson\PassingTheoryExam.cshtml" />
     <Content Include="Views\Lesson\PassingTheoryExamCompleted.cshtml" />
+    <Content Include="Views\Article\_ArticleData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
