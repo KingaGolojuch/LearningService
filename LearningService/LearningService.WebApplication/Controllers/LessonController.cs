@@ -209,6 +209,15 @@ namespace LearningService.WebApplication.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public JsonResult VueCreatePracticalExamVue(LessonPracticalExamViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return Json(new { success = false });
+
+            return Json(new { success = true });
+        }
+
         public ActionResult StartLesson(int lessonId)
         {
             var lessonDTO = _lessonService.GetLesson(lessonId);

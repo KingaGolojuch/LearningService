@@ -18,5 +18,7 @@ namespace LearningService.WebApplication.Models.Lesson
 
         [Display(Name = "Wynik")]
         public string Answer { get; set; }
+
+        public List<string> RequiredNames { get; set; }
     }
 }
