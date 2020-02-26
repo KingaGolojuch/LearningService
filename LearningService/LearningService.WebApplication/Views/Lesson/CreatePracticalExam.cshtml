@@ -18,7 +18,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Headline, new { htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.Headline" } } })
                     @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.LessonContent, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.LessonContent, new { htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.LessonContent" } } })
                     @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
                 </div>
             </div>
