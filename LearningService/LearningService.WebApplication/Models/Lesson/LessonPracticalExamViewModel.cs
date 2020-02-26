@@ -8,6 +8,7 @@ namespace LearningService.WebApplication.Models.Lesson
     {
         [Display(Name = "Treść")]
         [Required]
+        [AllowHtml]
         public string LessonContent { get; set; }
 
         [Display(Name = "Typ zwracany")]

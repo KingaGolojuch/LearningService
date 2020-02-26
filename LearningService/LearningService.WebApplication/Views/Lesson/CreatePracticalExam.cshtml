@@ -26,7 +26,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.LessonContent, new { htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.LessonContent" } } })
+                    <summernote v-model="model.LessonContent"></summernote>
                     @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -117,8 +117,35 @@
                         alert('blad');
                     });
                 }
+            },
+            mounted: function () {
+                model.LessonContent = ' '; //to show summernote textbox
             }
         })
+        Vue.component(
+            'summernote', {
+                template: '<textarea class="form-control" style = "height: 150px;" >{{value}}</textarea>',
+                props: ["value"],
+                data() {
+                    return {
+                        obj: ''
+                    };
+                },
+                mounted() {
+                    let vue = this;
+                    vue.obj = $(this.$el);
+                    let option = {
+                        // summernote config
+                    };
+                    option.callbacks = {
+                        onChange(contents) {
+                            vue.$emit('input', contents);
+                        }
+                    };
+                    vue.obj.summernote(option);
+                },
+            }
+        );
     </script>    
 }
 
