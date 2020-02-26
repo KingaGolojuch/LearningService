@@ -203,6 +203,7 @@ namespace LearningService.WebApplication.Controllers
         [HttpPost]
         public JsonResult CreatePracticalExam(LessonPracticalExamViewModel model)
         {
+            model.ReturnTypeOptions = PracticalTestReturnTypeOptions.Get();
             if (!ModelState.IsValid)
                 return Json(new { success = false });
 
