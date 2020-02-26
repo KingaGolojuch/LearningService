@@ -194,23 +194,14 @@ namespace LearningService.WebApplication.Controllers
             var model = new LessonPracticalExamViewModel
             {
                 CourseId = courseId,
-                ReturnTypeOptions = PracticalTestReturnTypeOptions.Get()
+                ReturnTypeOptions = PracticalTestReturnTypeOptions.Get(),
+                RequiredNames = new List<string>() 
             };
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult CreatePracticalExam(LessonPracticalExamViewModel model)
-        {
-            model.ReturnTypeOptions = PracticalTestReturnTypeOptions.Get();
-            if (!ModelState.IsValid)
-                return View(model);
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public JsonResult VueCreatePracticalExamVue(LessonPracticalExamViewModel model)
+        public JsonResult CreatePracticalExam(LessonPracticalExamViewModel model)
         {
             if (!ModelState.IsValid)
                 return Json(new { success = false });
