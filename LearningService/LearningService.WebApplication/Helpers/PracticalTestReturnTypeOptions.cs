@@ -10,8 +10,8 @@ namespace LearningService.WebApplication.Helpers
             return new List<SelectListItem>()
             {
                 new SelectListItem { Text = "void", Value = "void" },
-                new SelectListItem { Text = "int", Value = "int" },
-                new SelectListItem { Text = "string", Value = "string" },
+                new SelectListItem { Text = "string", Value = "string" }
+                //new SelectListItem { Text = "int", Value = "int" },
             };
         }
     }

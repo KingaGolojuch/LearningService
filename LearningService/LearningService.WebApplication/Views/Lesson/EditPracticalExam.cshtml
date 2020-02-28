@@ -59,10 +59,10 @@
                     <label class="control-label col-md-2">Nazwa jaka ma się pojawić</label>
                     <div class="col-md-10">
                         <input v-model="model.RequiredNames[index]" type="text" class="form-control text-box single-line">
+                        <button type="button" class="text-center button btn-xs btn-danger" v-on:click="removeRequiredName(index)">Remove</button>
                     </div>
                 </div>
             </div>
-
 
             <div v-on:click="submitForm" class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -81,6 +81,30 @@
             EditExam: '@Url.Action("EditPracticalExam", "Lesson")'
         };
         const model = @Html.Raw(Json.Encode(Model));
+
+        Vue.component(
+            'summernote', {
+                template: '<textarea class="form-control" style="height: 150px;" id="LessonContent" name="LessonContent">{{name}}</textarea>',
+                data() {
+                    return {
+                        name: model.LessonContent
+                    };
+                },
+                mounted() {
+                    let vue = this;
+                    vue.obj = $(this.$el);
+                    let option = {
+                        // summernote config
+                    };
+                    option.callbacks = {
+                        onChange(contents) {
+                            vue.$emit('input', contents);
+                        }
+                    };
+                    vue.obj.summernote(option);
+                },
+            }
+        );
         const $api = {};
         $api.exam = {
             create(exam) {
@@ -111,6 +135,9 @@
                 addNewRequiredName: function (e) {
                     this.model.RequiredNames.push('');
                 },
+                removeRequiredName: function (index) {
+                    this.model.RequiredNames.splice(index, 1)
+                },
                 submitForm: function (event) {
                     $api.exam.create(this.model).then(() => {
                         alert('wyslane');
@@ -120,33 +147,9 @@
                 }
             },
             mounted: function () {
-                model.LessonContent = ' '; //to show summernote textbox
+                model.LessonContent = model.LessonContent != null ? model.LessonContent :  ' '; //to show summernote textbox
             }
         })
-        Vue.component(
-            'summernote', {
-                template: '<textarea class="form-control" style = "height: 150px;" >{{value}}</textarea>',
-                props: ["value"],
-                data() {
-                    return {
-                        obj: ''
-                    };
-                },
-                mounted() {
-                    let vue = this;
-                    vue.obj = $(this.$el);
-                    let option = {
-                        // summernote config
-                    };
-                    option.callbacks = {
-                        onChange(contents) {
-                            vue.$emit('input', contents);
-                        }
-                    };
-                    vue.obj.summernote(option);
-                },
-            }
-        );
     </script>
 }
 
