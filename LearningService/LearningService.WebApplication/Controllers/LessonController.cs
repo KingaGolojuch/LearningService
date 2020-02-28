@@ -216,15 +216,21 @@ namespace LearningService.WebApplication.Controllers
 
         public ActionResult EditPracticalExam(int lessonId)
         {
-            //var lessonDTO = _lessonService.GetLesson(lessonId);
-            //if (lessonDTO == null)
-            //    return RedirectToAction("Index", "Course");
+            var lessonDTO = _lessonService.GetLesson(lessonId);
+            if (lessonDTO == null)
+                return RedirectToAction("Index", "Course");
 
-            //var lessonOptions = _lessonService.GetLessonOptions(lessonId);
-            //var model = Mapper.Map<LessonTheoryExamViewModel>(lessonDTO);
-            //model.Options = Mapper.Map<List<LessonTheoryOptionViewModel>>(lessonOptions);
-            //return View(model);
-            return View();
+            var lessonOptions = _lessonService.GetLessonRequiredNames(lessonId);
+            var model = Mapper.Map<LessonPracticalExamViewModel>(lessonDTO);
+            model.ReturnTypeOptions = PracticalTestReturnTypeOptions.Get();
+            model.RequiredNames = lessonOptions.ToList();
+            if (model.Answer == null)
+                model.SelectedOption = "void";
+
+            else
+                model.SelectedOption = "string";
+
+            return View(model);
         }
 
         //[HttpPost]

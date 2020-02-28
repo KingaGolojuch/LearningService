@@ -42,6 +42,8 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
                     opt => opt.MapFrom(src => src.SelectedOption == "void" ? null : src.Answer)
                 );
 
+            CreateMap<LessonDTO, LessonPracticalExamViewModel>();
+
             CreateMap<LessonTypeCustom, string>().ConvertUsing(value =>
             {
                 switch (value)

@@ -18,5 +18,6 @@ namespace LearningService.Domain.Services.Abstract
         void AttemptPassTheoryTest(int lessonId, int answerId, string userId);
         void ChangeOrderLesson(int lessonId, LessonOrderChangeDirection orderDirection);
         void AddPracticalTest(LessonDTO lessonDTO, IEnumerable<string> requiredNames);
+        IEnumerable<string> GetLessonRequiredNames(int lessonId);
     }
 }

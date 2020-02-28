@@ -116,6 +116,13 @@ namespace LearningService.Domain.Services.Concrete
             return lessonComponents;
         }
 
+        public IEnumerable<string> GetLessonRequiredNames(int lessonId)
+        {
+            var lesson = _lessonRepository.GetById(lessonId);
+            var lessonRequiredNames = lesson.LessonComponents.Select(x => x.Name);
+            return lessonRequiredNames;
+        }
+
         public IEnumerable<LessonDTO> GetLessons(int courseId)
         {
             var lessons = _lessonRepository.GetLessons(courseId);

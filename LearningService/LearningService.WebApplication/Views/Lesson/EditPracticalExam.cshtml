@@ -1,7 +1,152 @@
-﻿
+﻿@model LearningService.WebApplication.Models.Lesson.LessonPracticalExamViewModel
 @{
-    ViewBag.Title = "EditPracticalExam";
+    ViewBag.Title = "Edycja egzaminu praktycznego";
 }
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app">
 
-<h2>edycja praktycznego egzaminu</h2>
+    <h2>Edycja egzaminu praktycznego</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CourseId)
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Headline, new { htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.Headline" } } })
+                    @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <summernote v-model="model.LessonContent"></summernote>
+                    @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SelectedOption, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SelectedOption, Model.ReturnTypeOptions, new Dictionary<string, object>() { { "class", "form-control" }, { @"v-on:change", @"CheckAnswerVisible" }, { @"v-model", "model.SelectedOption" } })
+                    @Html.ValidationMessageFor(model => model.SelectedOption, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div v-if="IsAnswerVisible" class="form-group">
+                @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Answer, new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.Answer" } })
+                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div v-on:click="addNewRequiredName" class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="dodaj nowy wymagany" class="btn btn-default" />
+                </div>
+            </div>
+
+            <div class="row" v-for="(param, index) in model.RequiredNames">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nazwa jaka ma się pojawić</label>
+                    <div class="col-md-10">
+                        <input v-model="model.RequiredNames[index]" type="text" class="form-control text-box single-line">
+                    </div>
+                </div>
+            </div>
+
+
+            <div v-on:click="submitForm" class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Zapisz" class="btn btn-success" />
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
+@section Scripts {
+    <script>
+        jQuery.ajaxSettings.traditional = true;
+        const urls = {
+            EditExam: '@Url.Action("EditPracticalExam", "Lesson")'
+        };
+        const model = @Html.Raw(Json.Encode(Model));
+        const $api = {};
+        $api.exam = {
+            create(exam) {
+                return jQuery.ajax({
+                    url: urls.EditExam,
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(exam),
+                    async: true,
+                    processData: false,
+                    cache: false,
+                    error: (xhr) => { }
+                });
+            }
+        };
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                IsAnswerVisible: (model.SelectedOption !== null && model.SelectedOption !== 'void'),
+                model: model
+            },
+            methods: {
+                CheckAnswerVisible: function (e) {
+                    this.IsAnswerVisible = (this.SelectedOptionVue !== null && this.SelectedOptionVue !== 'void');
+                },
+                addNewRequiredName: function (e) {
+                    this.model.RequiredNames.push('');
+                },
+                submitForm: function (event) {
+                    $api.exam.create(this.model).then(() => {
+                        alert('wyslane');
+                    }).fail((resp) => {
+                        alert('blad');
+                    });
+                }
+            },
+            mounted: function () {
+                model.LessonContent = ' '; //to show summernote textbox
+            }
+        })
+        Vue.component(
+            'summernote', {
+                template: '<textarea class="form-control" style = "height: 150px;" >{{value}}</textarea>',
+                props: ["value"],
+                data() {
+                    return {
+                        obj: ''
+                    };
+                },
+                mounted() {
+                    let vue = this;
+                    vue.obj = $(this.$el);
+                    let option = {
+                        // summernote config
+                    };
+                    option.callbacks = {
+                        onChange(contents) {
+                            vue.$emit('input', contents);
+                        }
+                    };
+                    vue.obj.summernote(option);
+                },
+            }
+        );
+    </script>
+}
 
