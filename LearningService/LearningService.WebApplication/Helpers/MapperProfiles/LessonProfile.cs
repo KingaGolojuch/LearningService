@@ -12,7 +12,7 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
         {
             CreateMap<LessonDTO, LessonBaseViewModel>()
                 .ForMember(
-                    dest => dest.LessonType,
+                    dest => dest.LessonTypeName,
                     src => src.ResolveUsing(opt => Mapper.Map<string>(opt.LessonType))
                 );
 
@@ -42,7 +42,11 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
                     opt => opt.MapFrom(src => src.SelectedOption == "void" ? null : src.Answer)
                 );
 
-            CreateMap<LessonDTO, LessonPracticalExamViewModel>();
+            CreateMap<LessonDTO, LessonPracticalExamViewModel>()
+                .ForMember(
+                    dest => dest.Answer,
+                    opt => opt.MapFrom(src => src.ValidAnswer)
+                );
 
             CreateMap<LessonTypeCustom, string>().ConvertUsing(value =>
             {

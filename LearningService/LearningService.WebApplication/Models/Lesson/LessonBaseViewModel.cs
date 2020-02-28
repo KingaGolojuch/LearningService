@@ -21,6 +21,6 @@ namespace LearningService.WebApplication.Models.Lesson
         public int OrderLesson { get; set; }
 
         [Display(Name = "Typ lekcji")]
-        public string LessonType { get; set; }
+        public string LessonTypeName { get; set; }
     }
 }

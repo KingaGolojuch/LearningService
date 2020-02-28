@@ -26,14 +26,6 @@ namespace LearningService.WebApplication.Models.Lesson
         {
             var results = new List<ValidationResult>();
 
-            Validator.TryValidateProperty(this.Headline,
-                    new ValidationContext(this, null, null) { MemberName = "Headline" },
-                    results);
-
-            Validator.TryValidateProperty(this.LessonContent,
-                    new ValidationContext(this, null, null) { MemberName = "LessonContent" },
-                    results);
-            
             if (SelectedOption != "void")
             {
                 Validator.TryValidateProperty(this.Answer,

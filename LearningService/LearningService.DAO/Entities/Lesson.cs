@@ -87,5 +87,32 @@ namespace LearningService.DAO.Entities
 
             return false;
         }
+
+        public virtual void SetRequiredNames(IEnumerable<string> requiredNames)
+        {
+            if (LessonComponents.Select(x => x.Name).SequenceEqual(requiredNames))
+                return;
+
+            var lessonComponents = requiredNames.Select(x => new LessonComponent
+            {
+                Name = x,
+                Lesson = this
+            });
+            LessonComponents.Clear();
+            foreach (var lessonComponent in lessonComponents)
+            {
+                LessonComponents.Add(lessonComponent);
+            }
+            DataChanged = true;
+        }
+
+        public virtual void SetAnswer(string answer)
+        {
+            if (ValidAnswer == answer)
+                return;
+
+            ValidAnswer = answer;
+            DataChanged = true;
+        }
     }
 }

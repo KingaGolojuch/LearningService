@@ -201,5 +201,18 @@ namespace LearningService.Domain.Services.Concrete
             newLesson.LessonComponents = lessonComponents;
             _lessonRepository.Add(newLesson);
         }
+
+
+        public void EditPracticalTest(LessonDTO lessonDTO, IEnumerable<string> requiredNames)
+        {
+            var lesson = _lessonRepository.GetById(lessonDTO.Id);
+            lesson.SetHeadline(lessonDTO.Headline);
+            lesson.SetContent(lessonDTO.LessonContent);
+            lesson.SetAnswer(lessonDTO.ValidAnswer);
+            lesson.SetRequiredNames(requiredNames);
+
+            if (lesson.DataChanged)
+                _lessonRepository.Update(lesson);
+        }
     }
 }

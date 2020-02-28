@@ -14,7 +14,7 @@
     <tr>
         <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().Headline)</th>
         <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().OrderLesson)</th>
-        <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().LessonType)</th>
+        <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().LessonTypeName)</th>
         <th></th>
     </tr>
 
@@ -32,7 +32,7 @@
                 @Html.ActionLink("Na późniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = true })
             }
         </td>
-        <td>@Html.DisplayFor(modelItem => item.LessonType)</td>
+        <td>@Html.DisplayFor(modelItem => item.LessonTypeName)</td>
         <td>@Html.ActionLink("Edycja", "Edit", new { lessonId = item.Id })</td>
     </tr>
 }
