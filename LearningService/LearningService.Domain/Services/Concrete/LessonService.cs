@@ -171,5 +171,28 @@ namespace LearningService.Domain.Services.Concrete
 
             _courseRepository.Update(course);
         }
+
+        public void AddPracticalTest(LessonDTO lessonDTO, IEnumerable<string> requiredNames)
+        {
+            var course = _courseRepository.GetById(lessonDTO.CourseId);
+
+            var newLesson = new Lesson
+            {
+                Course = new Course { Id = lessonDTO.CourseId },
+                LessonType = new LessonType { Id = (int)LessonTypeCustom.PracticalExam },
+                OrderLesson = course.GetNextOrderLesson(),
+                Headline = lessonDTO.Headline,
+                LessonContent = lessonDTO.LessonContent,
+                ValidAnswer = lessonDTO.ValidAnswer
+            };
+            var lessonComponents = requiredNames.Select(x => new LessonComponent
+            {
+                Name = x,
+                Lesson = newLesson
+            }).ToList();
+
+            newLesson.LessonComponents = lessonComponents;
+            _lessonRepository.Add(newLesson);
+        }
     }
 }

@@ -30,6 +30,12 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
                     dest => dest.Text,
                     opt => opt.MapFrom(src => src.Name)
                 );
+
+            CreateMap<LessonPracticalExamViewModel, LessonDTO>()
+                .ForMember(
+                    dest => dest.ValidAnswer,
+                    opt => opt.MapFrom(src => src.SelectedOption == "void" ? null : src.Answer)
+                );
         }
     }
 }

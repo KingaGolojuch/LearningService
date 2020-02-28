@@ -53,6 +53,9 @@ namespace LearningService.WebApplication.Controllers
             if (lessonDTO.LessonType == LessonTypeCustom.TheoryExam)
                 return RedirectToAction("EditTheoryExam", new { lessonId = lessonId });
 
+            if (lessonDTO.LessonType == LessonTypeCustom.PracticalExam)
+                return RedirectToAction("EditPracticalExam", new { lessonId = lessonId });
+
             return RedirectToAction("Index", "Course");
         }
 
@@ -203,12 +206,57 @@ namespace LearningService.WebApplication.Controllers
         [HttpPost]
         public JsonResult CreatePracticalExam(LessonPracticalExamViewModel model)
         {
-            model.ReturnTypeOptions = PracticalTestReturnTypeOptions.Get();
             if (!ModelState.IsValid)
                 return Json(new { success = false });
 
+            var lessonDTO = Mapper.Map<LessonDTO>(model);
+            _lessonService.AddPracticalTest(lessonDTO, (model.RequiredNames);
             return Json(new { success = true });
         }
+
+        public ActionResult EditPracticalExam(int lessonId)
+        {
+            //var lessonDTO = _lessonService.GetLesson(lessonId);
+            //if (lessonDTO == null)
+            //    return RedirectToAction("Index", "Course");
+
+            //var lessonOptions = _lessonService.GetLessonOptions(lessonId);
+            //var model = Mapper.Map<LessonTheoryExamViewModel>(lessonDTO);
+            //model.Options = Mapper.Map<List<LessonTheoryOptionViewModel>>(lessonOptions);
+            //return View(model);
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult EditPracticalExam(LessonTheoryExamViewModel model)
+        //{
+        //    if (model.Options == null || !model.Options.Any())
+        //    {
+        //        ModelState.AddModelError(string.Empty, "Brak opcji. Dodaj aby zapisać");
+        //        model.Options = new List<LessonTheoryOptionViewModel>();
+        //        return View(model);
+        //    }
+
+        //    if (model.Options.Count() == 1)
+        //    {
+        //        ModelState.AddModelError(string.Empty, "Musi być więcej jak jedna opcja. Tylko jedna odpowiedź może być prawidłowa");
+        //        return View(model);
+        //    }
+
+        //    if (model.Options.Where(x => x.Selected == true).Count() != 1)
+        //    {
+        //        ModelState.AddModelError(string.Empty, "Tylko jedna odpowiedź może być prawidłowa");
+        //        return View(model);
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //        return View(model);
+
+        //    var lessonDTO = Mapper.Map<LessonDTO>(model);
+        //    var answers = Mapper.Map<IEnumerable<LessonComponentDTO>>(model.Options);
+        //    _lessonService.EditTheoryTest(lessonDTO, answers);
+        //    return RedirectToAction("Index", new { courseId = model.CourseId });
+        //}
 
         public ActionResult StartLesson(int lessonId)
         {

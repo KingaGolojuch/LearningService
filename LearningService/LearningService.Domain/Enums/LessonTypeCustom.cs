@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LearningService.Domain.Enums
+﻿namespace LearningService.Domain.Enums
 {
     public enum LessonTypeCustom
     {
         Theory = 1,
-        TheoryExam = 2
+        TheoryExam = 2,
+        PracticalExam = 3
     }
 }
