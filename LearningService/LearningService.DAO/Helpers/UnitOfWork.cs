@@ -12,7 +12,6 @@ namespace LearningService.DAO.Helpers
     public class UnitOfWork : IUnitOfWork
     {
         private static readonly ISessionFactory _sessionFactory;
-        private ITransaction _transaction;
         public ISession Session { get; set; }
 
         static UnitOfWork()

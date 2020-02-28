@@ -210,7 +210,7 @@ namespace LearningService.WebApplication.Controllers
                 return Json(new { success = false });
 
             var lessonDTO = Mapper.Map<LessonDTO>(model);
-            _lessonService.AddPracticalTest(lessonDTO, (model.RequiredNames);
+            _lessonService.AddPracticalTest(lessonDTO, model.RequiredNames);
             return Json(new { success = true });
         }
 

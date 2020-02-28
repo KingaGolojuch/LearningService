@@ -19,5 +19,8 @@ namespace LearningService.WebApplication.Models.Lesson
 
         [Display(Name = "Kolejność")]
         public int OrderLesson { get; set; }
+
+        [Display(Name = "Typ lekcji")]
+        public string LessonType { get; set; }
     }
 }

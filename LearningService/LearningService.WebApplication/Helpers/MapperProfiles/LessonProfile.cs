@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LearningService.Domain.Enums;
 using LearningService.Domain.ModelsDTO;
 using LearningService.WebApplication.Models.Lesson;
 using System.Web.Mvc;
@@ -9,7 +10,11 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
     {
         public LessonProfile()
         {
-            CreateMap<LessonDTO, LessonBaseViewModel>();
+            CreateMap<LessonDTO, LessonBaseViewModel>()
+                .ForMember(
+                    dest => dest.LessonType,
+                    src => src.ResolveUsing(opt => Mapper.Map<string>(opt.LessonType))
+                );
 
             CreateMap<LessonDTO, LessonTheoryViewModel>();
             CreateMap<LessonTheoryViewModel, LessonDTO>();
@@ -36,6 +41,21 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
                     dest => dest.ValidAnswer,
                     opt => opt.MapFrom(src => src.SelectedOption == "void" ? null : src.Answer)
                 );
+
+            CreateMap<LessonTypeCustom, string>().ConvertUsing(value =>
+            {
+                switch (value)
+                {
+                    case LessonTypeCustom.Theory:
+                        return "Teoria";
+                    case LessonTypeCustom.TheoryExam:
+                        return "Test teoretyczny";
+                    case LessonTypeCustom.PracticalExam:
+                        return "Test praktyczny";
+                    default:
+                        return string.Empty;
+                }
+            });
         }
     }
 }
