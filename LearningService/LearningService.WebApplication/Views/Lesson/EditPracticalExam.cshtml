@@ -130,7 +130,7 @@
             },
             methods: {
                 CheckAnswerVisible: function (e) {
-                    this.IsAnswerVisible = (this.SelectedOptionVue !== null && this.SelectedOptionVue !== 'void');
+                    this.IsAnswerVisible = (model.SelectedOption !== null && model.SelectedOption !== 'void');
                 },
                 addNewRequiredName: function (e) {
                     this.model.RequiredNames.push('');
