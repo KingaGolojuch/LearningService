@@ -15,6 +15,7 @@ namespace LearningService.Domain.Services.Abstract
         void AddTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components);
         void EditTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components);
         IEnumerable<LessonComponentDTO> GetLessonOptions(int lessonId);
+        void SetLessonTheoryAsPassed(int lessonId, string userId);
         void AttemptPassTheoryTest(int lessonId, int answerId, string userId);
         void ChangeOrderLesson(int lessonId, LessonOrderChangeDirection orderDirection);
         void AddPracticalTest(LessonDTO lessonDTO, IEnumerable<string> requiredNames);

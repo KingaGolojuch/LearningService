@@ -266,6 +266,7 @@ namespace LearningService.WebApplication.Controllers
                 return RedirectToAction("Index", "Home");
             
             var model = Mapper.Map<LessonTheoryViewModel>(lessonDTO);
+            _lessonService.SetLessonTheoryAsPassed(lessonId, GetUserId);
             return View(model);
         }
 

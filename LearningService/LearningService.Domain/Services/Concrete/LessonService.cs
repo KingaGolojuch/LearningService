@@ -142,6 +142,18 @@ namespace LearningService.Domain.Services.Concrete
             return lessonsDTO;
         }
 
+        public void SetLessonTheoryAsPassed(int lessonId, string userId)
+        {
+            var lesson = _lessonRepository.GetById(lessonId);
+
+            var user = _userRepository.GetById(userId);
+            user.AddLesson(lessonId);
+            if (!user.DataChanged)
+                return;
+
+            _userRepository.Update(user);
+        }
+
         public void AttemptPassTheoryTest(int lessonId, int answerId, string userId)
         {
             var lesson = _lessonRepository.GetById(lessonId);
