@@ -8,6 +8,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.CourseId)
     @Html.HiddenFor(x => x.Headline)
     @Html.HiddenFor(x => x.LessonContent)
 

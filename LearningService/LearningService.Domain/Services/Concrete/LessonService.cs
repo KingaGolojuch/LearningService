@@ -5,6 +5,7 @@ using LearningService.Domain.Enums;
 using LearningService.Domain.Exceptions;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,15 +16,18 @@ namespace LearningService.Domain.Services.Concrete
         private readonly ICourseRepository _courseRepository;
         private readonly ILessonRepository _lessonRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ICompilationService _compilationService;
 
         public LessonService(
             ICourseRepository courseRepository,
             ILessonRepository lessonRepository,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            ICompilationService compilationService)
         {
             _courseRepository = courseRepository;
             _lessonRepository = lessonRepository;
             _userRepository = userRepository;
+            _compilationService = compilationService;
         }
 
         public void AddLessonTheory(LessonDTO lessonDTO)
@@ -228,6 +232,38 @@ namespace LearningService.Domain.Services.Concrete
 
             if (lesson.DataChanged)
                 _lessonRepository.Update(lesson);
+        }
+
+        public void AttemptPassPracticalTest(int lessonId, string code, string userId)
+        {
+            var lesson = _lessonRepository.GetById(lessonId);
+            if (lesson == null)
+                throw new NullReferenceException();
+
+            IEnumerable<string> result; 
+            if (lesson.ValidAnswer == null)
+            {
+                result = _compilationService.IsResultValid(code, lesson.LessonComponents.Select(x => x.Name));
+            }
+
+            else
+            {
+                result = _compilationService.IsResultValid(code, lesson.ValidAnswer, lesson.LessonComponents.Select(x => x.Name));
+            }
+            
+            if (result.Any())
+            {
+                throw new LessonException(string.Join(",", result));
+                //get all messages
+                //throw LessonException with messages
+            }
+
+            var user = _userRepository.GetById(userId);
+            user.AddLesson(lessonId);
+            if (!user.DataChanged)
+                return;
+
+            _userRepository.Update(user);
         }
     }
 }

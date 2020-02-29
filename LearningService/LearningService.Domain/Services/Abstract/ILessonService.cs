@@ -20,6 +20,7 @@ namespace LearningService.Domain.Services.Abstract
         void ChangeOrderLesson(int lessonId, LessonOrderChangeDirection orderDirection);
         void AddPracticalTest(LessonDTO lessonDTO, IEnumerable<string> requiredNames);
         void EditPracticalTest(LessonDTO lessonDTO, IEnumerable<string> requiredNames);
+        void AttemptPassPracticalTest(int lessonId, string code, string userId);
         IEnumerable<string> GetLessonRequiredNames(int lessonId);
     }
 }

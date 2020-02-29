@@ -331,7 +331,26 @@ namespace LearningService.WebApplication.Controllers
         [HttpPost]
         public ActionResult PassingPracticalExam(LessonPracticalExamLearningViewModel model)
         {
-            return View(model);
+            if (!ModelState.IsValid)
+                return View(model);
+
+            try
+            {
+                _lessonService.AttemptPassPracticalTest(model.Id, model.Code, GetUserId);
+
+            }
+            catch (LessonException ex)
+            {
+                IEnumerable<string> messages = ex.Message.Split(',');
+                foreach (var message in messages)
+                {
+                    ModelState.AddModelError(string.Empty, message);
+                }
+                
+                return View(model);
+            }
+
+            return RedirectToAction("CourseOverwiew", "Course", new { courseId = model.CourseId });
         }
     }
 }
