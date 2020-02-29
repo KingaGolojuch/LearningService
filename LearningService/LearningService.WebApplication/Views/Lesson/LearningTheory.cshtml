@@ -10,3 +10,5 @@
     <p>nagłówek: @Model.Headline</p>
     <p>zawartość: @Html.Raw(Model.LessonContent)</p>
 </div>
+
+@Html.ActionLink("Powrót", "CourseOverwiew", "Course", new { courseId = Model.CourseId }, null)
