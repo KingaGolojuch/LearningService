@@ -103,6 +103,9 @@ namespace LearningService.Domain.Services.Concrete
         public LessonDTO GetLesson(int lessonId, string userId)
         {
             var lesson = _lessonRepository.GetById(lessonId);
+            if (lesson == null)
+                return null;
+
             var lessonDTO = Mapper.Map<LessonDTO>(lesson);
             lessonDTO.AlreadyPassed = lesson.IsUserPassedLesson(userId);
             return lessonDTO;
