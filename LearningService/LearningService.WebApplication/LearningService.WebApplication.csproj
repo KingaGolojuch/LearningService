@@ -451,6 +451,7 @@
     <Content Include="Views\Article\_ArticleData.cshtml" />
     <Content Include="Views\Lesson\CreatePracticalExam.cshtml" />
     <Content Include="Views\Lesson\EditPracticalExam.cshtml" />
+    <Content Include="Views\Lesson\PassingPracticalExam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

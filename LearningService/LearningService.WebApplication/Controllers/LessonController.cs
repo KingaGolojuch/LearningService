@@ -256,6 +256,9 @@ namespace LearningService.WebApplication.Controllers
             if (lessonDTO.LessonType == LessonTypeCustom.TheoryExam)
                 return RedirectToAction("PassingTheoryExam", new { lessonId = lessonId });
 
+            if (lessonDTO.LessonType == LessonTypeCustom.PracticalExam)
+                return RedirectToAction("PassingPracticalExam", new { lessonId = lessonId });
+
             return RedirectToAction("Index", "Course");
         }
 
@@ -308,6 +311,15 @@ namespace LearningService.WebApplication.Controllers
                 ModelState.AddModelError(string.Empty, "Niepoprawna odpowiedź");
                 return View(model);
             }
+        }
+
+        public ActionResult PassingPracticalExam(int lessonId)
+        {
+            var lessonDTO = _lessonService.GetLesson(lessonId, GetUserId);
+            if (lessonDTO == null)
+                return RedirectToAction("Index", "Home");
+
+            return View();
         }
     }
 }
