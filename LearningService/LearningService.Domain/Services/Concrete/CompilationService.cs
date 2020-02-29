@@ -75,11 +75,11 @@ namespace LearningService.Domain.Services.Concrete
             string code = @"
                 using System;
             
-                namespace UserFunctions
+                namespace LearningService
                 {                
-                    public class BinaryFunction
+                    public class Compilation
                     {                
-                        public static Object Function()
+                        public static Object CheckCode()
                         {
                             userCode;
                         }
@@ -103,8 +103,8 @@ namespace LearningService.Domain.Services.Concrete
                 throw new InvalidOperationException(sb.ToString());
             }
 
-            Type binaryFunction = results.CompiledAssembly.GetType("UserFunctions.BinaryFunction");
-            return binaryFunction.GetMethod("Function");
+            Type binaryFunction = results.CompiledAssembly.GetType("LearningService.Compilation");
+            return binaryFunction.GetMethod("CheckCode");
         }
 
         private static MethodInfo CreateFunctionVoid(string userFunction)
@@ -112,11 +112,11 @@ namespace LearningService.Domain.Services.Concrete
             string code = @"
                 using System;
             
-                namespace UserFunctions
+                namespace LearningService
                 {                
-                    public class BinaryFunction
+                    public class Compilation
                     {                
-                        public static void Function()
+                        public static void CheckCode()
                         {
                             userCode;
                         }
@@ -140,8 +140,8 @@ namespace LearningService.Domain.Services.Concrete
                 throw new InvalidOperationException(sb.ToString());
             }
 
-            Type binaryFunction = results.CompiledAssembly.GetType("UserFunctions.BinaryFunction");
-            return binaryFunction.GetMethod("Function");
+            Type binaryFunction = results.CompiledAssembly.GetType("LearningService.Compilation");
+            return binaryFunction.GetMethod("CheckCode");
         }
     }
 }
