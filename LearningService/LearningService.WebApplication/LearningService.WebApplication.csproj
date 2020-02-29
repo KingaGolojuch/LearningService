@@ -453,6 +453,7 @@
     <Content Include="Views\Lesson\CreatePracticalExam.cshtml" />
     <Content Include="Views\Lesson\EditPracticalExam.cshtml" />
     <Content Include="Views\Lesson\PassingPracticalExam.cshtml" />
+    <Content Include="Views\Lesson\PassingPracticalExamCompleted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

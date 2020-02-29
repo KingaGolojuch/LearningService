@@ -320,12 +320,10 @@ namespace LearningService.WebApplication.Controllers
                 return RedirectToAction("Index", "Home");
 
             var model = Mapper.Map<LessonPracticalExamLearningViewModel>(lessonDTO);
+            if (lessonDTO.AlreadyPassed)
+                return View("PassingPracticalExamCompleted", model);
+
             return View(model);
-            //if (lessonDTO.AlreadyPassed)
-            //{
-            //    model.Answer = lessonDTO.ValidAnswer;
-            //    return View("PassingTheoryExamCompleted", model);
-            //}
         }
 
         [HttpPost]
