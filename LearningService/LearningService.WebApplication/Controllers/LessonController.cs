@@ -319,7 +319,19 @@ namespace LearningService.WebApplication.Controllers
             if (lessonDTO == null)
                 return RedirectToAction("Index", "Home");
 
-            return View();
+            var model = Mapper.Map<LessonPracticalExamLearningViewModel>(lessonDTO);
+            return View(model);
+            //if (lessonDTO.AlreadyPassed)
+            //{
+            //    model.Answer = lessonDTO.ValidAnswer;
+            //    return View("PassingTheoryExamCompleted", model);
+            //}
+        }
+
+        [HttpPost]
+        public ActionResult PassingPracticalExam(LessonPracticalExamLearningViewModel model)
+        {
+            return View(model);
         }
     }
 }

@@ -26,6 +26,7 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
             CreateMap<LessonComponentDTO, LessonTheoryOptionViewModel>();
 
             CreateMap<LessonDTO, LessonTheoryExamLearningViewModel>();
+            CreateMap<LessonDTO, LessonPracticalExamLearningViewModel>();
 
             CreateMap<LessonComponentDTO, SelectListItem>()
                 .ForMember(
