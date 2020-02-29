@@ -6,8 +6,7 @@ namespace LearningService.Domain.Services.Abstract
 {
     public interface ICompilationService
     {
-        IEnumerable<string> IsResultValid(string code, IEnumerable<string> requiredNames);
-        IEnumerable<string> IsResultValid(string code, string answer, IEnumerable<string> requiredNames);
-        void CompileCode(string code);
+        IEnumerable<string> CheckCodeCorrectness(string code, IEnumerable<string> requiredNames);
+        IEnumerable<string> CheckCodeCorrectness(string code, string answer, IEnumerable<string> requiredNames);
     }
 }

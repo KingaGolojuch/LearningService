@@ -1,63 +1,28 @@
-﻿using AutoMapper;
-using LearningService.DAO.Entities;
-using LearningService.DAO.Repositories.Abstract;
-using LearningService.Domain.Enums;
-using LearningService.Domain.Exceptions;
-using LearningService.Domain.ModelsDTO;
-using LearningService.Domain.Services.Abstract;
-using System.Collections.Generic;
+﻿using LearningService.Domain.Services.Abstract;
 using Microsoft.CSharp;
+using System;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
-using System;
-using System.Linq;
 
 namespace LearningService.Domain.Services.Concrete
 {
     public class CompilationService : ICompilationService
     {
-        private readonly ICourseRepository _courseRepository;
-        private readonly ILessonRepository _lessonRepository;
-        private readonly IUserRepository _userRepository;
-
-        public CompilationService(
-            ICourseRepository courseRepository,
-            ILessonRepository lessonRepository,
-            IUserRepository userRepository)
-        {
-            _courseRepository = courseRepository;
-            _lessonRepository = lessonRepository;
-            _userRepository = userRepository;
-        }
-
-        public void CompileCode(string code)
-        {
-            try
-            {
-                MethodInfo templateFunction = CreateFunctionString(code);
-                var userCodeFunction = (Func<string>)Delegate.CreateDelegate(typeof(Func<string>), templateFunction);
-                string result = userCodeFunction();
-            }
-            catch (InvalidOperationException ex)
-            {
-                var results = ex.Message;
-            }
-        }
-
-        public IEnumerable<string> IsResultValid(string code, IEnumerable<string> requiredNames)
+        public IEnumerable<string> CheckCodeCorrectness(string code, IEnumerable<string> requiredNames)
         {
             try
             {
                 var errorList = new List<string>();
-                MethodInfo templateFunction = CreateFunctionString(code);
-                var userCodeFunction = (Func<Object>)Delegate.CreateDelegate(typeof(Func<Object>), templateFunction);
-                string result = userCodeFunction().ToString();
+                MethodInfo templateFunction = CreateFunctionVoid(code);
                 if (requiredNames.Any())
                 {
+                    code = code.ToUpper();
                     foreach (var requiredName in requiredNames)
                     {
-                        if (code.Contains(requiredName))
+                        if (code.Contains(requiredName.ToUpper()))
                             continue;
 
                         errorList.Add($"Brakuje {requiredName}");
@@ -72,7 +37,7 @@ namespace LearningService.Domain.Services.Concrete
             }
         }
 
-        public IEnumerable<string> IsResultValid(string code, string answer, IEnumerable<string> requiredNames)
+        public IEnumerable<string> CheckCodeCorrectness(string code, string answer, IEnumerable<string> requiredNames)
         {
             try
             {
@@ -87,9 +52,10 @@ namespace LearningService.Domain.Services.Concrete
                 }
                 if (requiredNames.Any())
                 {
+                    code = code.ToUpper();
                     foreach (var requiredName in requiredNames)
                     {
-                        if (code.Contains(requiredName))
+                        if (code.Contains(requiredName.ToUpper()))
                             continue;
 
                         errorList.Add($"Brakuje {requiredName}");
@@ -114,6 +80,43 @@ namespace LearningService.Domain.Services.Concrete
                     public class BinaryFunction
                     {                
                         public static Object Function()
+                        {
+                            userCode;
+                        }
+                    }
+                }
+            ";
+
+            string finalCode = code.Replace("userCode", userFunction);
+
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+            CompilerResults results = provider.CompileAssemblyFromSource(new CompilerParameters(), finalCode);
+            if (results.Errors.HasErrors)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (CompilerError error in results.Errors)
+                {
+                    sb.AppendLine(String.Format("Error ({0}): {1}", error.ErrorNumber, error.ErrorText));
+                }
+
+                throw new InvalidOperationException(sb.ToString());
+            }
+
+            Type binaryFunction = results.CompiledAssembly.GetType("UserFunctions.BinaryFunction");
+            return binaryFunction.GetMethod("Function");
+        }
+
+        private static MethodInfo CreateFunctionVoid(string userFunction)
+        {
+            string code = @"
+                using System;
+            
+                namespace UserFunctions
+                {                
+                    public class BinaryFunction
+                    {                
+                        public static void Function()
                         {
                             userCode;
                         }

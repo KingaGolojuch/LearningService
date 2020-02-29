@@ -243,17 +243,17 @@ namespace LearningService.Domain.Services.Concrete
             IEnumerable<string> result; 
             if (lesson.ValidAnswer == null)
             {
-                result = _compilationService.IsResultValid(code, lesson.LessonComponents.Select(x => x.Name));
+                result = _compilationService.CheckCodeCorrectness(code, lesson.LessonComponents.Select(x => x.Name));
             }
 
             else
             {
-                result = _compilationService.IsResultValid(code, lesson.ValidAnswer, lesson.LessonComponents.Select(x => x.Name));
+                result = _compilationService.CheckCodeCorrectness(code, lesson.ValidAnswer, lesson.LessonComponents.Select(x => x.Name));
             }
             
             if (result.Any())
             {
-                throw new LessonException(string.Join(",", result));
+                throw new LessonException(string.Join(Environment.NewLine, result));
                 //get all messages
                 //throw LessonException with messages
             }

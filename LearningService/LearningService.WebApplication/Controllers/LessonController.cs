@@ -6,7 +6,7 @@ using LearningService.Domain.Services.Abstract;
 using LearningService.WebApplication.Helpers;
 using LearningService.WebApplication.Models.Course;
 using LearningService.WebApplication.Models.Lesson;
-using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -339,7 +339,7 @@ namespace LearningService.WebApplication.Controllers
             }
             catch (LessonException ex)
             {
-                IEnumerable<string> messages = ex.Message.Split(',');
+                IEnumerable<string> messages = ex.Message.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var message in messages)
                 {
                     ModelState.AddModelError(string.Empty, message);
