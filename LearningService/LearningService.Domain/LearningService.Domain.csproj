@@ -77,10 +77,12 @@
     <Compile Include="ModelsDTO\LessonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Abstract\IArticleService.cs" />
+    <Compile Include="Services\Abstract\ICompilationService.cs" />
     <Compile Include="Services\Abstract\ILessonService.cs" />
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\Abstract\ICourseService.cs" />
     <Compile Include="Services\Concrete\ArticleService.cs" />
+    <Compile Include="Services\Concrete\CompilationService.cs" />
     <Compile Include="Services\Concrete\LessonService.cs" />
     <Compile Include="Services\Concrete\UserService.cs" />
     <Compile Include="Services\Concrete\CourseService.cs" />
