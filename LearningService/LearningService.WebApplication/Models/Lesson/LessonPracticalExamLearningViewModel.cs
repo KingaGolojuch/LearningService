@@ -12,6 +12,7 @@ namespace LearningService.WebApplication.Models.Lesson
         public string Headline { get; set; }
 
         [Display(Name = "Treść zadania")]
+        [AllowHtml]
         public string LessonContent { get; set; }
 
         [Display(Name = "Kod")]
