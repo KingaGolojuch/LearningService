@@ -6,6 +6,9 @@ namespace LearningService.WebApplication.Controllers
     {
         public ActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+                return View("StartPageUnloggeUser");
+
             return View();
         }
     }
