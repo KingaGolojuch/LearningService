@@ -12,7 +12,7 @@ namespace LearningService.DAO.Mappings
             Id(x => x.Id);
             Map(x => x.OrderLesson, "OrderLesson");
             Map(x => x.Headline, "Headline");
-            Map(x => x.LessonContent, "LessonContent");
+            Map(x => x.LessonContent, "LessonContent").Length(4001);
             Map(x => x.ValidAnswer, "ValidAnswer").Nullable();
 
             References(x => x.Course, "CourseId").Cascade.None();
