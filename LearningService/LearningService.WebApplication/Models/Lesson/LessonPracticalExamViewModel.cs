@@ -11,7 +11,7 @@ namespace LearningService.WebApplication.Models.Lesson
         [AllowHtml]
         public string LessonContent { get; set; }
 
-        [Display(Name = "Typ zwracany")]
+        [Display(Name = "Ma zwracać wynik?")]
         [Required]
         public string SelectedOption { get; set; }
 

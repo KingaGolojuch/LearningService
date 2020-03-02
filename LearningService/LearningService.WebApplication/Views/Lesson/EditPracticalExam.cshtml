@@ -48,13 +48,13 @@
                 </div>
             </div>
 
-            <div v-on:click="addNewRequiredName" class="form-group">
+            <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="dodaj nowy wymagany" class="btn btn-default" />
+                    <input type="button" v-on:click="addNewRequiredName" value="Nowa nazwa" class="btn btn-default" />
                 </div>
             </div>
 
-            <div class="row" v-for="(param, index) in model.RequiredNames">
+            <div class="" v-for="(param, index) in model.RequiredNames">
                 <div class="form-group">
                     <label class="control-label col-md-2">Nazwa jaka ma się pojawić</label>
                     <div class="col-md-10">
@@ -139,10 +139,15 @@
                     this.model.RequiredNames.splice(index, 1)
                 },
                 submitForm: function (event) {
-                    $api.exam.create(this.model).then(() => {
-                        alert('wyslane');
+                    $api.exam.create(this.model).then((response) => {
+                        if (response.success) {
+                            window.location.href = response.url;
+                        }
+                        else {
+                            alert(response.message);
+                        }
                     }).fail((resp) => {
-                        alert('blad');
+                        alert('Błąd');
                     });
                 }
             },

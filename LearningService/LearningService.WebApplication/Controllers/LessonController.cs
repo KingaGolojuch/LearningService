@@ -4,6 +4,7 @@ using LearningService.Domain.Exceptions;
 using LearningService.Domain.ModelsDTO;
 using LearningService.Domain.Services.Abstract;
 using LearningService.WebApplication.Helpers;
+using LearningService.WebApplication.Helpers.Extensions;
 using LearningService.WebApplication.Models.Course;
 using LearningService.WebApplication.Models.Lesson;
 using System;
@@ -207,11 +208,11 @@ namespace LearningService.WebApplication.Controllers
         public JsonResult CreatePracticalExam(LessonPracticalExamViewModel model)
         {
             if (!ModelState.IsValid)
-                return Json(new { success = false });
+                return Json(new { success = false, message = ModelState.GetErrors() });
 
             var lessonDTO = Mapper.Map<LessonDTO>(model);
             _lessonService.AddPracticalTest(lessonDTO, model.RequiredNames);
-            return Json(new { success = true });
+            return Json(new { success = true, url = Url.Action("Index", new { courseId = model.CourseId }) });
         }
 
         public ActionResult EditPracticalExam(int lessonId)
@@ -234,14 +235,14 @@ namespace LearningService.WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPracticalExam(LessonPracticalExamViewModel model)
+        public JsonResult EditPracticalExam(LessonPracticalExamViewModel model)
         {
             if (!ModelState.IsValid)
-                return Json(new { success = false });
+                return Json(new { success = false, message = ModelState.GetErrors() });
 
             var lessonDTO = Mapper.Map<LessonDTO>(model);
             _lessonService.EditPracticalTest(lessonDTO, model.RequiredNames);
-            return RedirectToAction("Index", new { courseId = model.CourseId });
+            return Json(new { success = true, url = Url.Action("Index", new { courseId = model.CourseId }) });
         }
 
         public ActionResult StartLesson(int lessonId)

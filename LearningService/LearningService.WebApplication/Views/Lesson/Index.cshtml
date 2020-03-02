@@ -13,26 +13,25 @@
 <table class="table">
     <tr>
         <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().Headline)</th>
-        <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().OrderLesson)</th>
         <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().LessonTypeName)</th>
+        <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().OrderLesson)</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model.Lessons.OrderBy(x => x.OrderLesson)) {
     <tr>
         <td>@Html.DisplayFor(modelItem => item.Headline)</td>
+        <td>@Html.DisplayFor(modelItem => item.LessonTypeName)</td>
         <td>
             @if (Model.Lessons.First().Id != item.Id)
             {
                 @Html.ActionLink("Na wcześniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = false })
             }
-
             @if (Model.Lessons.Last().Id != item.Id)
             {
                 @Html.ActionLink("Na późniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = true })
             }
         </td>
-        <td>@Html.DisplayFor(modelItem => item.LessonTypeName)</td>
         <td>@Html.ActionLink("Edycja", "Edit", new { lessonId = item.Id })</td>
     </tr>
 }
