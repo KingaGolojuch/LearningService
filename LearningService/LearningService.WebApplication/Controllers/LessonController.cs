@@ -14,6 +14,7 @@ using System.Web.Mvc;
 
 namespace LearningService.WebApplication.Controllers
 {
+    [Authorize]
     public class LessonController : BaseController
     {
         private readonly ICourseService _courseService;
