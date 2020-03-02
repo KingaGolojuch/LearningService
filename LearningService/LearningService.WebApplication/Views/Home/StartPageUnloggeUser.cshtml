@@ -4,16 +4,7 @@
     Layout = null;
     ViewBag.Title = "Strona główna";
 }
-<style>
-    /*.full-width-image*/
-    #registerView {
-        background: url('Content/testImageFullWidth.jpg') no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-    }
-</style>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,56 +37,104 @@
         <div class="container">
             @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary("", new { @class = "text-danger" })
-
                 <div class="row">
-                    <div class="col-md-6">
-                        content do umieszczenia
+                    <div class="col-md-5">
+                        content do umieszczenia (chwytliwy nagłówek)
                     </div>
-                    <div class="col-md-6">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="col-md-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Rejestracja</div>
+                            <div class="panel-body">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
 
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Surname, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Surname, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Surname, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Surname, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                </div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" class="btn btn-primary" value="Dołącz" />
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" class="btn btn-primary" value="Dołącz" />
+                                    </div>
                                 </div>
                             </div>
+                            <div class="panel-footer">
+                                Masz już konto? @Html.ActionLink("Zaloguj", "Login", "Account")
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
         </div>
     </div>
     <div class="container body-content">
-
+        <section>
+            <div>
+                <p>
+                    opisz jakie zalety daje Ci ten system
+                    <ul>
+                        <li>support twórcami kursu(skontaktuj się z twórca kursu, gdyby coś było nie jasne)</li>
+                        <li>darmowa platforma (bezpłatny dostęp) - dla wszystkich, gdziekolwiek jesteś</li>
+                        <li>dostęp do wszystkich kursów</li>
+                        <li>czytaj i dziel się informacji w postaci artykułów</li>
+                        <li>ucz się według własnego harmonogramu</li>
+                        <li>zostań instruktorem dla innych</li>
+                        <li>twórz blogi, aby zobaczyć własny rozwój</li>
+                        <li>każdy ma szansę na naukę, dostęp dla każdego równomierny</li>
+                        <li>ucz się obecnych trendów</li>
+                        <li>poznawaj najnowsze nowinki</li>
+                        <li>poznawaj nowe umiejętności</li>
+                        <li>poświęcaj się pasji i oddaj się kreatywności. Przykłady, które znajdziesz mogą Cię zaskoczyć i zainspirować.</li>
+                    </ul>
+                </p>
+                <p>
+                    v1. może zamiast kombinowania ( wybrac 3 albo 6) i np w dwóch kolumnach i w 3 rzędach, jakiś obrazek i opis (wszystko już na białym tle, albo lekko szarym)
+                </p>
+                <p>
+                    v2.
+                    na środku jakiś ładny tekst, "jest to system do nauki, inwestuj w swoją przyszłość poznaj zalety jakie da ci ten system", , a pozniej w jednej kolumnie każda zaleta od nowego wiersza w stylu:
+                    przyklad : 1. -obrazek- -tekst(naglowek pogrubione a pod spodem krótki opis do 10 wyrazów)
+                </p>
+            </div>
+        </section>
 
         <hr />
         <footer>
@@ -105,7 +144,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
 </body>
 </html>
 

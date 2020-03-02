@@ -75,10 +75,10 @@ namespace LearningService.WebApplication.Models
         [Display(Name = "Hasło")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Potwierdzenie hasła")]
-        [Compare("Password", ErrorMessage = "Hasła do siebie nie pasuja")]
-        public string ConfirmPassword { get; set; }
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Potwierdzenie hasła")]
+        //[Compare("Password", ErrorMessage = "Hasła do siebie nie pasuja")]
+        //public string ConfirmPassword { get; set; }
 
         [Required]
         [Display(Name = "Imię")]

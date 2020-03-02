@@ -173,7 +173,7 @@ namespace LearningService.WebApplication.Controllers
                     else
                     {
                         AddErrors(roleResult);
-                        return View(model);
+                        return View("../Home/StartPageUnloggeUser", model);
                     }
 
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -190,7 +190,7 @@ namespace LearningService.WebApplication.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("../Home/StartPageUnloggeUser", model);
         }
 
         //
