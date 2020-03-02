@@ -280,13 +280,13 @@ namespace LearningService.WebApplication.Controllers
                 return RedirectToAction("Index", "Home");
 
             var model = Mapper.Map<LessonTheoryExamLearningViewModel>(lessonDTO);
+            var lessonOptions = _lessonService.GetLessonOptions(lessonId);
+            model.Options = Mapper.Map<List<SelectListItem>>(lessonOptions);
             if (lessonDTO.AlreadyPassed)
             {
                 model.Answer = lessonDTO.ValidAnswer;
                 return View("PassingTheoryExamCompleted", model);
             }
-            var lessonOptions = _lessonService.GetLessonOptions(lessonId);
-            model.Options = Mapper.Map<List<SelectListItem>>(lessonOptions);
             return View(model);
         }
 

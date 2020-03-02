@@ -4,11 +4,13 @@
     ViewBag.Title = "Nauka lekcji";
 }
 
-<h2>Nauka lekcji</h2>
+<h2>@Model.Headline</h2>
 
 <div class="form-horizontal">
-    <p>nagłówek: @Model.Headline</p>
-    <p>zawartość: @Html.Raw(Model.LessonContent)</p>
+    <div class="form-horizontal">
+        <hr />
+        <p>@Html.Raw(Model.LessonContent)</p>
+    </div>
 </div>
 
-@Html.ActionLink("Powrót", "CourseOverwiew", "Course", new { courseId = Model.CourseId }, null)
+@Html.ActionLink("Powrót", "CourseOverwiew", "Course", new { courseId = Model.CourseId }, new { @class = "btn btn-default", @style = "margin-top: 10px;" })
