@@ -32,22 +32,25 @@
         
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input id="btnAddNewOptionThoery" type="button" value="Add new row" class="btn btn-default" />
+                <input id="btnAddNewOptionThoery" type="button" value="Dodaj opcje" class="btn btn-default" />
             </div>
         </div>
         <div id="formCreateTheoryExam">
             @for (int i = 0; i < Model.Options.Count; i++)
             {
                 <div class="form-group">
-                    @Html.CheckBoxFor(x => x.Options[i].Selected)
-                    @Html.TextBoxFor(x => x.Options[i].Name)
+                    <label class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(x => x.Options[i].Selected)
+                        @Html.TextBoxFor(x => x.Options[i].Name)
+                    </div>
                 </div>
             }
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>
         </div>
     </div>
