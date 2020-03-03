@@ -3,21 +3,24 @@
     ViewBag.Title = "Zarządzanie kontem";
 }
 
-<h2>Zarządzanie kontem</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
+<div class="row">
+    <div class="col-md-4">
+        @Html.Partial("_LeftSettingMenuOptions")
+    </div>
 
-<div>
-    informacje o koncie
-    <ul>
-        <li>imie</li>
-        <li>nazwisko</li>
-        <li>adres email</li>
-        <li>ilość artykułów</li>
-        <li>ilość kursów</li>
-    </ul>
-    <p>do prawej stronie czy lewej mozna by umiescic jakies informacje w stylu : prywatność: czy twój email ma się wyświetlać jako twórca</p>
-    <p>np aktywność, tutaj wyświetlić, stworzyłes takie kursy, przeczytałeś takie posty, dostałeś tyle maili</p>
-    <p>do przemyślenie zmiana adresu email do korenspondecji (pytanie czy myślimy o sytuacji, kiedy użytkownik nie będzie chciał podawać adresu e-mail do siebie, z drugiej strony niekoneicznie użytkownik musi widzieć jaki adres email jest twórcy kursu i wteyd nei musi odpowiadac na maila)</p>
-    @Html.ActionLink("Edycja konta", "Edit", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Zmiana hasła", "ChangePassword", null, new { @class = "btn btn-default" })
+    <div class="col-md-8">
+        <h2>Zarządzanie kontem</h2>
+        informacje o koncie
+        <ul>
+            <li>imie</li>
+            <li>nazwisko</li>
+            <li>adres email</li>
+            <li>ilość artykułów</li>
+            <li>ilość kursów</li>
+        </ul>
+        <p>do prawej stronie czy lewej mozna by umiescic jakies informacje w stylu : prywatność: czy twój email ma się wyświetlać jako twórca</p>
+        <p>np aktywność, tutaj wyświetlić, stworzyłes takie kursy, przeczytałeś takie posty, dostałeś tyle maili</p>
+        <p>do przemyślenie zmiana adresu email do korenspondecji (pytanie czy myślimy o sytuacji, kiedy użytkownik nie będzie chciał podawać adresu e-mail do siebie, z drugiej strony niekoneicznie użytkownik musi widzieć jaki adres email jest twórcy kursu i wteyd nei musi odpowiadac na maila)</p>
+    </div>
 </div>

@@ -84,8 +84,7 @@ namespace LearningService.WebApplication.Controllers
             _userManager.Update(user);
             return RedirectToAction("Index", new { message = ManageMessageId.ChangePasswordSuccess });
         }
-
-
+        
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
@@ -114,8 +113,12 @@ namespace LearningService.WebApplication.Controllers
             AddErrors(result);
             return View(model);
         }
-        
-        
+
+        public ActionResult Activities()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

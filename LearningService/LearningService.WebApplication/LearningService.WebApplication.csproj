@@ -451,6 +451,8 @@
     <Content Include="Views\Shared\_LayoutUnathorize.cshtml" />
     <Content Include="Views\Home\StartPageUnloggeUser.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Manage\_LeftSettingMenuOptions.cshtml" />
+    <Content Include="Views\Manage\Activities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
