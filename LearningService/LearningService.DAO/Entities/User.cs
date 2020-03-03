@@ -17,6 +17,7 @@ namespace LearningService.DAO.Entities
 
         public virtual IList<UserCourseSubscription> UserCourseSubscription { get; set; }
         public virtual IList<UserLesson> UserLessons { get; set; }
+        public virtual IList<ActivityLog> Activities { get; set; }
 
         public virtual void AddCourse(UserCourseSubscription userCourse)
         {
@@ -48,6 +49,19 @@ namespace LearningService.DAO.Entities
             };
             UserLessons.Add(userLesson);
             DataChanged = true;
+        }
+
+        public virtual void AddSubscription(string description, int activityType)
+        {
+            var activity = new ActivityLog
+            {
+                User = this,
+                ActivityType = new ActivityType { Id = activityType},
+                Date = DateTime.Now,
+                Description = description
+            };
+
+            Activities.Add(activity);
         }
     }
 }

@@ -22,6 +22,11 @@ namespace LearningService.DAO.Mappings
                   .KeyColumn("UserId")
                   .Inverse()
                   .Cascade.AllDeleteOrphan();
+
+            HasMany(x => x.Activities)
+                  .KeyColumn("UserId")
+                  .Inverse()
+                  .Cascade.AllDeleteOrphan();
             //HasManyToMany(x => x.Courses)
             //   .Table("UserCourseSubscription")
             //   .ParentKeyColumns.Add("UserId")

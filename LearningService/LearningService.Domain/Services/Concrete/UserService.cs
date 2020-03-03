@@ -31,6 +31,7 @@ namespace LearningService.Domain.Services.Concrete
             if (!user.DataChanged)
                 return;
 
+            user.AddSubscription("dodałeś subskrypcję", 1);
             _userRepository.Update(user);
         }
         
