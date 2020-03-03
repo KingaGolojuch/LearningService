@@ -14,6 +14,9 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
                 .ForMember(
                     dest => dest.LessonTypeName,
                     src => src.ResolveUsing(opt => Mapper.Map<string>(opt.LessonType))
+                ).ForMember(
+                    dest => dest.CountUserCompletedLesson,
+                    opt => opt.MapFrom(src => src.CountUserCompletedLesson)
                 );
 
             CreateMap<LessonDTO, LessonTheoryViewModel>();

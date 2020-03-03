@@ -7,7 +7,6 @@
 <h2>Szczegóły kursu: @Model.Course.Name</h2>
 
 <p>Opis: @Model.Course.Description</p>
-<p><strong>Ilość osób subskrybujących: @Model.CountSubscribers</strong></p>
 <p>@Html.ActionLink("Skontaktuj się z twórcą kursu", "AskQuestion", new { @courseId = Model.Course.Id }, new { @class = "btn btn-default" })</p>
 <p>
     Subskrypcja:

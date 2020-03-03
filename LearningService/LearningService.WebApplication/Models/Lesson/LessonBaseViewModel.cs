@@ -22,5 +22,7 @@ namespace LearningService.WebApplication.Models.Lesson
 
         [Display(Name = "Typ lekcji")]
         public string LessonTypeName { get; set; }
+
+        public string CountUserCompletedLesson { get; set; }
     }
 }

@@ -114,5 +114,13 @@ namespace LearningService.DAO.Entities
             ValidAnswer = answer;
             DataChanged = true;
         }
+
+        public virtual int GetCountOfUserCompletedLesson()
+        {
+            if (!UserLessons.Any())
+                return 0;
+
+            return UserLessons.Count;
+        }
     }
 }

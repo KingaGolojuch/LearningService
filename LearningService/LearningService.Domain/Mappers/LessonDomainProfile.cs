@@ -14,6 +14,9 @@ namespace LearningService.Domain.Mappers
                 .ForMember(
                     destination => destination.LessonType,
                     opt => opt.MapFrom(source => Enum.GetName(typeof(LessonTypeCustom), source.LessonType.Id))
+                ).ForMember(
+                    destination => destination.CountUserCompletedLesson,
+                    opt => opt.MapFrom(source => source.GetCountOfUserCompletedLesson())
                 );
 
             CreateMap<LessonComponent, LessonComponentDTO>();

@@ -10,5 +10,6 @@ namespace LearningService.WebApplication.Models.Lesson
     {
         public CourseViewModel Course { get; set; }
         public IEnumerable<LessonBaseViewModel> Lessons { get; set; }
+        public int CountSubscribers { get; set; }
     }
 }

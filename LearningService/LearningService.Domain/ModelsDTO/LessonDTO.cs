@@ -13,5 +13,7 @@ namespace LearningService.Domain.ModelsDTO
 
         public string ValidAnswer { get; set; }
         public bool AlreadyPassed { get; set; }
+
+        public int CountUserCompletedLesson { get; set; }
     }
 }

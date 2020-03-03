@@ -38,7 +38,8 @@ namespace LearningService.WebApplication.Controllers
             var model = new LessonCourseContainerViewModel
             {
                 Course = Mapper.Map<CourseViewModel>(course),
-                Lessons = Mapper.Map<IEnumerable<LessonBaseViewModel>>(allLessons.OrderBy(x => x.OrderLesson))
+                Lessons = Mapper.Map<IEnumerable<LessonBaseViewModel>>(allLessons.OrderBy(x => x.OrderLesson)),
+                CountSubscribers = course.UsersSubscribers.Count()
             };
             return View(model);
         }

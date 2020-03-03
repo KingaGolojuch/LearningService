@@ -7,8 +7,8 @@
 <h2>Lekcje z kursu @Model.Course.Name</h2>
 
 <p class="text-danger">
-    można wyświetlić ile osób aktualnie bierze udział w szkoleniu. 
-    ile osób w ogóle kiedykolwiek brało udział
+
+<p><strong>Ilość osób subskrybujących: @Model.CountSubscribers</strong></p>
 </p>
 <p>@Html.ActionLink("Dodaj teorie", "CreateTheory", new { @courseId = Model.Course.Id })</p>
 <p>@Html.ActionLink("Dodaj test teoretyczny", "CreateTheoryExam", new { @courseId = Model.Course.Id })</p>
@@ -23,23 +23,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.Lessons.OrderBy(x => x.OrderLesson)) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.Headline)</td>
-        <td>@Html.DisplayFor(modelItem => item.LessonTypeName)</td>
-        <td>
-            @if (Model.Lessons.First().Id != item.Id)
-            {
-                @Html.ActionLink("Na wcześniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = false })
-            }
-            @if (Model.Lessons.Last().Id != item.Id)
-            {
-                @Html.ActionLink("Na późniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = true })
-            }
-        </td>
-        <td>to implement</td>
-        <td>@Html.ActionLink("Edycja", "Edit", new { lessonId = item.Id })</td>
-    </tr>
-}
+    @foreach (var item in Model.Lessons.OrderBy(x => x.OrderLesson))
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Headline)</td>
+            <td>@Html.DisplayFor(modelItem => item.LessonTypeName)</td>
+            <td>
+                @if (Model.Lessons.First().Id != item.Id)
+                {
+                    @Html.ActionLink("Na wcześniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = false })
+                }
+                @if (Model.Lessons.Last().Id != item.Id)
+                {
+                    @Html.ActionLink("Na późniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = true })
+                }
+            </td>
+            <td>@item.CountUserCompletedLesson / @Model.CountSubscribers</td>
+            <td>@Html.ActionLink("Edycja", "Edit", new { lessonId = item.Id })</td>
+        </tr>
+    }
 
 </table>
