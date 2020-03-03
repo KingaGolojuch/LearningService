@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearningService.DAO.CustomTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,7 +52,7 @@ namespace LearningService.DAO.Entities
             DataChanged = true;
         }
 
-        public virtual void AddSubscription(string description, int activityType)
+        public virtual void AddSubscription(string description, ActivityTypeCustom activityType)
         {
             var activity = new ActivityLog
             {

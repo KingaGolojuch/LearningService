@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LearningService.DAO.CustomTypes;
 using LearningService.DAO.Entities;
 using LearningService.DAO.Repositories.Abstract;
 using LearningService.Domain.ModelsDTO;
@@ -31,7 +32,7 @@ namespace LearningService.Domain.Services.Concrete
             if (!user.DataChanged)
                 return;
 
-            user.AddSubscription("dodałeś subskrypcję", 1);
+            user.AddSubscription("dodałeś subskrypcję", ActivityTypeCustom.CourseSubscription);
             _userRepository.Update(user);
         }
         

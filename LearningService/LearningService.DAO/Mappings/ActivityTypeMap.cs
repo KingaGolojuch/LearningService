@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
+using LearningService.DAO.CustomTypes;
 using LearningService.DAO.Entities;
 
 namespace LearningService.DAO.Mappings
@@ -10,7 +11,7 @@ namespace LearningService.DAO.Mappings
             Table("ActivityType");
             ReadOnly();
 
-            Id(x => x.Id);
+            Id(x => x.Id).CustomType(typeof (ActivityTypeCustom));
             Map(x => x.Name, "Name").Not.Nullable();
 
             HasMany(x => x.Activities)

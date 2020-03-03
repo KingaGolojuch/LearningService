@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomTypes\ActivityTypeCustom.cs" />
     <Compile Include="Entities\ActivityLog.cs" />
     <Compile Include="Entities\ActivityType.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
