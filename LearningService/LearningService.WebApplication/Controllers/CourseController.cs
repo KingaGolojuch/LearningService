@@ -71,7 +71,8 @@ namespace LearningService.WebApplication.Controllers
             var model = new CourseOverwiewViewModel
             {
                 Course = Mapper.Map<CourseViewModel>(course),
-                Lessons = Mapper.Map<List<LessonBaseViewModel>>(lessonsCourse.OrderBy(x => x.OrderLesson))
+                Lessons = Mapper.Map<List<LessonBaseViewModel>>(lessonsCourse.OrderBy(x => x.OrderLesson)),
+                CountSubscribers = course.UsersSubscribers.Count()
             };
             return View(model);
         }
