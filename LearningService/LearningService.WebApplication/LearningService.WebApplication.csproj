@@ -249,6 +249,7 @@
     <Compile Include="Helpers\PracticalTestReturnTypeOptions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article\ArticleBaseViewModel.cs" />
+    <Compile Include="Models\Course\CourseMailViewModel.cs" />
     <Compile Include="Models\Course\CourseOverwiewViewModel.cs" />
     <Compile Include="Models\Course\CourseViewModel.cs" />
     <Compile Include="Models\Lesson\LessonBaseViewModel.cs" />
@@ -454,6 +455,7 @@
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Manage\_LeftSettingMenuOptions.cshtml" />
     <Content Include="Views\Manage\Activities.cshtml" />
+    <Content Include="Views\Course\AskQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
