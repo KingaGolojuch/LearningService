@@ -159,7 +159,7 @@ namespace LearningService.WebApplication.Controllers
                     Surname = model.Surname,
                     UserName = model.Email,
                     Email = model.Email,
-                    Active = true
+                    Active = false
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -167,23 +167,26 @@ namespace LearningService.WebApplication.Controllers
                     var roleResult = await _userManager.AddToRoleAsync(user.Id, AspRoles.User);
                     if (roleResult.Succeeded)
                     {
+                        //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        string code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        await _userManager.SendEmailAsync(model.Email, "Potwierdzenie konta", string.Format($"Cześć {model.Name}. Potwierdź adres email Kliknij <a href='{callbackUrl}'>tutaj</a"));
+                        ModelState.AddModelError(string.Empty, "Zajrzyj do skrzynki pocztowej, aby potwierdzić adres mailowy");
                         //show page that user should go on email
-                        return RedirectToAction("Index", "Home");
+                        return View("../Home/StartPageUnloggeUser", model);
+                        //return RedirectToAction("Index", "Home");
                     }
                     else
                     {
                         AddErrors(roleResult);
                         return View("../Home/StartPageUnloggeUser", model);
                     }
-
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

@@ -1,4 +1,5 @@
 ﻿using LearningService.DAO.Entities;
+using LearningService.WebApplication.Helpers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -77,6 +78,18 @@ namespace LearningService.WebApplication
             {
                 TokenLifespan = TimeSpan.FromHours(24),
             };
+        }
+
+        public override Task SendEmailAsync(string userId, string subject, string body)
+        {
+            return MailNotification.SendEmail(userId, subject, body);
+        }
+
+        public override Task<IdentityResult> ConfirmEmailAsync(string userId, string token)
+        {
+            var user = FindByIdAsync(userId);
+            user.Result.Active = true;
+            return base.ConfirmEmailAsync(userId, token);
         }
     }
 
