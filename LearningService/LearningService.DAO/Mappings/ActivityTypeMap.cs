@@ -12,6 +12,11 @@ namespace LearningService.DAO.Mappings
 
             Id(x => x.Id);
             Map(x => x.Name, "Name").Not.Nullable();
+
+            HasMany(x => x.Activities)
+                  .KeyColumn("ActivityTypeId")
+                  .Inverse()
+                  .Cascade.AllDeleteOrphan();
         }
     }
 }
