@@ -6,6 +6,10 @@
 
 <h2>Lekcje z kursu @Model.Course.Name</h2>
 
+<p class="text-danger">
+    można wyświetlić ile osób aktualnie bierze udział w szkoleniu. 
+    ile osób w ogóle kiedykolwiek brało udział
+</p>
 <p>@Html.ActionLink("Dodaj teorie", "CreateTheory", new { @courseId = Model.Course.Id })</p>
 <p>@Html.ActionLink("Dodaj test teoretyczny", "CreateTheoryExam", new { @courseId = Model.Course.Id })</p>
 <p>@Html.ActionLink("Dodaj test praktyczny", "CreatePracticalExam", new { @courseId = Model.Course.Id })</p>
@@ -15,6 +19,7 @@
         <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().Headline)</th>
         <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().LessonTypeName)</th>
         <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().OrderLesson)</th>
+        <th>ilość osób które zdało / ilosc wszystkich</th>
         <th></th>
     </tr>
 
@@ -32,6 +37,7 @@
                 @Html.ActionLink("Na późniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = true })
             }
         </td>
+        <td>to implement</td>
         <td>@Html.ActionLink("Edycja", "Edit", new { lessonId = item.Id })</td>
     </tr>
 }

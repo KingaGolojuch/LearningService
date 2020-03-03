@@ -2,8 +2,11 @@
 @{
     ViewBag.Title = "Zarządzanie kontem";
 }
+@if (!string.IsNullOrEmpty(ViewBag.StatusMessage))
+{
+    <p class="text-success">@ViewBag.StatusMessage</p>
+}
 
-<p class="text-success">@ViewBag.StatusMessage</p>
 <div class="row">
     <div class="col-md-4">
         @Html.Partial("_LeftSettingMenuOptions")
@@ -11,6 +14,7 @@
 
     <div class="col-md-8">
         <h2>Zarządzanie kontem</h2>
+        <hr />
         informacje o koncie
         <ul>
             <li>imie</li>
