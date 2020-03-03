@@ -73,7 +73,7 @@ namespace LearningService.WebApplication.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (!user.Active)
             {
-                ModelState.AddModelError("", "Twoje konto zostało zablokowane");
+                ModelState.AddModelError("", "Twoje konto nie jest aktywne");
                 return View(model);
             }
             // This doesn't count login failures towards account lockout
