@@ -7,39 +7,17 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 
 <div>
+    informacje o koncie
+    <ul>
+        <li>imie</li>
+        <li>nazwisko</li>
+        <li>adres email</li>
+        <li>ilość artykułów</li>
+        <li>ilość kursów</li>
+    </ul>
+    <p>do prawej stronie czy lewej mozna by umiescic jakies informacje w stylu : prywatność: czy twój email ma się wyświetlać jako twórca</p>
+    <p>np aktywność, tutaj wyświetlić, stworzyłes takie kursy, przeczytałeś takie posty, dostałeś tyle maili</p>
+    <p>do przemyślenie zmiana adresu email do korenspondecji (pytanie czy myślimy o sytuacji, kiedy użytkownik nie będzie chciał podawać adresu e-mail do siebie, z drugiej strony niekoneicznie użytkownik musi widzieć jaki adres email jest twórcy kursu i wteyd nei musi odpowiadac na maila)</p>
+    @Html.ActionLink("Edycja konta", "Edit", null, new { @class = "btn btn-default" })
     @Html.ActionLink("Zmiana hasła", "ChangePassword", null, new { @class = "btn btn-default" })
 </div>
-<div class="row">
-    <div class="col-md-12">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(x => x.Id)
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-12 default-text" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-12 default-text" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Surname, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-10">
-                    <input type="submit" value="Zapisz" class="btn btn-success " />
-                </div>
-            </div>
-        }
-    </div>
-</div>
-

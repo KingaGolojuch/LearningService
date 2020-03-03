@@ -450,6 +450,7 @@
     <Content Include="Views\Lesson\PassingPracticalExamCompleted.cshtml" />
     <Content Include="Views\Shared\_LayoutUnathorize.cshtml" />
     <Content Include="Views\Home\StartPageUnloggeUser.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

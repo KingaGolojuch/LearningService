@@ -54,6 +54,7 @@ namespace LearningService.WebApplication.Controllers
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Hasło zostało zmienione."
+                : message == ManageMessageId.ChangePersonalDataSuccess ? "Dane zostały zmienione"
                 : message == ManageMessageId.Error ? "Wystąpił błąd."
                 : "";
 
@@ -62,9 +63,17 @@ namespace LearningService.WebApplication.Controllers
             var model = Mapper.Map<UserViewModel>(user);
             return View(model);
         }
-        
+
+        public async Task<ActionResult> Edit()
+        {
+            var userId = GetUserId;
+            var user = await _userManager.FindByIdAsync(userId);
+            var model = Mapper.Map<UserViewModel>(user);
+            return View(model);
+        }
+
         [HttpPost]
-        public async Task<ActionResult> Index(UserViewModel model)
+        public async Task<ActionResult> Edit(UserViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -73,8 +82,9 @@ namespace LearningService.WebApplication.Controllers
             user.Name = model.Name;
             user.Surname = model.Surname;
             _userManager.Update(user);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = ManageMessageId.ChangePasswordSuccess });
         }
+
 
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
@@ -145,6 +155,7 @@ namespace LearningService.WebApplication.Controllers
         public enum ManageMessageId
         {
             ChangePasswordSuccess,
+            ChangePersonalDataSuccess,
             Error
         }
     }
