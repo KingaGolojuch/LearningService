@@ -39,5 +39,26 @@ namespace LearningService.Domain.Services.Concrete
             user.AddSubscription($"Dokonano subskrypcji na kurs {course.Name}", ActivityTypeCustom.CourseSubscription);
             _userRepository.Update(user);
         }
+
+        public void LogAccountLoggedIn(string userId)
+        {
+            var user = _userRepository.GetById(userId);
+            user.AddSubscription($"Zalogowano", ActivityTypeCustom.AccountLoggedIn);
+            _userRepository.Update(user);
+        }
+
+        public void LogAccountLoggedOff(string userId)
+        {
+            var user = _userRepository.GetById(userId);
+            user.AddSubscription($"Wylogowano", ActivityTypeCustom.AccountLogOut);
+            _userRepository.Update(user);
+        }
+
+        public void LogCreatedAccount(string userId)
+        {
+            var user = _userRepository.GetById(userId);
+            user.AddSubscription($"Utworzono konto", ActivityTypeCustom.AccountCreated);
+            _userRepository.Update(user);
+        }
     }
 }

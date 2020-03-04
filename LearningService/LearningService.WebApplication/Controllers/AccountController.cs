@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using LearningService.WebApplication.Models;
 using LearningService.WebApplication.Helpers;
 using LearningService.DAO.Entities;
+using LearningService.Domain.Services.Abstract;
 
 namespace LearningService.WebApplication.Controllers
 {
@@ -19,11 +20,16 @@ namespace LearningService.WebApplication.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IUserService _userService;
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(
+            ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager,
+            IUserService userService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _userService = userService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -82,7 +88,10 @@ namespace LearningService.WebApplication.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        _userService.LogAccountLoggedIn(user.Id);
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -167,6 +176,7 @@ namespace LearningService.WebApplication.Controllers
                     var roleResult = await _userManager.AddToRoleAsync(user.Id, AspRoles.User);
                     if (roleResult.Succeeded)
                     {
+                        _userService.LogCreatedAccount(user.Id);
                         //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                         // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -335,6 +345,7 @@ namespace LearningService.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            _userService.LogAccountLoggedOff(GetUserId);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
