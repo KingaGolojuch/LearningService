@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LearningService.DAO.CustomTypes;
 using LearningService.DAO.Entities;
 using LearningService.DAO.Repositories.Abstract;
 using LearningService.Domain.ModelsDTO;
@@ -11,10 +12,13 @@ namespace LearningService.Domain.Services.Concrete
     public class CourseService : ICourseService
     {
         private readonly ICourseRepository _courseRepository;
-
-        public CourseService(ICourseRepository courseRepository)
+        private readonly IUserRepository _userRepository;
+        public CourseService(
+            ICourseRepository courseRepository,
+            IUserRepository userRepository)
         {
-            this._courseRepository = courseRepository;
+            _courseRepository = courseRepository;
+            _userRepository = userRepository;
         }
 
         public IEnumerable<CourseDTO> Get(string userId)
@@ -43,6 +47,9 @@ namespace LearningService.Domain.Services.Concrete
         {
             var entity = Mapper.Map<Course>(course);
             _courseRepository.Add(entity);
+            var user = _userRepository.GetById(course.UserId);
+            user.AddSubscription($"Utworzono kurs: {course.Name}", ActivityTypeCustom.CourseAdded);
+            _userRepository.Update(user);
         }
 
         public IEnumerable<CourseDTO> GetFromOtherUsers(string userId)

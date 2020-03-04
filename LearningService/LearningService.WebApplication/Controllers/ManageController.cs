@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using LearningService.WebApplication.Models;
 using AutoMapper;
 using LearningService.WebApplication.Models.User;
+using LearningService.Domain.Services.Abstract;
 
 namespace LearningService.WebApplication.Controllers
 {
@@ -17,11 +18,16 @@ namespace LearningService.WebApplication.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IUserService _userService;
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(
+            ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager,
+            IUserService userService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _userService = userService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -82,7 +88,8 @@ namespace LearningService.WebApplication.Controllers
             user.Name = model.Name;
             user.Surname = model.Surname;
             _userManager.Update(user);
-            return RedirectToAction("Index", new { message = ManageMessageId.ChangePasswordSuccess });
+            _userService.LogEditAccountData(user.Id, "Edytowano dane osobowe");
+            return RedirectToAction("Index", new { message = ManageMessageId.ChangePersonalDataSuccess });
         }
         
         // GET: /Manage/ChangePassword
@@ -108,6 +115,7 @@ namespace LearningService.WebApplication.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
+                _userService.LogEditAccountData(user.Id, "Zmieniono hasło");
                 return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);

@@ -60,5 +60,12 @@ namespace LearningService.Domain.Services.Concrete
             user.AddSubscription($"Utworzono konto", ActivityTypeCustom.AccountCreated);
             _userRepository.Update(user);
         }
+
+        public void LogEditAccountData(string userId, string description)
+        {
+            var user = _userRepository.GetById(userId);
+            user.AddSubscription(description, ActivityTypeCustom.AccountManagement);
+            _userRepository.Update(user);
+        }
     }
 }
