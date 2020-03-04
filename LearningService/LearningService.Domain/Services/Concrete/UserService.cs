@@ -12,43 +12,31 @@ namespace LearningService.Domain.Services.Concrete
     {
         private readonly IUserRepository _userRepository;
         private readonly ICourseRepository _courseRepository;
+        private readonly ILessonRepository _lessonRepository;
         public UserService(
             IUserRepository userRepository,
-            ICourseRepository courseRepository)
+            ICourseRepository courseRepository,
+            ILessonRepository lessonRepository)
         {
             _userRepository = userRepository;
             _courseRepository = courseRepository;
+            _lessonRepository = lessonRepository;
         }
         public void AddCourseSubscription(string userId, int courseId)
         {
             var user = _userRepository.GetById(userId);
+            var course = _courseRepository.GetById(courseId);
             var newCourse = new UserCourseSubscription
             {
                 User = user,
-                Course = new Course { Id = courseId }
+                Course = course
             };
             user.AddCourse(newCourse);
 
             if (!user.DataChanged)
                 return;
 
-            user.AddSubscription("dodałeś subskrypcję", ActivityTypeCustom.CourseSubscription);
-            _userRepository.Update(user);
-        }
-        
-        public void SetLessonAsCompleted(string userId, int lessonId)
-        {
-            var user = _userRepository.GetById(userId);
-            var passedLesson = new UserLesson
-            {
-                User = user,
-                Lesson = new Lesson { Id = lessonId }
-            };
-            user.AddLesson(passedLesson);
-
-            if (!user.DataChanged)
-                return;
-
+            user.AddSubscription($"Dokonano subskrypcji na kurs {course.Name}", ActivityTypeCustom.CourseSubscription);
             _userRepository.Update(user);
         }
     }

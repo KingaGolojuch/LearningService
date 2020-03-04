@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LearningService.DAO.CustomTypes;
 using LearningService.DAO.Entities;
 using LearningService.DAO.Repositories.Abstract;
 using LearningService.Domain.Enums;
@@ -158,6 +159,7 @@ namespace LearningService.Domain.Services.Concrete
             if (!user.DataChanged)
                 return;
 
+            user.AddSubscription($"Ukończono lekcję: {lesson.Headline} z kursu: {lesson.Course.Name}", ActivityTypeCustom.LessonPassed);
             _userRepository.Update(user);
         }
 
