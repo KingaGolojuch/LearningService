@@ -36,42 +36,42 @@ namespace LearningService.Domain.Services.Concrete
             if (!user.DataChanged)
                 return;
 
-            user.AddSubscription($"Dokonano subskrypcji na kurs {course.Name}", ActivityTypeCustom.CourseSubscription);
+            user.AddActivityLog($"Dokonano subskrypcji na kurs {course.Name}", ActivityTypeCustom.CourseSubscription);
             _userRepository.Update(user);
         }
 
         public void LogAccountLoggedIn(string userId)
         {
             var user = _userRepository.GetById(userId);
-            user.AddSubscription($"Zalogowano", ActivityTypeCustom.AccountLoggedIn);
+            user.AddActivityLog($"Zalogowano", ActivityTypeCustom.AccountLoggedIn);
             _userRepository.Update(user);
         }
 
         public void LogAccountLoggedOff(string userId)
         {
             var user = _userRepository.GetById(userId);
-            user.AddSubscription($"Wylogowano", ActivityTypeCustom.AccountLogOut);
+            user.AddActivityLog($"Wylogowano", ActivityTypeCustom.AccountLogOut);
             _userRepository.Update(user);
         }
 
         public void LogCreatedAccount(string userId)
         {
             var user = _userRepository.GetById(userId);
-            user.AddSubscription($"Utworzono konto", ActivityTypeCustom.AccountCreated);
+            user.AddActivityLog($"Utworzono konto", ActivityTypeCustom.AccountCreated);
             _userRepository.Update(user);
         }
 
         public void LogEditAccountData(string userId, string description)
         {
             var user = _userRepository.GetById(userId);
-            user.AddSubscription(description, ActivityTypeCustom.AccountManagement);
+            user.AddActivityLog(description, ActivityTypeCustom.AccountManagement);
             _userRepository.Update(user);
         }
 
         public void LogSendedEmail(string userId, string description)
         {
             var user = _userRepository.GetById(userId);
-            user.AddSubscription(description, ActivityTypeCustom.MailNotification);
+            user.AddActivityLog(description, ActivityTypeCustom.MailNotification);
             _userRepository.Update(user);
         }
     }

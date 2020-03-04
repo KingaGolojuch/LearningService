@@ -48,7 +48,7 @@ namespace LearningService.Domain.Services.Concrete
             var entity = Mapper.Map<Course>(course);
             _courseRepository.Add(entity);
             var user = _userRepository.GetById(course.UserId);
-            user.AddSubscription($"Utworzono kurs: {course.Name}", ActivityTypeCustom.CourseAdded);
+            user.AddActivityLog($"Utworzono kurs: {course.Name}", ActivityTypeCustom.CourseAdded);
             _userRepository.Update(user);
         }
 

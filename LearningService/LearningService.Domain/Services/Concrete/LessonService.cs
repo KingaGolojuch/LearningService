@@ -159,7 +159,7 @@ namespace LearningService.Domain.Services.Concrete
             if (!user.DataChanged)
                 return;
 
-            user.AddSubscription($"Ukończono lekcję: {lesson.Headline} z kursu: {lesson.Course.Name}", ActivityTypeCustom.LessonPassed);
+            user.AddActivityLog($"Ukończono lekcję: {lesson.Headline} z kursu: {lesson.Course.Name}", ActivityTypeCustom.LessonPassed);
             _userRepository.Update(user);
         }
 

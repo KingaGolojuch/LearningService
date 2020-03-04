@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LearningService.DAO.CustomTypes;
 using LearningService.DAO.Entities;
 using LearningService.DAO.Repositories.Abstract;
 using LearningService.Domain.ModelsDTO;
@@ -11,10 +12,14 @@ namespace LearningService.Domain.Services.Concrete
     public class ArticleService : IArticleService
     {
         private readonly IArticleRepository _articleRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ArticleService(IArticleRepository articleRepository)
+        public ArticleService(
+            IArticleRepository articleRepository,
+            IUserRepository userRepository)
         {
             _articleRepository = articleRepository;
+            _userRepository = userRepository;
         }
 
         public void Add(ArticleDTO articleDTO)
@@ -24,6 +29,9 @@ namespace LearningService.Domain.Services.Concrete
             article.SetCreateTime();
             article.SetUpdateTime();
             _articleRepository.Add(article);
+            var user = _userRepository.GetById(articleDTO.UserId);
+            user.AddActivityLog($"Utworzono artykuł: {article.Headline}", ActivityTypeCustom.ArticleOwnManagement);
+            _userRepository.Update(user);
         }
 
         public void Update(ArticleDTO articleDTO)
@@ -36,6 +44,9 @@ namespace LearningService.Domain.Services.Concrete
 
             article.SetUpdateTime();
             _articleRepository.Update(article);
+            var user = _userRepository.GetById(articleDTO.UserId);
+            user.AddActivityLog($"Edytowano artykuł: {article.Headline}", ActivityTypeCustom.ArticleOwnManagement);
+            _userRepository.Update(user);
         }
 
         public IEnumerable<ArticleDTO> Get(string userId)

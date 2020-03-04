@@ -52,7 +52,7 @@ namespace LearningService.DAO.Entities
             DataChanged = true;
         }
 
-        public virtual void AddSubscription(string description, ActivityTypeCustom activityType)
+        public virtual void AddActivityLog(string description, ActivityTypeCustom activityType)
         {
             var activity = new ActivityLog
             {
