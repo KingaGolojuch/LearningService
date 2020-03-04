@@ -67,5 +67,12 @@ namespace LearningService.Domain.Services.Concrete
             user.AddSubscription(description, ActivityTypeCustom.AccountManagement);
             _userRepository.Update(user);
         }
+
+        public void LogSendedEmail(string userId, string description)
+        {
+            var user = _userRepository.GetById(userId);
+            user.AddSubscription(description, ActivityTypeCustom.MailNotification);
+            _userRepository.Update(user);
+        }
     }
 }

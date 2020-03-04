@@ -100,9 +100,11 @@ namespace LearningService.WebApplication.Controllers
 
             var course = _courseService.Get(model.CourseId);
             var courseOwenr = _userManager.GetEmail(course.UserId);
-            var userLoggedIn = _userManager.GetEmail(GetUserId);
-            var mailContent = $"Użytkownik o mailu {userLoggedIn} zadał ci pytanie: {model.MailContent}";
+            var userIdLoggedIn = GetUserId;
+            var userEmailLoggedIn = _userManager.GetEmail(userIdLoggedIn);
+            var mailContent = $"Użytkownik o mailu {userEmailLoggedIn} zadał ci pytanie: {model.MailContent}";
             await MailNotification.SendEmail(courseOwenr, $"Otrzymałeś wiadomość do kursu: {course.Name}", mailContent);
+            _userService.LogSendedEmail(userIdLoggedIn, $"Wysłano maila dotyczący kursu: {course.Name}. Treść: {model.MailContent}");
             return RedirectToAction("CourseOverwiew", new { model.CourseId });
         }
     }

@@ -10,5 +10,6 @@ namespace LearningService.Domain.Services.Abstract
         void LogAccountLoggedIn(string userId);
         void LogAccountLoggedOff(string userId);
         void LogEditAccountData(string userId, string description);
+        void LogSendedEmail(string userId, string description);
     }
 }
