@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LearningService.DAO.CustomTypes
+﻿namespace LearningService.DAO.CustomTypes
 {
     public enum ActivityTypeCustom
     {
-        CourseSubscription = 1
+        AccountCreated = 1,
+        AccountLoggedIn,
+        AccountLogOut,
+        ArticleOwnManagement,
+        ArticleRead,
+        CourseAdded,
+        LessonOwnManagement,
+        CourseSubscription,
+        LessonPassed,
+        MailNotification, //wyslales maila do .. z kursu ..
+        AccountManagement //edited password, account
     }
 }
