@@ -44,7 +44,7 @@ namespace LearningService.Domain.Services.Concrete
 
             article.SetUpdateTime();
             _articleRepository.Update(article);
-            var user = _userRepository.GetById(articleDTO.UserId);
+            var user = _userRepository.GetById(article.User.Id);
             user.AddActivityLog($"Edytowano artykuł: {article.Headline}", ActivityTypeCustom.ArticleOwnManagement);
             _userRepository.Update(user);
         }

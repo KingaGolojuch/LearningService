@@ -44,6 +44,9 @@ namespace LearningService.Domain.Services.Concrete
                 LessonContent = lessonDTO.LessonContent
             };
             _lessonRepository.Add(newLesson);
+            var user = _userRepository.GetById(course.User.Id);
+            user.AddActivityLog($"Dodano lekcję teorię: {lessonDTO.Headline} do kursu: {course.Name}", ActivityTypeCustom.LessonOwnManagement);
+            _userRepository.Update(user);
         }
 
         public void AddTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components)
@@ -67,6 +70,10 @@ namespace LearningService.Domain.Services.Concrete
             }).ToList();
             newLesson.LessonComponents = lessonComponents;
             _lessonRepository.Add(newLesson);
+
+            var user = _userRepository.GetById(course.User.Id);
+            user.AddActivityLog($"Dodano lekcję test teoretyczny: {lessonDTO.Headline} do kursu: {course.Name}", ActivityTypeCustom.LessonOwnManagement);
+            _userRepository.Update(user);
         }
 
         public void EditTheoryTest(LessonDTO lessonDTO, IEnumerable<LessonComponentDTO> components)
@@ -221,6 +228,10 @@ namespace LearningService.Domain.Services.Concrete
 
             newLesson.LessonComponents = lessonComponents;
             _lessonRepository.Add(newLesson);
+
+            var user = _userRepository.GetById(course.User.Id);
+            user.AddActivityLog($"Dodano lekcję test praktyczny: {lessonDTO.Headline} do kursu: {course.Name}", ActivityTypeCustom.LessonOwnManagement);
+            _userRepository.Update(user);
         }
 
 
