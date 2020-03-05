@@ -69,8 +69,14 @@
             $('#lessonTheoryContent').summernote({
                 focus: true,
                 height: 150,
+                tabSize: 4,
+                tabDisable: true,
                 codemirror: {
                     theme: 'united'
+                    //mode: 'text/html',
+                    //htmlMode: true,
+                    //lineNumbers: true,
+                    //tabSize: 4    // This is for CodeMirror (CodeView)
                 },
                 toolbar: [
                     ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -79,7 +85,8 @@
                     ['style', ['style']],
                     ['table', ['table']],
                     ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link']]
+                    ['insert', ['link']],
+                    //['view', ['codeview']],
                 ]
             });
 
