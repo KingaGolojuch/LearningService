@@ -10,9 +10,20 @@ namespace LearningService.Domain.Services.Concrete
 {
     public class ActivityLogService : IActivityLogService
     {
-        public ActivityLogService()
+        private readonly IUserRepository _userRepository;
+        public ActivityLogService(IUserRepository userRepository)
         {
+            _userRepository = userRepository;
+        }
 
+        public IEnumerable<ActivityLogDTO> GetLogs(string userId)
+        {
+            var user = _userRepository.GetById(userId);
+            return user.Activities.Select(x => new ActivityLogDTO
+            {
+                Date = x.Date,
+                Description = x.Description
+            });
         }
     }
 }

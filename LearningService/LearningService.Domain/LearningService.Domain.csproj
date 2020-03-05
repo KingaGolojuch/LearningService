@@ -71,6 +71,7 @@
     <Compile Include="Mappers\ArticleDomainProfile.cs" />
     <Compile Include="Mappers\CourseDomainProfile.cs" />
     <Compile Include="Mappers\LessonDomainProfile.cs" />
+    <Compile Include="ModelsDTO\ActivityLogDTO.cs" />
     <Compile Include="ModelsDTO\ArticleDTO.cs" />
     <Compile Include="ModelsDTO\CourseDTO.cs" />
     <Compile Include="ModelsDTO\LessonComponentDTO.cs" />

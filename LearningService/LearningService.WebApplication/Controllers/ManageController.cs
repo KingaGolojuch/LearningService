@@ -10,6 +10,8 @@ using LearningService.WebApplication.Models;
 using AutoMapper;
 using LearningService.WebApplication.Models.User;
 using LearningService.Domain.Services.Abstract;
+using LearningService.WebApplication.Models.ActivityLog;
+using System.Collections.Generic;
 
 namespace LearningService.WebApplication.Controllers
 {
@@ -19,15 +21,18 @@ namespace LearningService.WebApplication.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly IUserService _userService;
+        private readonly IActivityLogService _activityLogService;
 
         public ManageController(
             ApplicationUserManager userManager,
             ApplicationSignInManager signInManager,
-            IUserService userService)
+            IUserService userService,
+            IActivityLogService activityLogService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             _userService = userService;
+            _activityLogService = activityLogService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -124,7 +129,13 @@ namespace LearningService.WebApplication.Controllers
 
         public ActionResult Activities()
         {
-            return View();
+            var userId = GetUserId;
+            var activites = _activityLogService.GetLogs(userId);
+            var model = new ActivityLogContainerViewModel
+            {
+                UserActivities = Mapper.Map<IEnumerable<ActivityLogViewModel>>(activites)
+            };
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)

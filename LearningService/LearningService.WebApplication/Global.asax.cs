@@ -20,6 +20,7 @@ namespace LearningService.WebApplication
                 cfg.AddProfile<CourseProfile>();
                 cfg.AddProfile<LessonProfile>();
                 cfg.AddProfile<ArticleProfile>();
+                cfg.AddProfile<ActivityProfile>();
                 cfg.AddProfile<DomainAutomappers.ArticleDomainProfile>();
                 cfg.AddProfile<DomainAutomappers.CourseDomainProfile>();
                 cfg.AddProfile<DomainAutomappers.LessonDomainProfile>();
