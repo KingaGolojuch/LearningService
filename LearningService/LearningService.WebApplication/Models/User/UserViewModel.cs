@@ -19,6 +19,9 @@ namespace LearningService.WebApplication.Models.User
         [Display(Name = "Status")]
         public bool Active { get; set; }
 
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
         public string GetActiveAsString {
             get
             {

@@ -13,18 +13,18 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
                 .ForMember(
                     dest => dest.Id,
                     opt => opt.MapFrom(src => src.Id)
-                )
-                .ForMember(
+                ).ForMember(
                     dest => dest.Name,
                     opt => opt.MapFrom(src => src.Name)
-                )
-                .ForMember(
+                ).ForMember(
                     dest => dest.Surname,
                     opt => opt.MapFrom(src => src.Surname)
-                )
-                .ForMember(
+                ).ForMember(
                     dest => dest.Active,
                     opt => opt.MapFrom(src => src.Active)
+                ).ForMember(
+                    dest => dest.Email,
+                    opt => opt.MapFrom(src => src.Email)
                 );
         }
     }

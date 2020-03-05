@@ -11,6 +11,7 @@
         <tr>
             <th>@Html.DisplayNameFor(model => model.Name)</th>
             <th>@Html.DisplayNameFor(model => model.Surname)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
             <th>@Html.DisplayNameFor(model => model.Active)</th>
             <th></th>
             <th></th>
@@ -21,6 +22,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.Surname) </td>
+                <td>@Html.DisplayFor(modelItem => item.Email) </td>
                 <td>@Html.DisplayFor(modelItem => item.GetActiveAsString) </td>
                 <td>@Html.ActionLink("Edytuj", "Edit", new { userId = item.Id })</td>
                 <td>
