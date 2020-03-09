@@ -2,11 +2,11 @@
 @using LearningService.WebApplication.Helpers;
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav">
             @if (User.IsInRole(AspRoles.Admin))
             {
                 <li>@Html.ActionLink("Użytkownicy", "Index", "User", routeValues: null, htmlAttributes: new { id = "" })</li>
@@ -18,6 +18,17 @@
                 <li>@Html.ActionLink("Kursy innych", "UserCourses", "Course", routeValues: null, htmlAttributes: new { id = "" })</li>
                 <li>@Html.ActionLink("Kursy twoje", "Index", "Course", routeValues: null, htmlAttributes: new { id = "" })</li>
             }
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right hidden-xs">
+            <li>
+                <a href="@Url.Action("Index", "Manage", routeValues: null)" title="Ustawienia"><i class="glyphicon glyphicon-cog"></i></a>
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()" title="Wyloguj"><i class="glyphicon glyphicon-log-out"></i></a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right visible-xs">
             <li>
                 @Html.ActionLink("Ustawienia", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
