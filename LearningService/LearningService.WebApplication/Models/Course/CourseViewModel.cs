@@ -20,5 +20,17 @@ namespace LearningService.WebApplication.Models.Course
         
         [Display(Name = "Subskrypcja")]
         public bool IsSubscribed { get; set; }
+
+        public string GetDescriptionShort {
+            get
+            {
+                int maxDescriptionLength = 100;
+                if (Description.Length < maxDescriptionLength)
+                    return Description;
+
+                var shortened = Description.Substring(0, maxDescriptionLength);
+                return $"{shortened} ...";
+            }
+        }
     }
 }

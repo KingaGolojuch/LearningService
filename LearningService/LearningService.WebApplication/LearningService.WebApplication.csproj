@@ -255,6 +255,7 @@
     <Compile Include="Models\Course\CourseMailViewModel.cs" />
     <Compile Include="Models\Course\CourseOverwiewViewModel.cs" />
     <Compile Include="Models\Course\CourseViewModel.cs" />
+    <Compile Include="Models\HomePageViewModel.cs" />
     <Compile Include="Models\Lesson\LessonBaseViewModel.cs" />
     <Compile Include="Models\Lesson\LessonCourseContainerViewModel.cs" />
     <Compile Include="Models\Lesson\LessonPracticalExamLearningViewModel.cs" />
