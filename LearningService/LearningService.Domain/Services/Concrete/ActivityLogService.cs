@@ -22,7 +22,8 @@ namespace LearningService.Domain.Services.Concrete
             return user.Activities.Select(x => new ActivityLogDTO
             {
                 Date = x.Date,
-                Description = x.Description
+                Description = x.Description,
+                Name = x.ActivityType.Name
             });
         }
     }
