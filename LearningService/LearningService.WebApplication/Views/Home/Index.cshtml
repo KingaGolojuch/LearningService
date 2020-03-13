@@ -28,6 +28,7 @@
     .flex-item-small {
         width: 10%;
         height: 75px;
+        padding-right: 0px;
     }
 
     .flex-item-header {
@@ -51,8 +52,15 @@
     .homePageBorderSeparator {
         margin: 15px;
     }
+
     .flex-item-see-all span {
         display: block;
+    }
+
+    .flex-item-see-all {
+        background-color: transparent;
+        border: 1px solid #dddddd;
+        padding: 8px;
     }
 
     .flex-item-see-all {
@@ -68,7 +76,12 @@
     <div class="flex-container">
         @if (!Model.Articles.Any())
         {
-            <p>nie masz jeszcze zadnego artykulu.. dodaj</p>
+            <p>
+                nie masz jeszcze zadnego artykulu. 
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Article")'">
+                    Dodaj
+                </button>
+            </p>
         }
         else
         {
@@ -97,12 +110,16 @@
 
 <hr />
 
-<h2 class="marginLeftHeader">Kursy</h2>
+<h2>Kursy</h2>
 <div class="">
     <div class="flex-container">
         @if (!Model.Courses.Any())
         {
-            <p>nie utworzyłeś zadnego kursu.. dodaj</p>
+            <p>nie utworzyłeś zadnego kursu.
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Course")'">
+                    Dodaj
+                </button>
+            </p>
         }
         else
         {
@@ -131,61 +148,82 @@
 
 <hr />
 
-<h2 class="marginLeftHeader">Twoja aktywność</h2>
+<h2>Twoja aktywność</h2>
+<hr />
 <div class="">
-    <div class="">
-        <div class="col-md-2">
-            Artykuły
-        </div>
+    <h4>
+        Artykuły
+    </h4>
+    <div class="flex-container">
         @if (!Model.Articles.Any())
         {
-            <p>Nie masz jeszcze zadnego artykulu.. Dodaj +</p>
+            <p>
+                nie masz jeszcze zadnego artykulu. 
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Article")'">
+                    Dodaj
+                </button>
+            </p>
         }
         else
         {
             foreach (var activity in Model.ArticleActivities)
             {
-                <div class="">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">@activity.GetDate()</div>
-                        <div class="panel-body">@Html.Raw(activity.Description)</div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector">
+                        <div class="flex-item-header">@activity.GetDate()</div>
+                        <div class="flex-item-content">@Html.Raw(activity.Description)</div>
                     </div>
                 </div>
             }
-            <div class="col-md-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">..</div>
-                    <div class="panel-body"></div>
-                </div>
+            <div class="flex-item flex-item-small">
+                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Article")'">
+                    <span>
+                        <i class="material-icons">more_horiz</i>
+                    </span>
+                    <span>
+                        zobacz wszystkie
+                    </span>
+                </button>
             </div>
         }
     </div>
 </div>
-<div class="">
-    <div class="">
-        <div class="col-md-2">
-            Kursy
-        </div>
+
+<hr />
+
+<div>
+    <h4>
+        Kursy
+    </h4>
+    <div class="flex-container">
         @if (!Model.Courses.Any())
         {
-            <p>Nie utworzyłeś żadnego kursu.. dodaj</p>
+            <p>nie utworzyłeś zadnego kursu.
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Course")'">
+                    Dodaj
+                </button>
+            </p>
         }
         else
         {
             foreach (var activity in Model.CourseActivities)
             {
-                <div class="">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">@activity.GetDate()</div>
-                        <div class="panel-body">@activity.Description</div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector">
+                        <div class="flex-item-header">@activity.GetDate()</div>
+                        <div class="flex-item-content">@activity.Description</div>
                     </div>
                 </div>
             }
-            <div class="col-md-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">..</div>
-                    <div class="panel-body"></div>
-                </div>
+            <div class="flex-item flex-item-small">
+                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Course")'">
+                    <span>
+                        <i class="material-icons">more_horiz</i>
+                    </span>
+                    <span>
+                        zobacz wszystkie
+                    </span>
+                </button>
             </div>
         }
     </div>
