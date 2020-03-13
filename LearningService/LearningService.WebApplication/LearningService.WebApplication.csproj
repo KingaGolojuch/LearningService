@@ -460,6 +460,7 @@
     <Content Include="Views\Manage\_LeftSettingMenuOptions.cshtml" />
     <Content Include="Views\Manage\Activities.cshtml" />
     <Content Include="Views\Course\AskQuestion.cshtml" />
+    <Content Include="Views\Home\Index - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

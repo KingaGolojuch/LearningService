@@ -3,6 +3,47 @@
     ViewBag.Title = "Strona główna";
 }
 <style>
+    .flex-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .flex-item {
+        height: 150px;
+        padding: 5px 25px 0 0;
+    }
+
+    .flex-item-connector {
+        border: 1px #dddddd solid;
+    }
+
+    .flex-item-big {
+        width: 30%;
+    }
+
+    .flex-item-small {
+        width: 10%;
+        height: 75px;
+    }
+
+    .flex-item-header {
+        height: 50px;
+        padding-top: 15px;
+        padding-left: 15px;
+        border-bottom: 1px #dddddd solid;
+        background-color: #f5f5f5;
+    }
+
+    .flex-item-content {
+        height: 100px;
+        padding-top: 15px;
+        padding-left: 15px;
+    }
+
     .marginLeftHeader {
         margin-left: 15px;
     }
@@ -10,10 +51,21 @@
     .homePageBorderSeparator {
         margin: 15px;
     }
+    .flex-item-see-all span {
+        display: block;
+    }
+
+    .flex-item-see-all {
+        background-color: transparent;
+        border: 1px solid #dddddd;
+        padding: 8px;
+    }
 </style>
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="marginLeftHeader">Artykuły</h2>
+
+
+<h2>Artykuły</h2>
+<div class="">
+    <div class="flex-container">
         @if (!Model.Articles.Any())
         {
             <p>nie masz jeszcze zadnego artykulu.. dodaj</p>
@@ -22,28 +74,32 @@
         {
             foreach (var article in Model.Articles)
             {
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">@article.Headline</div>
-                        <div class="panel-body">@Html.Raw(article.ContentArticle)</div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector">
+                        <div class="flex-item-header">@article.Headline</div>
+                        <div class="flex-item-content">@Html.Raw(article.ContentArticle)</div>
                     </div>
                 </div>
             }
-            <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">zobacz wszystkie</div>
-                    <div class="panel-body"></div>
-                </div>
+            <div class="flex-item flex-item-small">
+                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Article")'">
+                    <span>
+                        <i class="material-icons">more_horiz</i>
+                    </span>
+                    <span>
+                        zobacz wszystkie
+                    </span>
+                </button>
             </div>
         }
     </div>
 </div>
 
-<hr class="homePageBorderSeparator"/>
+<hr />
 
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="marginLeftHeader">Kursy</h2>
+<h2 class="marginLeftHeader">Kursy</h2>
+<div class="">
+    <div class="flex-container">
         @if (!Model.Courses.Any())
         {
             <p>nie utworzyłeś zadnego kursu.. dodaj</p>
@@ -52,18 +108,22 @@
         {
             foreach (var course in Model.Courses)
             {
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">@course.Name</div>
-                        <div class="panel-body">@course.GetDescriptionShort</div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector">
+                        <div class="flex-item-header">@course.Name</div>
+                        <div class="flex-item-content">@course.GetDescriptionShort</div>
                     </div>
                 </div>
             }
-            <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">zobacz wszystkie</div>
-                    <div class="panel-body"></div>
-                </div>
+            <div class="flex-item flex-item-small">
+                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Course")'">
+                    <span>
+                        <i class="material-icons">more_horiz</i>
+                    </span>
+                    <span>
+                        zobacz wszystkie
+                    </span>
+                </button>
             </div>
         }
     </div>
@@ -72,8 +132,8 @@
 <hr />
 
 <h2 class="marginLeftHeader">Twoja aktywność</h2>
-<div class="row">
-    <div class="col-md-12">
+<div class="">
+    <div class="">
         <div class="col-md-2">
             Artykuły
         </div>
@@ -85,7 +145,7 @@
         {
             foreach (var activity in Model.ArticleActivities)
             {
-                <div class="col-md-3">
+                <div class="">
                     <div class="panel panel-default">
                         <div class="panel-heading">@activity.GetDate()</div>
                         <div class="panel-body">@Html.Raw(activity.Description)</div>
@@ -101,8 +161,8 @@
         }
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
+<div class="">
+    <div class="">
         <div class="col-md-2">
             Kursy
         </div>
@@ -114,7 +174,7 @@
         {
             foreach (var activity in Model.CourseActivities)
             {
-                <div class="col-md-3">
+                <div class="">
                     <div class="panel panel-default">
                         <div class="panel-heading">@activity.GetDate()</div>
                         <div class="panel-body">@activity.Description</div>
