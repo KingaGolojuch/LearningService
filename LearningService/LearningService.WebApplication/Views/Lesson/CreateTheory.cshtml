@@ -3,38 +3,36 @@
 @{
     ViewBag.Title = "Dodanie lekcji do kursu";
 }
-@Html.Partial("_LessonManagementHeader", @Model.LessonContainerBase)
+@Html.Action("LessonManagementHeader", new { courseId = Model.CourseId })
 
 <div class="row">
     <div class="col-md-12">
 
-        <div class="col-md-6">
-            @Html.Partial("_LessonManagamentBase", @Model.LessonContainerBase)
-        </div>
+        @Html.Action("LessonManagementBase", new { courseId = Model.CourseId })
 
-        <div class="col-md-6">
+        <div class="col-md-6 form-input-full-width">
             <h3>Tworzenie nowej lekcji - teoria</h3>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.CourseId)
-                <div class="form-horizontal">
+                <div class="">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label" })
-                            @Html.TextAreaFor(model => model.LessonContent, new { @id = "lessonTheoryContent", @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.LessonContent, new { @id = "lessonTheoryContent", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
-                            <input type="submit" value="Zapisz" class="btn btn-primary" />
+                        <input type="submit" value="Zapisz" class="btn btn-primary" />
                     </div>
                 </div>
             }

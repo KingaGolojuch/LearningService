@@ -37,6 +37,26 @@ namespace LearningService.WebApplication.Controllers
             return View(model);
         }
 
+        [ChildActionOnly]
+        public PartialViewResult LessonManagementHeader(int courseId)
+        {
+            var course = _courseService.Get(courseId);
+            var model = new LessonBaseSubscriberViewModel
+            {
+                CourseId = course.Id,
+                CourseName = course.Name,
+                CountSubscribers = course.UsersSubscribers.Count()
+            };
+            return PartialView("_LessonManagementHeader", model);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult LessonManagementBase(int courseId)
+        {
+            var model = GetLessonContainerViewModel(courseId);
+            return PartialView("_LessonManagamentBase", model);
+        }
+
         public RedirectToRouteResult Edit(int lessonId)
         {
             var lessonDTO = _lessonService.GetLesson(lessonId);
@@ -66,8 +86,7 @@ namespace LearningService.WebApplication.Controllers
         public ActionResult CreateTheory(int courseId)
         {
             var model = new LessonTheoryViewModel{
-                CourseId = courseId,
-                LessonContainerBase = GetLessonContainerViewModel(courseId)
+                CourseId = courseId
             };
             return View(model);
         }
@@ -350,13 +369,12 @@ namespace LearningService.WebApplication.Controllers
 
         private LessonCourseContainerViewModel GetLessonContainerViewModel(int courseId)
         {
-            var course = _courseService.Get(courseId);
             var allLessons = _lessonService.GetLessons(courseId);
             var model = new LessonCourseContainerViewModel
             {
-                Course = Mapper.Map<CourseViewModel>(course),
+                CourseId = courseId,
                 Lessons = Mapper.Map<IEnumerable<LessonBaseViewModel>>(allLessons.OrderBy(x => x.OrderLesson)),
-                CountSubscribers = course.UsersSubscribers.Count()
+                CountSubscribers = _courseService.GetCountSubscribers(courseId)
             };
             return model;
         }

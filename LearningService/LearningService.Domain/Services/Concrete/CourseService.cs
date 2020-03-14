@@ -69,5 +69,11 @@ namespace LearningService.Domain.Services.Concrete
 
             return coursesDTO;
         }
+
+        public int GetCountSubscribers(int id)
+        {
+            var course = _courseRepository.GetById(id);
+            return course.UserCourseSubscription.Count;
+        }
     }
 }

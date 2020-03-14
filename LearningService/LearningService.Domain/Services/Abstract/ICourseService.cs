@@ -10,5 +10,6 @@ namespace LearningService.Domain.Services.Abstract
         CourseDTO Get(int id, string userId);
         void Add(CourseDTO course);
         IEnumerable<CourseDTO> GetFromOtherUsers(string userId);
+        int GetCountSubscribers(int id);
     }
 }

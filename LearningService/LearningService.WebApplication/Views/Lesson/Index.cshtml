@@ -4,14 +4,7 @@
     ViewBag.Title = "Lekcje";
 }
 
-<h2>Lekcje z kursu @Model.Course.Name</h2>
-
-<p class="text-danger">
-    <strong>Ilość osób subskrybujących: @Model.CountSubscribers</strong>
-</p>
-<p>@Html.ActionLink("Dodaj teorie", "CreateTheory", new { @courseId = Model.Course.Id })</p>
-<p>@Html.ActionLink("Dodaj test teoretyczny", "CreateTheoryExam", new { @courseId = Model.Course.Id })</p>
-<p>@Html.ActionLink("Dodaj test praktyczny", "CreatePracticalExam", new { @courseId = Model.Course.Id })</p>
+@Html.Action("LessonManagementHeader", new { courseId = Model.CourseId })
 
 <table class="table">
     <tr>
