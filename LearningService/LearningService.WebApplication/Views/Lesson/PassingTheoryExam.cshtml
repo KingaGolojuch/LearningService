@@ -42,8 +42,10 @@
                 <input type="submit" value="Sprawdź" class="btn btn-primary" />
             </div>
         </div>
-        </div>
-    }
+    </div>
+}
+
+@Html.ActionLink("Powrót", "CourseOverwiew", "Course", new { courseId = Model.CourseId }, new { @class = "btn btn-default", @style = "margin-top: 10px;" })
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

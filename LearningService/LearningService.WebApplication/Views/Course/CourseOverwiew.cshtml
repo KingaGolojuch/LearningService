@@ -3,36 +3,52 @@
 @{
     ViewBag.Title = "Szczegóły kursu";
 }
+<style>
+    .lessonPassed td:first-child {
+        color: #28a745;
+    }
 
+    .row-inactive {
+        background-color: #ececec;
+        color: #b9b9b9;
+    }
+    #lessonsSection {
+        margin-top: 25px;
+        margin-bottom: -15px;
+    }
+</style>
 <h2>Szczegóły kursu: @Model.Course.Name</h2>
 
 <p>Opis: @Model.Course.Description</p>
 <p>@Html.ActionLink("Skontaktuj się z twórcą kursu", "AskQuestion", new { @courseId = Model.Course.Id }, new { @class = "btn btn-default" })</p>
-<p>
-    Subskrypcja:
-    @if (Model.Course.IsSubscribed)
-    {
-        <span>Aktualnie subskrybujesz</span>
-    }
-    else
-    {
-        using (Html.BeginForm("AddSubscribe", "Course", new { courseId = Model.Course.Id }, FormMethod.Post, null))
+
+@if (!Model.Course.IsSubscribed)
+{
+    <p>
+        @using (Html.BeginForm("AddSubscribe", "Course", new { courseId = Model.Course.Id }, FormMethod.Post, null))
         {
             <input type="submit" value="subskrybuj" />
         }
-    }
-</p>
+    </p>
+}
 
-<div>
-    <p><strong>Lekcje</strong></p>
+<h4 id="lessonsSection">
+    <strong>Lekcje</strong>
+</h4>
+<table class="table-row-collapse">
     @for (int i = 0; i < Model.Lessons.Count(); i++)
     {
-        <p>
-            @(i + 1). @Model.Lessons[i].Headline @(Model.Lessons[i].AlreadyPassed ? "Zdana" : "")
+        <tr class="@(Model.Lessons[i].AlreadyPassed ? "lessonPassed" : Model.Lessons[i-1].AlreadyPassed ? "" : "row-inactive")">
+            <td>@(i + 1). @Model.Lessons[i].Headline</td>
+            <td>@Model.Lessons[i].LessonTypeName</td>
             @if ((Model.Course.IsSubscribed) && (i == 0 || Model.Lessons[i].AlreadyPassed || Model.Lessons[i - 1].AlreadyPassed))
             {
-                @Html.ActionLink("Przejdź do lekcji", "StartLesson", "Lesson", new { @lessonId = Model.Lessons[i].Id }, null)
+                <td>@Html.ActionLink("Przejdź do lekcji", "StartLesson", "Lesson", new { @lessonId = Model.Lessons[i].Id }, null)</td>
             }
-        </p>
+            else
+            {
+                <td></td>
+            }
+        </tr>
     }
-</div>
+</table>
