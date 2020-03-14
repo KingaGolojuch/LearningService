@@ -38,7 +38,7 @@
 <table class="table-row-collapse">
     @for (int i = 0; i < Model.Lessons.Count(); i++)
     {
-        <tr class="@(Model.Lessons[i].AlreadyPassed ? "lessonPassed" : Model.Lessons[i-1].AlreadyPassed ? "" : "row-inactive")">
+        <tr class="@(Model.Lessons[i].AlreadyPassed ? "lessonPassed" : Model.Lessons[i-1].AlreadyPassed ? "" : "row-inactive") shadow-normal">
             <td>@(i + 1). @Model.Lessons[i].Headline</td>
             <td>@Model.Lessons[i].LessonTypeName</td>
             @if ((Model.Course.IsSubscribed) && (i == 0 || Model.Lessons[i].AlreadyPassed || Model.Lessons[i - 1].AlreadyPassed))

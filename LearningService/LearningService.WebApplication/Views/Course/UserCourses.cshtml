@@ -14,7 +14,7 @@
 </style>
 <h3>Aktualnie subskrybowane</h3>
 <table class="table-row-collapse">
-    <tr>
+    <tr class="shadow-normal">
         <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th>@Html.DisplayNameFor(model => model.Description)</th>
         <th></th>
@@ -22,7 +22,7 @@
 
     @foreach (var item in Model.Where(x => x.IsSubscribed))
     {
-        <tr>
+        <tr class="shadow-normal">
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>
