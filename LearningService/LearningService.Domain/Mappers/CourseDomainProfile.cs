@@ -22,6 +22,9 @@ namespace LearningService.Domain.Mappers
                 ).ForMember(
                     dest => dest.UsersSubscribers,
                     opt => opt.MapFrom(src => src.UserCourseSubscription.Select(x => x.User.Id).ToList())
+                ).ForMember(
+                    dest => dest.LessonCount,
+                    opt => opt.MapFrom(src => src.Lessons.Count())
                 );
 
             CreateMap<CourseDTO, Course>()

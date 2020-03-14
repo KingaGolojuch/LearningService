@@ -40,8 +40,8 @@ namespace LearningService.WebApplication.Controllers
             var activites = _activityLogService.GetLogs(userId);
             var model = new HomePageViewModel
             {
-                Articles = Mapper.Map<IEnumerable<ArticleBaseViewModel>>(_articleService.Get(userId).Where(x => x.Active == true).OrderByDescending(x => x.CreateTime).Take(3)),
-                Courses = Mapper.Map<IEnumerable<CourseViewModel>>(_courseService.Get(userId).OrderByDescending(x => x.Id).Take(3)),
+                Articles = Mapper.Map<IEnumerable<ArticleBaseViewModel>>(_articleService.GetFromOtherUsers(userId).Where(x => x.Active == true).OrderByDescending(x => x.CreateTime).Take(3)),
+                Courses = Mapper.Map<IEnumerable<CourseViewModel>>(_courseService.GetFromOtherUsers(userId).OrderByDescending(x => x.Id).Take(3)),
                 ArticleActivities = Mapper.Map<IEnumerable<ActivityLogViewModel>>(activites.Where(x => x.Name == "ArticleOwnManagement").OrderByDescending(x => x.Date).Take(3)),
                 CourseActivities = Mapper.Map<IEnumerable<ActivityLogViewModel>>(activites.Where(x => x.Name == "LessonOwnManagement" || x.Name == "CourseAdded").OrderByDescending(x => x.Date).Take(3))
             };

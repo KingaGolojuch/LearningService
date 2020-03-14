@@ -12,5 +12,7 @@ namespace LearningService.Domain.ModelsDTO
         public bool IsSubscribed { get; set; }
 
         public IEnumerable<string> UsersSubscribers { get; set; }
+        public int LessonCount { get; set; }
+        public int UserSubscriberFinishedLesson { get; set; }
     }
 }

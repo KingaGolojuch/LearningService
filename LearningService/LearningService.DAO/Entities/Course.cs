@@ -49,5 +49,10 @@ namespace LearningService.DAO.Entities
             lesson.OrderLesson = lesson.OrderLesson + 1;
             DataChanged = true;
         }
+
+        public virtual int GetCountOfUserCompletedLesson(string userId)
+        {
+            return Lessons.Where(x => x.IsUserPassedLesson(userId)).Count();
+        }
     }
 }

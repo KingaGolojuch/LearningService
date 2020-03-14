@@ -19,6 +19,9 @@ namespace LearningService.WebApplication.Helpers.MapperProfiles
                 ).ForMember(
                    dest => dest.Name,
                    opt => opt.MapFrom(src => src.Name)
+                ).ForMember(
+                   dest => dest.CountUserSubscriberFinishedLesson,
+                   opt => opt.MapFrom(src => $"{src.UserSubscriberFinishedLesson}/{src.LessonCount}")
                 )
                 .ReverseMap()
                 .ForMember(

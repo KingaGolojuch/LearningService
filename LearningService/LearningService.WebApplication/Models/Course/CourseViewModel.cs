@@ -21,6 +21,8 @@ namespace LearningService.WebApplication.Models.Course
         [Display(Name = "Subskrypcja")]
         public bool IsSubscribed { get; set; }
 
+        public string CountUserSubscriberFinishedLesson { get; set; }
+
         public string GetDescriptionShort {
             get
             {

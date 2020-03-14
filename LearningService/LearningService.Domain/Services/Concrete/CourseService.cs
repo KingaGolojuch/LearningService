@@ -55,14 +55,16 @@ namespace LearningService.Domain.Services.Concrete
         public IEnumerable<CourseDTO> GetFromOtherUsers(string userId)
         {
             var entities = _courseRepository.Get();
-            var coursesDTO = Mapper.Map<IEnumerable<CourseDTO>>(
-                entities
-                .Where(x => x.User.Id != userId));
-            
+            var coursesOtherUsers = entities
+                .Where(x => x.User.Id != userId);
+
+            var coursesDTO = Mapper.Map<IEnumerable<CourseDTO>>(coursesOtherUsers);
             foreach (var course in coursesDTO)
             {
                 if (course.UsersSubscribers.Any(x => x == userId))
                     course.IsSubscribed = true;
+
+                course.UserSubscriberFinishedLesson = coursesOtherUsers.Single(x => x.Id == course.Id).GetCountOfUserCompletedLesson(userId);
             }
 
             return coursesDTO;

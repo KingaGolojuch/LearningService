@@ -17,6 +17,7 @@
         padding: 5px 25px 0 0;
     }
 
+
     .flex-item-connector {
         border: 1px #dddddd solid;
     }
@@ -31,7 +32,8 @@
         padding-right: 0px;
     }
 
-    .flex-item-header {
+    .flex-item-header,
+    .flex-item-footer {
         height: 50px;
         padding-top: 15px;
         padding-left: 15px;
@@ -63,86 +65,66 @@
         padding: 8px;
     }
 
-    .flex-item-see-all {
-        background-color: transparent;
-        border: 1px solid #dddddd;
-        padding: 8px;
+    #courseAll .flex-item {
+        height: 200px;
     }
+
+        #courseAll .flex-item-small {
+            height: 100px;
+        }
 </style>
 
 
 <h2>Artykuły</h2>
 <div class="">
     <div class="flex-container">
-        @if (!Model.Articles.Any())
+        @foreach (var article in Model.Articles)
         {
-            <p>
-                nie masz jeszcze zadnego artykulu. 
-                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Article")'">
-                    Dodaj
-                </button>
-            </p>
-        }
-        else
-        {
-            foreach (var article in Model.Articles)
-            {
-                <div class="flex-item flex-item-big">
-                    <div class="flex-item-connector">
-                        <div class="flex-item-header">@article.Headline</div>
-                        <div class="flex-item-content">@Html.Raw(article.ContentArticle)</div>
-                    </div>
+            <div class="flex-item flex-item-big">
+                <div class="flex-item-connector">
+                    <div class="flex-item-header">@article.Headline</div>
+                    <div class="flex-item-content">@Html.Raw(article.ContentArticle)</div>
                 </div>
-            }
-            <div class="flex-item flex-item-small">
-                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Article")'">
-                    <span>
-                        <i class="material-icons">more_horiz</i>
-                    </span>
-                    <span>
-                        zobacz wszystkie
-                    </span>
-                </button>
             </div>
         }
+        <div class="flex-item flex-item-small">
+            <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("UserArticles", "Article")'">
+                <span>
+                    <i class="material-icons">more_horiz</i>
+                </span>
+                <span>
+                    zobacz wszystkie
+                </span>
+            </button>
+        </div>
     </div>
 </div>
 
 <hr />
 
 <h2>Kursy</h2>
-<div class="">
+<div id="courseAll" class="">
     <div class="flex-container">
-        @if (!Model.Courses.Any())
+        @foreach (var course in Model.Courses)
         {
-            <p>nie utworzyłeś zadnego kursu.
-                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Course")'">
-                    Dodaj
-                </button>
-            </p>
-        }
-        else
-        {
-            foreach (var course in Model.Courses)
-            {
-                <div class="flex-item flex-item-big">
-                    <div class="flex-item-connector">
-                        <div class="flex-item-header">@course.Name</div>
-                        <div class="flex-item-content">@course.GetDescriptionShort</div>
-                    </div>
+            <div class="flex-item flex-item-big">
+                <div class="flex-item-connector">
+                    <div class="flex-item-header">@course.Name</div>
+                    <div class="flex-item-content">@course.GetDescriptionShort</div>
+                    <div class="flex-item-footer">Lekcje @course.CountUserSubscriberFinishedLesson</div>
                 </div>
-            }
-            <div class="flex-item flex-item-small">
-                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Course")'">
-                    <span>
-                        <i class="material-icons">more_horiz</i>
-                    </span>
-                    <span>
-                        zobacz wszystkie
-                    </span>
-                </button>
             </div>
         }
+        <div class="flex-item flex-item-small">
+            <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("UserCourses", "Course")'">
+                <span>
+                    <i class="material-icons">more_horiz</i>
+                </span>
+                <span>
+                    zobacz wszystkie
+                </span>
+            </button>
+        </div>
     </div>
 </div>
 
