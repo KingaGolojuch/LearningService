@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.form-input-full-width input,
+.form-input-full-width select,
+.form-input-full-width textarea {
+    max-width: 100%;
+}
