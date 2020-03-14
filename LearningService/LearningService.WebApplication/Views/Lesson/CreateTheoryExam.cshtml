@@ -2,66 +2,60 @@
 @{
     ViewBag.Title = "Tworzenie egzaminu teoretycznego";
 }
+@Html.Action("LessonManagementHeader", new { courseId = Model.CourseId })
 
-<h2>Tworzenie egzaminu teoretycznego</h2>
+<div class="row">
+    @Html.Action("LessonManagementBase", new { courseId = Model.CourseId })
+    <div class="col-md-6 form-input-full-width">
+        <h3>Tworzenie egzaminu teoretycznego</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.CourseId)
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(x => x.CourseId)
+            <div class="">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.LessonContent, new { @id = "lessonTheoryContent", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input id="btnAddNewOptionThoery" type="button" value="Dodaj nową opcję" class="btn btn-default" />
-            </div>
-        </div>
-        <div id="formCreateTheoryExam">
-            @for (int i = 0; i < Model.Options.Count; i++)
-            {
                 <div class="form-group">
-                    <label class="control-label col-md-2"></label>
-                    <div class="col-md-10">
-                        @Html.CheckBoxFor(x => x.Options[i].Selected)
-                        @Html.TextBoxFor(x => x.Options[i].Name)
-                    </div>
+                    @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
                 </div>
-            }
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.LessonContent, new { @id = "lessonTheoryContent", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <input id="btnAddNewOptionThoery" type="button" value="Dodaj nową opcję" class="btn btn-default" />
+                </div>
+                <div id="formCreateTheoryExam">
+                    @for (int i = 0; i < Model.Options.Count; i++)
+                    {
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                                @Html.CheckBoxFor(x => x.Options[i].Selected)
+                                @Html.TextBoxFor(x => x.Options[i].Name)
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="btn btn-primary" />
+                </div>
             </div>
-        </div>
+        }
     </div>
-}
+</div>
 <template id="theory-exam-row">
     @Html.Partial("_TheoryExamItem", Model)
 </template>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
+    <script>
         var countedOptions = @Model.CountOfOptions;
         (function ($) {
             $('#lessonTheoryContent').summernote({
@@ -94,5 +88,5 @@
             });
 
         })(jQuery);
-</script>
+    </script>
 }

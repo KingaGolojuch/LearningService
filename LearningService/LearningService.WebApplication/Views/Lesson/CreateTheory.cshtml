@@ -6,7 +6,6 @@
 @Html.Action("LessonManagementHeader", new { courseId = Model.CourseId })
 
 <div class="row">
-    <div class="col-md-12">
 
         @Html.Action("LessonManagementBase", new { courseId = Model.CourseId })
 
@@ -37,7 +36,6 @@
                 </div>
             }
         </div>
-    </div>
 </div>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
