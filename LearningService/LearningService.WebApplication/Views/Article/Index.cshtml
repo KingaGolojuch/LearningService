@@ -3,38 +3,23 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Artykuły twoje</h2>
-<p>
-    @Html.ActionLink("Utwórz nowy", "Create")
-</p>
 
-<table class="table table-striped table-bordered table-condensed infinite-scroll">
+<div class="margin-top-md">
+    @Html.ActionLink("Stwórz nowy", "Create", null, new { @class = "btn btn-default" })
+</div>
+
+<table class="table-row-collapse infinite-scroll">
     <thead>
-        <tr>
+        <tr class="shadow-normal">
             <th>@Html.DisplayNameFor(model => model.Headline)</th>
-            <th>@Html.DisplayNameFor(model => model.ContentArticle)</th>
+            <th>@Html.DisplayNameFor(model => model.ContentShortened)</th>
             <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @Html.Partial("_ArticleData", Model)
-        @*@foreach (var item in Model)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Headline)</td>
-                    <td>@Html.Raw(item.ContentArticle)</td>
-                    <td>@Html.ActionLink("Edycja", "Edit", new { articleId = item.Id })</td>
-                    <td>
-                        @using (Html.BeginForm("Delete", "Article", new { articleId = item.Id }, FormMethod.Post, null))
-                        {
-                            <input type="submit" value="Usuń" />
-                        }
-                    </td>
-                </tr>
-            }*@
     </tbody>
-
 </table>
 
 @section scripts{

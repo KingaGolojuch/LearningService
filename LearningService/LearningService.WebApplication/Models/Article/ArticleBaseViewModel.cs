@@ -15,6 +15,10 @@ namespace LearningService.WebApplication.Models.Article
         [System.Web.Mvc.AllowHtml]
         public string ContentArticle { get; set; }
 
+        [Display(Name = "Skrócony opis")]
+        [Required]
+        public string ContentShortened { get; set; }
+
         [Display(Name = "Data utworzenia")]
         public string CreateTime { get; set; }
 

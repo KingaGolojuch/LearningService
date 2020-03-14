@@ -12,7 +12,7 @@
         margin-top: 25px;
     }
 </style>
-<h3>Aktualnie subskrybowane</h3>
+<h3>Wybrane kursy</h3>
 <table class="table-row-collapse">
     <tr class="shadow-normal">
         <th>@Html.DisplayNameFor(model => model.Name)</th>
@@ -33,7 +33,7 @@
 </table>
 
 <hr />
-<h3>bez subskrypcji</h3>
+<h3>Pozostałe</h3>
 <div id="courseAll">
     <div class="flex-container">
         @foreach (var course in Model.Where(x => x.IsSubscribed == false))

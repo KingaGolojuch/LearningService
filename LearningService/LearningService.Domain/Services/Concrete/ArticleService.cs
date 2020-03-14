@@ -38,6 +38,7 @@ namespace LearningService.Domain.Services.Concrete
         {
             var article = _articleRepository.GetById(articleDTO.Id);
             article.SetHeadline(articleDTO.Headline);
+            article.SetContentShortened(articleDTO.Headline);
             article.SetContent(articleDTO.ContentArticle);
             if (!article.DataChanged)
                 return;

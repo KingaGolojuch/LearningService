@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<LearningService.WebApplication.Models.Article.ArticleBaseViewModel>
 @foreach (var item in Model)
 {
-    <tr>
+    <tr class="shadow-normal">
         <td>@Html.DisplayFor(modelItem => item.Headline)</td>
-        <td>@Html.Raw(item.ContentArticle)</td>
+        <td>@Html.Raw(item.ContentShortened)</td>
         <td>@Html.ActionLink("Edycja", "Edit", new { articleId = item.Id })</td>
         <td>
             @using (Html.BeginForm("Delete", "Article", new { articleId = item.Id }, FormMethod.Post, null))

@@ -13,6 +13,7 @@ namespace LearningService.DAO.Mappings
             Map(x => x.Headline, "Headline").Not.Nullable();
             Map(x => x.ContentArticle, "ContentOfArticle").Not.Nullable();
             Map(x => x.Active, "Active").Not.Nullable();
+            Map(x => x.ContentShortened, "ContentShortened").Not.Nullable();
             Map(x => x.CreateTime, "CreateTime").Not.Nullable();
             Map(x => x.UpdateTime, "UpdateTime").Not.Nullable();
 

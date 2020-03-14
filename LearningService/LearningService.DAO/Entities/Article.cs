@@ -10,6 +10,7 @@ namespace LearningService.DAO.Entities
         public virtual string Headline { get; protected set; }
         public virtual string ContentArticle { get; protected set; }
         public virtual bool Active { get; protected set; }
+        public virtual string ContentShortened { get; set; }
         public virtual DateTime CreateTime { get; protected set; }
         public virtual DateTime UpdateTime { get; protected set; }
 
@@ -21,6 +22,15 @@ namespace LearningService.DAO.Entities
                 return;
 
             Headline = name;
+            DataChanged = true;
+        }
+
+        public virtual void SetContentShortened(string name)
+        {
+            if (ContentShortened == name)
+                return;
+
+            ContentShortened = name;
             DataChanged = true;
         }
 
