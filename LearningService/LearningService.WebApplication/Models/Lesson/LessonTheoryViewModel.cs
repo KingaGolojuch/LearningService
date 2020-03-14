@@ -13,5 +13,7 @@ namespace LearningService.WebApplication.Models.Lesson
         [Required]
         [AllowHtml]
         public string LessonContent { get; set; }
+
+        public LessonCourseContainerViewModel LessonContainerBase { get; set; }
     }
 }

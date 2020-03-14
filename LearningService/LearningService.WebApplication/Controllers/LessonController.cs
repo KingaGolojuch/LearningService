@@ -33,14 +33,7 @@ namespace LearningService.WebApplication.Controllers
         // GET: Lesson
         public ActionResult Index(int courseId)
         {
-            var course = _courseService.Get(courseId);
-            var allLessons = _lessonService.GetLessons(courseId);
-            var model = new LessonCourseContainerViewModel
-            {
-                Course = Mapper.Map<CourseViewModel>(course),
-                Lessons = Mapper.Map<IEnumerable<LessonBaseViewModel>>(allLessons.OrderBy(x => x.OrderLesson)),
-                CountSubscribers = course.UsersSubscribers.Count()
-            };
+            var model = GetLessonContainerViewModel(courseId);
             return View(model);
         }
 
@@ -73,7 +66,8 @@ namespace LearningService.WebApplication.Controllers
         public ActionResult CreateTheory(int courseId)
         {
             var model = new LessonTheoryViewModel{
-                CourseId = courseId
+                CourseId = courseId,
+                LessonContainerBase = GetLessonContainerViewModel(courseId)
             };
             return View(model);
         }
@@ -352,6 +346,19 @@ namespace LearningService.WebApplication.Controllers
             }
 
             return RedirectToAction("CourseOverwiew", "Course", new { courseId = model.CourseId });
+        }
+
+        private LessonCourseContainerViewModel GetLessonContainerViewModel(int courseId)
+        {
+            var course = _courseService.Get(courseId);
+            var allLessons = _lessonService.GetLessons(courseId);
+            var model = new LessonCourseContainerViewModel
+            {
+                Course = Mapper.Map<CourseViewModel>(course),
+                Lessons = Mapper.Map<IEnumerable<LessonBaseViewModel>>(allLessons.OrderBy(x => x.OrderLesson)),
+                CountSubscribers = course.UsersSubscribers.Count()
+            };
+            return model;
         }
     }
 }

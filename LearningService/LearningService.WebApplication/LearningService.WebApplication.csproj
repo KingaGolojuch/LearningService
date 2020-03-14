@@ -461,6 +461,8 @@
     <Content Include="Views\Manage\Activities.cshtml" />
     <Content Include="Views\Course\AskQuestion.cshtml" />
     <Content Include="Views\Home\Index - Copy.cshtml" />
+    <Content Include="Views\Lesson\_LessonManagamentBase.cshtml" />
+    <Content Include="Views\Lesson\_LessonManagementHeader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
