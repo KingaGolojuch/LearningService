@@ -1,0 +1,13 @@
+﻿@model LearningService.WebApplication.Models.Article.ArticleBaseViewModel
+
+@{
+    ViewBag.Title = "Szczegóły artykułu";
+}
+
+<h2>@Model.Headline</h2>
+
+@Html.Raw(Model.ContentArticle)
+
+<div>
+    @Html.ActionLink("Powrót", "UserArticles", null, new { @class = "btn btn-default" })
+</div>

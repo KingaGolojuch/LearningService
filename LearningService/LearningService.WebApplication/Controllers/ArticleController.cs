@@ -57,6 +57,16 @@ namespace LearningService.WebApplication.Controllers
             return View(model);
         }
 
+        public ActionResult Show(int articleId)
+        {
+            var articleDTO = _articleService.Get(articleId);
+            if (articleDTO == null)
+                return RedirectToAction("Index");
+
+            var model = Mapper.Map<ArticleBaseViewModel>(articleDTO);
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Edit(ArticleBaseViewModel model)
         {

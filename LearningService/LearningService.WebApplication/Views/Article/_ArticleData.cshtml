@@ -1,4 +1,12 @@
 ﻿@model IEnumerable<LearningService.WebApplication.Models.Article.ArticleBaseViewModel>
+<style>
+    input {
+        background: none;
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
 @foreach (var item in Model)
 {
     <tr class="shadow-normal">
@@ -8,7 +16,7 @@
         <td>
             @using (Html.BeginForm("Delete", "Article", new { articleId = item.Id }, FormMethod.Post, null))
             {
-                <input type="submit" value="Usuń" />
+                <input type="submit" value="Usuń" class="text-danger" />
             }
         </td>
     </tr>

@@ -6,22 +6,26 @@
 
 <h2>Artykuły innych</h2>
 
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Headline)</th>
-        <th>@Html.DisplayNameFor(model => model.ContentArticle)</th>
-        <th>@Html.DisplayNameFor(model => model.CreateTime)</th>
-        <th>@Html.DisplayNameFor(model => model.UpdateTime)</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Headline)</td>
-            <td>@Html.Raw(item.ContentArticle)</td>
-            <td>@Html.DisplayFor(modelItem => item.CreateTime)</td>
-            <td>@Html.DisplayFor(modelItem => item.UpdateTime)</td>
+<table class="table-row-collapse">
+    <thead>
+        <tr class="shadow-normal">
+            <th>@Html.DisplayNameFor(model => model.Headline)</th>
+            <th>@Html.DisplayNameFor(model => model.ContentShortened)</th>
+            <th>@Html.DisplayNameFor(model => model.CreateTime)</th>
+            <th>@Html.DisplayNameFor(model => model.UpdateTime)</th>
+            <th></th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="shadow-normal">
+                <td>@Html.DisplayFor(modelItem => item.Headline)</td>
+                <td>@Html.DisplayFor(modelItem => item.ContentShortened)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreateTime)</td>
+                <td>@Html.DisplayFor(modelItem => item.UpdateTime)</td>
+                <td>@Html.ActionLink("Szczególy", "Show", "Article", new { articleId = item.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
 </table>

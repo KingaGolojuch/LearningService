@@ -464,6 +464,7 @@
     <Content Include="Views\Home\Index - Copy.cshtml" />
     <Content Include="Views\Lesson\_LessonManagamentBase.cshtml" />
     <Content Include="Views\Lesson\_LessonManagementHeader.cshtml" />
+    <Content Include="Views\Article\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
