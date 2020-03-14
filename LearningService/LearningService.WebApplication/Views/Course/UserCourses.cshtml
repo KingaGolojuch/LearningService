@@ -3,24 +3,49 @@
 @{
     ViewBag.Title = "User courses";
 }
+<style>
+    .flex-container {
+        flex-wrap: wrap;
+    }
 
-<table class="table">
+    .flex-item {
+        margin-top: 25px;
+    }
+</style>
+<h3>Aktualnie subskrybowane</h3>
+<table class="table-row-collapse">
     <tr>
         <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th>@Html.DisplayNameFor(model => model.Description)</th>
-        <th>@Html.DisplayNameFor(model => model.IsSubscribed)</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-        <td>@Html.DisplayFor(modelItem => item.IsSubscribed)</td>
-        <td>
-            @Html.ActionLink("Szczegóły", "CourseOverwiew", new { courseId = item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.Where(x => x.IsSubscribed))
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>
+                @Html.ActionLink("Szczegóły", "CourseOverwiew", new { courseId = item.Id })
+            </td>
+        </tr>
+    }
 </table>
+
+<hr />
+<h3>bez subskrypcji</h3>
+<div id="courseAll">
+    <div class="flex-container">
+        @foreach (var course in Model.Where(x => x.IsSubscribed == false))
+        {
+            <div class="flex-item flex-item-big">
+                <div class="flex-item-connector shadow-normal">
+                    <div class="flex-item-header">@course.Name</div>
+                    <div class="flex-item-content">@course.GetDescriptionShort</div>
+                    <div class="flex-item-footer">@Html.ActionLink("Szczegóły", "CourseOverwiew", new { courseId = course.Id })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
