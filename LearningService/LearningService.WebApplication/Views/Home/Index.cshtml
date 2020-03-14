@@ -2,78 +2,6 @@
 @{
     ViewBag.Title = "Strona główna";
 }
-<style>
-    .flex-container {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 0;
-        margin: 0;
-    }
-
-    .flex-item {
-        height: 150px;
-        padding: 5px 25px 0 0;
-    }
-
-
-    .flex-item-connector {
-        border: 1px #dddddd solid;
-    }
-
-    .flex-item-big {
-        width: 30%;
-    }
-
-    .flex-item-small {
-        width: 10%;
-        height: 75px;
-        padding-right: 0px;
-    }
-
-    .flex-item-header,
-    .flex-item-footer {
-        height: 50px;
-        padding-top: 15px;
-        padding-left: 15px;
-        border-bottom: 1px #dddddd solid;
-        background-color: #f5f5f5;
-    }
-
-    .flex-item-content {
-        height: 100px;
-        padding-top: 15px;
-        padding-left: 15px;
-    }
-
-    .marginLeftHeader {
-        margin-left: 15px;
-    }
-
-    .homePageBorderSeparator {
-        margin: 15px;
-    }
-
-    .flex-item-see-all span {
-        display: block;
-    }
-
-    .flex-item-see-all {
-        background-color: transparent;
-        border: 1px solid #dddddd;
-        padding: 8px;
-    }
-
-    #courseAll .flex-item {
-        height: 200px;
-    }
-
-        #courseAll .flex-item-small {
-            height: 100px;
-        }
-</style>
-
 
 <h2>Artykuły</h2>
 <div class="">
@@ -81,14 +9,14 @@
         @foreach (var article in Model.Articles)
         {
             <div class="flex-item flex-item-big">
-                <div class="flex-item-connector">
+                <div class="flex-item-connector  shadow-normal">
                     <div class="flex-item-header">@article.Headline</div>
                     <div class="flex-item-content">@Html.Raw(article.ContentArticle)</div>
                 </div>
             </div>
         }
         <div class="flex-item flex-item-small">
-            <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("UserArticles", "Article")'">
+            <button class="flex-item-see-all shadow-normal text-center" type="button" onclick="location.href='@Url.Action("UserArticles", "Article")'">
                 <span>
                     <i class="material-icons">more_horiz</i>
                 </span>
@@ -108,7 +36,7 @@
         @foreach (var course in Model.Courses)
         {
             <div class="flex-item flex-item-big">
-                <div class="flex-item-connector">
+                <div class="flex-item-connector shadow-normal">
                     <div class="flex-item-header">@course.Name</div>
                     <div class="flex-item-content">@course.GetDescriptionShort</div>
                     <div class="flex-item-footer">Lekcje @course.CountUserSubscriberFinishedLesson</div>
@@ -116,7 +44,7 @@
             </div>
         }
         <div class="flex-item flex-item-small">
-            <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("UserCourses", "Course")'">
+            <button class="flex-item-see-all text-center shadow-normal" type="button" onclick="location.href='@Url.Action("UserCourses", "Course")'">
                 <span>
                     <i class="material-icons">more_horiz</i>
                 </span>
@@ -151,14 +79,14 @@
             foreach (var activity in Model.ArticleActivities)
             {
                 <div class="flex-item flex-item-big">
-                    <div class="flex-item-connector">
+                    <div class="flex-item-connector shadow-normal">
                         <div class="flex-item-header">@activity.GetDate()</div>
                         <div class="flex-item-content">@Html.Raw(activity.Description)</div>
                     </div>
                 </div>
             }
             <div class="flex-item flex-item-small">
-                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Article")'">
+                <button class="flex-item-see-all text-center shadow-normal" type="button" onclick="location.href='@Url.Action("Index", "Article")'">
                     <span>
                         <i class="material-icons">more_horiz</i>
                     </span>
@@ -191,14 +119,14 @@
             foreach (var activity in Model.CourseActivities)
             {
                 <div class="flex-item flex-item-big">
-                    <div class="flex-item-connector">
+                    <div class="flex-item-connector shadow-normal">
                         <div class="flex-item-header">@activity.GetDate()</div>
                         <div class="flex-item-content">@activity.Description</div>
                     </div>
                 </div>
             }
             <div class="flex-item flex-item-small">
-                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Course")'">
+                <button class="flex-item-see-all text-center shadow-normal" type="button" onclick="location.href='@Url.Action("Index", "Course")'">
                     <span>
                         <i class="material-icons">more_horiz</i>
                     </span>

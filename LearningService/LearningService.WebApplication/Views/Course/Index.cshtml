@@ -4,23 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<p>
-    @Html.ActionLink("Stwórz nowy", "Create")
-</p>
+<div class="margin-top-md">
+    @Html.ActionLink("Stwórz nowy", "Create", null, new { @class = "btn btn-default" })
+</div>
 
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Name)</th>
-        <th>@Html.DisplayNameFor(model => model.Description)</th>
-        <th></th>
-    </tr>
+<table class="table-row-collapse">
+    <thead>
+        <tr class="shadow-normal">
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>Akcja</th>
+        </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-        <td>@Html.ActionLink("Przejdź do kursu", "Index", "Lesson", new { courseId = item.Id }, null)</td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr class="shadow-normal">
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.ActionLink("Przejdź do kursu", "Index", "Lesson", new { courseId = item.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
 
 </table>
