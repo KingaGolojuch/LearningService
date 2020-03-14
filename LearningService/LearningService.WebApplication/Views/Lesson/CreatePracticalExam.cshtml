@@ -3,75 +3,65 @@
     ViewBag.Title = "Tworzenie egzaminu praktycznego";
 }
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<div id="app">
+@Html.Action("LessonManagementHeader", new { courseId = Model.CourseId })
 
-    <h2>Tworzenie egzaminu praktycznego</h2>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.CourseId)
+<div class="row">
+    @Html.Action("LessonManagementBase", new { courseId = Model.CourseId })
 
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div id="app" class="col-md-6 form-input-full-width">
+        <h3>Tworzenie egzaminu praktycznego</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.CourseId)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Headline, new { htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.Headline" } } })
-                    @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+            <div class="">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Headline, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Headline, new { htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.Headline" } } })
+                        @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <summernote v-model="model.LessonContent"></summernote>
-                    @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LessonContent, htmlAttributes: new { @class = "control-label" })
+                        <summernote v-model="model.LessonContent"></summernote>
+                        @Html.ValidationMessageFor(model => model.LessonContent, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.SelectedOption, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.SelectedOption, Model.ReturnTypeOptions, new Dictionary<string,object>() {{ "class", "form-control" }, { @"v-on:change", @"CheckAnswerVisible" }, { @"v-model", "model.SelectedOption" } })
-                    @Html.ValidationMessageFor(model => model.SelectedOption, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SelectedOption, htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.SelectedOption, Model.ReturnTypeOptions, new Dictionary<string, object>() { { "class", "form-control" }, { @"v-on:change", @"CheckAnswerVisible" }, { @"v-model", "model.SelectedOption" } })
+                        @Html.ValidationMessageFor(model => model.SelectedOption, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div v-if="IsAnswerVisible" class="form-group">
-                @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Answer, new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.Answer" } })
-                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                <div v-if="IsAnswerVisible" class="form-group">
+                    @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Answer, new Dictionary<string, object>() { { "class", "form-control" }, { @"v-model", "model.Answer" } })
+                        @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="form-group">
                     <input type="button" v-on:click="addNewRequiredName" value="Nowa nazwa" class="btn btn-default" />
                 </div>
-            </div>
 
-            <div class="" v-for="(param, index) in model.RequiredNames">
-                <div class="form-group">
-                    <label class="control-label col-md-2">Nazwa jaka ma się pojawić</label>
-                    <div class="col-md-10">
+                <div class="" v-for="(param, index) in model.RequiredNames">
+                    <div class="form-group">
+                        <label class="control-label">Nazwa jaka ma się pojawić</label>
                         <input v-model="model.RequiredNames[index]" type="text" class="form-control text-box single-line">
                     </div>
                 </div>
-            </div>
 
-            
-            <div v-on:click="submitForm" class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+
+                <div v-on:click="submitForm" class="form-group">
                     <input type="button" value="Zapisz" class="btn btn-success" />
                 </div>
+
             </div>
+        }
 
-        </div>
-    }
-
+    </div>
 </div>
 @section Scripts {
     <script>
@@ -151,6 +141,6 @@
                 },
             }
         );
-    </script>    
+    </script>
 }
 
