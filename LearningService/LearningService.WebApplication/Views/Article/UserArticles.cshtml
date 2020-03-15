@@ -3,29 +3,31 @@
 @{
     ViewBag.Title = "Artykuły innych";
 }
+<style>
+    .flex-container {
+        flex-wrap: wrap;
+    }
 
-<h2>Artykuły innych</h2>
+    .flex-item {
+        margin-top: 25px;
+    }
+</style>
 
-<table class="table-row-collapse">
-    <thead>
-        <tr class="shadow-normal">
-            <th>@Html.DisplayNameFor(model => model.Headline)</th>
-            <th>@Html.DisplayNameFor(model => model.ContentShortened)</th>
-            <th>@Html.DisplayNameFor(model => model.CreateTime)</th>
-            <th>@Html.DisplayNameFor(model => model.UpdateTime)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+<h3>Artykuły</h3>
+
+<div id="courseAll">
+    <div class="flex-container">
+        @foreach (var article in Model)
         {
-            <tr class="shadow-normal">
-                <td>@Html.DisplayFor(modelItem => item.Headline)</td>
-                <td>@Html.DisplayFor(modelItem => item.ContentShortened)</td>
-                <td>@Html.DisplayFor(modelItem => item.CreateTime)</td>
-                <td>@Html.DisplayFor(modelItem => item.UpdateTime)</td>
-                <td>@Html.ActionLink("Szczególy", "Show", "Article", new { articleId = item.Id }, null)</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <div class="flex-item flex-item-big">
+                <div class="flex-item-connector shadow-normal">
+                    <div class="flex-item-header">@article.Headline</div>
+                    <div class="flex-item-content">@article.ContentShortened</div>
+                    <div class="flex-item-footer">
+                        @Html.ActionLink("Szczególy", "Show", "Article", new { articleId = article.Id }, null)
+                    </div>
+            </div>
+        </div>
+    }
+    </div>
+</div>
