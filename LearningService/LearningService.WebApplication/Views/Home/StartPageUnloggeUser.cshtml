@@ -13,7 +13,21 @@
     <title>@ViewBag.Title - Learning service</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        #titleShortUnloggedUser {
+            color: #2f2d2d69;
+            font-size: 3em;
+        }
 
+        .flex-container {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .flex-item {
+            margin-top: 25px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -38,8 +52,8 @@
             @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "", role = "form" }))
             {
                 <div class="row">
-                    <div class="col-md-5">
-                        content do umieszczenia (chwytliwy nagłówek)
+                    <div id="titleShortUnloggedUser" class="col-md-5">
+                        Dołącz do naszej społeczności. Nabywaj nowe umiejętności oraz dziel się swoją wiedzą.
                     </div>
                     <div class="col-md-7">
                         <div class="panel panel-default">
@@ -98,8 +112,48 @@
         </div>
     </div>
     <div class="container body-content">
+        <div>
+            <div class="flex-container">
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector shadow-normal">
+                        <div class="flex-item-header"><strong>Support</strong></div>
+                        <div class="flex-item-content">Skontaktuj się z twórcą kursu, gdyby coś było niejasne</div>
+                    </div>
+                </div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector shadow-normal">
+                        <div class="flex-item-header"><strong>Darmowa platforma</strong></div>
+                        <div class="flex-item-content">Bezpłatny dostęp dla wszystkich, gdziekolwiek jesteś</div>
+                    </div>
+                </div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector shadow-normal">
+                        <div class="flex-item-header"><strong>Mentoring</strong></div>
+                        <div class="flex-item-content">Zostań instruktorem dla innych</div>
+                    </div>
+                </div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector shadow-normal">
+                        <div class="flex-item-header"><strong>Nowe umiejętności</strong></div>
+                        <div class="flex-item-content">Nabywaj nowe umiejętności poprzez kończenie interesujących Cię kursów</div>
+                    </div>
+                </div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector shadow-normal">
+                        <div class="flex-item-header"><strong>Rozwój osobisty</strong></div>
+                        <div class="flex-item-content">Dokumentuj swoje postępy poprzez tworzenie artykułów o nowo nabytych umiejętnościach</div>
+                    </div>
+                </div>
+                <div class="flex-item flex-item-big">
+                    <div class="flex-item-connector shadow-normal">
+                        <div class="flex-item-header"><strong>Rozwijaj pasję</strong></div>
+                        <div class="flex-item-content">Znajdziesz tutaj wiele świetnych artykułów i kursów. Poznaj kreatywność innych osób. Przykłady, które znajdziesz mogą Cię zaskoczyć i zainspirować</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <section>
-            <div>
+            <div style="margin-top: 30px;">
                 <p>
                     opisz jakie zalety daje Ci ten system
                     <ul>
