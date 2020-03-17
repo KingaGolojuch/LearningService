@@ -175,3 +175,10 @@ textarea {
 #courseAll .flex-item-small {
     height: 100px;
 }
+
+.table-row-collapse.table tr,
+.table-row-collapse.table th,
+.table-row-collapse.table td {
+    border-top: none !important;
+    border-bottom: none !important;
+}
