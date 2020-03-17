@@ -7,6 +7,8 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color: white;
+    margin-top: 30px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -53,6 +55,9 @@ textarea {
     box-shadow: 0 10px 20px rgba(0,0,0, 0.1);
 }
 
+.font-italic {
+    font-style: italic;
+}
 
 .table-row-collapse thead {
     border-collapse: collapse;
@@ -114,6 +119,7 @@ textarea {
     height: 100px;
     padding-top: 15px;
     padding-left: 15px;
+    padding-right: 15px;
 }
 
 .homePageBorderSeparator {
