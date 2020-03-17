@@ -307,6 +307,7 @@
     <Content Include="Content\summernote\font\summernote.ttf" />
     <Content Include="Content\summernote\font\summernote.woff" />
     <Content Include="Content\summernote\font\summernote.woff2" />
+    <None Include="Properties\PublishProfiles\LearningServiceWebApplication - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
