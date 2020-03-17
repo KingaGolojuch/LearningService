@@ -9,14 +9,14 @@
         @foreach (var article in Model.Articles)
         {
             <div class="flex-item flex-item-big">
-                <div class="flex-item-connector shadow-normal">
+                <div class="flex-item-connector flex-item-green shadow-normal">
                     <div class="flex-item-header">@article.Headline</div>
                     <div class="flex-item-content">@Html.Raw(article.ContentShortened)</div>
                 </div>
             </div>
         }
         <div class="flex-item flex-item-small">
-            <button class="flex-item-see-all shadow-normal text-center" type="button" onclick="location.href='@Url.Action("UserArticles", "Article")'">
+            <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("UserArticles", "Article")'">
                 <span>
                     <i class="material-icons">more_horiz</i>
                 </span>
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<hr />
+<hr style="margin-top: 50px;" />
 
 <h2>Kursy</h2>
 <div id="courseAll" class="">
@@ -44,7 +44,7 @@
             </div>
         }
         <div class="flex-item flex-item-small">
-            <button class="flex-item-see-all text-center shadow-normal" type="button" onclick="location.href='@Url.Action("UserCourses", "Course")'">
+            <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("UserCourses", "Course")'">
                 <span>
                     <i class="material-icons">more_horiz</i>
                 </span>
@@ -56,7 +56,7 @@
     </div>
 </div>
 
-<hr />
+<hr style="margin-top: 50px;" />
 
 <h2>Twoja aktywność</h2>
 <hr />
@@ -86,7 +86,7 @@
                 </div>
             }
             <div class="flex-item flex-item-small">
-                <button class="flex-item-see-all text-center shadow-normal" type="button" onclick="location.href='@Url.Action("Index", "Article")'">
+                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Article")'">
                     <span>
                         <i class="material-icons">more_horiz</i>
                     </span>
@@ -99,7 +99,7 @@
     </div>
 </div>
 
-<hr />
+<hr style="margin-top: 50px;" />
 
 <div>
     <h4>
@@ -126,7 +126,7 @@
                 </div>
             }
             <div class="flex-item flex-item-small">
-                <button class="flex-item-see-all text-center shadow-normal" type="button" onclick="location.href='@Url.Action("Index", "Course")'">
+                <button class="flex-item-see-all text-center" type="button" onclick="location.href='@Url.Action("Index", "Course")'">
                     <span>
                         <i class="material-icons">more_horiz</i>
                     </span>

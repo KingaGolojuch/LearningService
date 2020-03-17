@@ -94,9 +94,13 @@ textarea {
     border: 1px #dddddd solid;
 }
 
-.flex-item-big {
-    width: 30%;
-}
+    .flex-item-connector.flex-item-green {
+        border: 1px #d6e9c6 solid;
+    }
+
+    .flex-item-big {
+        width: 30%;
+    }
 
 .flex-item-small {
     width: 10%;
@@ -112,6 +116,17 @@ textarea {
     border-bottom: 1px #dddddd solid;
     background-color: #f5f5f5;
 }
+
+    .flex-item-header {
+        font-weight:600;
+    }
+
+    .flex-item-green .flex-item-header,
+    .flex-item-green .flex-item-footer {
+        border-bottom: 1px #d6e9c6 solid;
+        background-color: #dff0d8;
+        color: #3c763d;
+    }
 
 .flex-item-content {
     height: 100px;
@@ -130,7 +145,7 @@ textarea {
 
 .flex-item-see-all {
     background-color: transparent;
-    border: 1px solid #dddddd;
+    border: none;
     padding: 8px;
 }
 
