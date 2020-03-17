@@ -7,10 +7,6 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav">
-            @if (User.IsInRole(AspRoles.Admin))
-            {
-                <li>@Html.ActionLink("Użytkownicy", "Index", "User", routeValues: null, htmlAttributes: new { id = "" })</li>
-            }
             @if (User.IsInRole(AspRoles.User))
             {
                 <li>@Html.ActionLink("Artykuły innych", "UserArticles", "Article", routeValues: null, htmlAttributes: new { id = "" })</li>

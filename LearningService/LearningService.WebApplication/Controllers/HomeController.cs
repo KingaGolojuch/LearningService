@@ -36,6 +36,9 @@ namespace LearningService.WebApplication.Controllers
             if (!User.Identity.IsAuthenticated)
                 return View("StartPageUnloggeUser");
 
+            if (User.IsInRole(AspRoles.Admin))
+                return RedirectToAction("Index", "User");
+
             var userId = GetUserId;
             var activites = _activityLogService.GetLogs(userId);
             var model = new HomePageViewModel
