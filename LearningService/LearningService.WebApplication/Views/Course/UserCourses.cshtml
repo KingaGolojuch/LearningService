@@ -42,7 +42,7 @@
         @foreach (var course in Model.Where(x => x.IsSubscribed == false))
         {
             <div class="flex-item flex-item-big">
-                <div class="flex-item-connector shadow-normal">
+                <div class="flex-item-connector flex-item-green shadow-normal">
                     <div class="flex-item-header">@course.Name</div>
                     <div class="flex-item-content">@course.GetDescriptionShort</div>
                     <div class="flex-item-footer">@Html.ActionLink("Szczegóły", "CourseOverwiew", new { courseId = course.Id })

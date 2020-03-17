@@ -6,33 +6,46 @@
 
 @Html.Action("LessonManagementHeader", new { courseId = Model.CourseId })
 
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().Headline)</th>
-        <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().LessonTypeName)</th>
-        <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().OrderLesson)</th>
-        <th>ilość osób które zdało / ilosc wszystkich</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Lessons.OrderBy(x => x.OrderLesson))
-    {
+<table class="table table-row-collapse">
+    <thead>
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.Headline)</td>
-            <td>@Html.DisplayFor(modelItem => item.LessonTypeName)</td>
-            <td>
-                @if (Model.Lessons.First().Id != item.Id)
-                {
-                    @Html.ActionLink("Na wcześniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = false })
-                }
-                @if (Model.Lessons.Last().Id != item.Id)
-                {
-                    @Html.ActionLink("Na późniejszą", "ChangeOrder", new { lessonId = item.Id, orderDown = true })
-                }
-            </td>
-            <td>@item.CountUserCompletedLesson / @Model.CountSubscribers</td>
-            <td>@Html.ActionLink("Edycja", "Edit", new { lessonId = item.Id })</td>
+            <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().Headline)</th>
+            <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().LessonTypeName)</th>
+            <th>Ilość osób które zdało / ilosc wszystkich</th>
+            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().OrderLesson)</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Lessons.OrderBy(x => x.OrderLesson))
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Headline)</td>
+                <td>@Html.DisplayFor(modelItem => item.LessonTypeName)</td>
+                <td>@item.CountUserCompletedLesson / @Model.CountSubscribers</td>
+                <td>@Html.ActionLink("Edycja", "Edit", new { lessonId = item.Id })</td>
+                <td class="text-center">
+                    @if (Model.Lessons.First().Id != item.Id)
+                    {
+                        <a href="@Url.Action("ChangeOrder", new { lessonId = item.Id, orderDown = false })" class="no-decoration">
+                            <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                        </a>
+                    }
+
+                    @if (Model.Lessons.First().Id != item.Id && Model.Lessons.Last().Id != item.Id)
+                    {
+                        <span style="margin-left: 30px;"></span>
+                    }
+
+                    @if (Model.Lessons.Last().Id != item.Id)
+                    {
+                        <a href="@Url.Action("ChangeOrder", new { lessonId = item.Id, orderDown = true })" class="no-decoration">
+                            <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
