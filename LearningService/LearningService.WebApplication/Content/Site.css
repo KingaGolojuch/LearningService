@@ -98,6 +98,10 @@ textarea {
         border: 1px #d6e9c6 solid;
     }
 
+    .flex-item-connector.flex-item-blue {
+        border: 1px #bce8f1 solid;
+    }
+
     .flex-item-big {
         width: 30%;
     }
@@ -121,12 +125,28 @@ textarea {
         font-weight:600;
     }
 
-    .flex-item-green .flex-item-header,
-    .flex-item-green .flex-item-footer {
+    .flex-item-green .flex-item-header {
         border-bottom: 1px #d6e9c6 solid;
         background-color: #dff0d8;
         color: #3c763d;
     }
+
+.flex-item-green .flex-item-footer {
+    border-bottom: none;
+    border-top: 1px #dddddd solid;
+    color: #3c763d;
+}
+
+.flex-item-blue .flex-item-header {
+    border-bottom: 1px #bce8f1 solid;
+    background-color: #d9edf7;
+}
+
+.flex-item-blue .flex-item-footer {
+    border-bottom: none;
+    border-top: 1px #dddddd solid;
+}
+
 
 .flex-item-content {
     height: 100px;
