@@ -79,7 +79,7 @@
             foreach (var activity in Model.ArticleActivities)
             {
                 <div class="flex-item flex-item-big">
-                    <div class="flex-item-connector shadow-normal">
+                    <div class="flex-item-connector flex-item-green shadow-normal">
                         <div class="flex-item-header">@activity.GetDate()</div>
                         <div class="flex-item-content">@Html.Raw(activity.Description)</div>
                     </div>
@@ -119,7 +119,7 @@
             foreach (var activity in Model.CourseActivities)
             {
                 <div class="flex-item flex-item-big">
-                    <div class="flex-item-connector shadow-normal">
+                    <div class="flex-item-connector flex-item-blue shadow-normal">
                         <div class="flex-item-header">@activity.GetDate()</div>
                         <div class="flex-item-content">@activity.Description</div>
                     </div>

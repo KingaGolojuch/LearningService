@@ -86,9 +86,8 @@ textarea {
 
 .flex-item {
     height: 150px;
-    padding: 5px 25px 0 0;
+    margin: 5px 30px 15px 0px;
 }
-
 
 .flex-item-connector {
     border: 1px #dddddd solid;
