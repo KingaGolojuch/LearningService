@@ -31,8 +31,8 @@ namespace LearningService.WebApplication
                         "~/Content/site.css",
                         "~/Content/HomePage.css"));
 
-            bundles.Add(new StyleBundle("~/Content/summernote").Include(
-                        "~/Content/summernote/summernote.css"));
+            //bundles.Add(new StyleBundle("~/Content/summernote").Include(
+            //            "~/Content/summernote/summernote.css"));
         }
     }
 }
