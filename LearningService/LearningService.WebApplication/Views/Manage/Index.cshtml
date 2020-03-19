@@ -1,4 +1,4 @@
-﻿@model LearningService.WebApplication.Models.User.UserViewModel
+﻿@model LearningService.WebApplication.Models.User.UserManageViewModel
 @{
     ViewBag.Title = "Zarządzanie kontem";
 }
@@ -16,18 +16,26 @@
         <h2>Zarządzanie kontem</h2>
         <hr />
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
-            @Html.DisplayFor(model => model.Name)
+            @Html.LabelFor(model => model.User.Name, htmlAttributes: new { @class = "control-label" }):
+            @Html.DisplayFor(model => model.User.Name)
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label" })
-            @Html.DisplayFor(model => model.Surname)
+            @Html.LabelFor(model => model.User.Surname, htmlAttributes: new { @class = "control-label" }):
+            @Html.DisplayFor(model => model.User.Surname)
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
-            @Html.DisplayFor(model => model.Email)
+            @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label" }):
+            @Html.DisplayFor(model => model.User.Email)
         </div>
-        informacje o koncie
+        <div class="form-group">
+            <label class="control-label">Ilość artykułów</label>:
+            @Html.DisplayFor(model => model.ArticleCount)
+        </div>
+        <div class="form-group">
+            <label class="control-label">Ilość kursów</label>:
+            @Html.DisplayFor(model => model.CourseCount)
+        </div>
+        @*informacje o koncie
         <ul>
             <li>imie</li>
             <li>nazwisko</li>
@@ -37,6 +45,6 @@
         </ul>
         <p>do prawej stronie czy lewej mozna by umiescic jakies informacje w stylu : prywatność: czy twój email ma się wyświetlać jako twórca</p>
         <p>np aktywność, tutaj wyświetlić, stworzyłes takie kursy, przeczytałeś takie posty, dostałeś tyle maili</p>
-        <p>do przemyślenie zmiana adresu email do korenspondecji (pytanie czy myślimy o sytuacji, kiedy użytkownik nie będzie chciał podawać adresu e-mail do siebie, z drugiej strony niekoneicznie użytkownik musi widzieć jaki adres email jest twórcy kursu i wteyd nei musi odpowiadac na maila)</p>
+        <p>do przemyślenie zmiana adresu email do korenspondecji (pytanie czy myślimy o sytuacji, kiedy użytkownik nie będzie chciał podawać adresu e-mail do siebie, z drugiej strony niekoneicznie użytkownik musi widzieć jaki adres email jest twórcy kursu i wteyd nei musi odpowiadac na maila)</p>*@
     </div>
 </div>

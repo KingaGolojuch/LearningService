@@ -266,6 +266,7 @@
     <Compile Include="Models\Lesson\LessonTheoryOptionViewModel.cs" />
     <Compile Include="Models\Lesson\LessonTheoryViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\User\UserManageViewModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

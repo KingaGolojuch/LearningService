@@ -21,17 +21,23 @@ namespace LearningService.WebApplication.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly IUserService _userService;
+        private readonly IArticleService _articleService;
+        private readonly ICourseService _courseService;
         private readonly IActivityLogService _activityLogService;
 
         public ManageController(
             ApplicationUserManager userManager,
             ApplicationSignInManager signInManager,
             IUserService userService,
+            IArticleService articleService,
+            ICourseService courseService,
             IActivityLogService activityLogService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             _userService = userService;
+            _articleService = articleService;
+            _courseService = courseService;
             _activityLogService = activityLogService;
         }
 
@@ -71,7 +77,12 @@ namespace LearningService.WebApplication.Controllers
 
             var userId = GetUserId;
             var user = await _userManager.FindByIdAsync(userId);
-            var model = Mapper.Map<UserViewModel>(user);
+            var model = new UserManageViewModel
+            {
+                User = Mapper.Map<UserViewModel>(user),
+                ArticleCount = _articleService.Get(userId).Count(),
+                CourseCount = _courseService.Get(userId).Count()
+            };
             return View(model);
         }
 
