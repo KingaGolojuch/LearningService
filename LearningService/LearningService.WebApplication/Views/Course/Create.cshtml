@@ -7,7 +7,7 @@
 <h2>Tworzenie nowego kursu</h2>
 
 
-@using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-input-full-width" }))
+@using (Html.BeginForm("Create", "Course", FormMethod.Post, new { @class = "form-input-full-width" }))
 {
     @Html.AntiForgeryToken()
 
